@@ -1,54 +1,52 @@
-# React + TypeScript + Vite
+# Resume Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application that allows users to build, customize, and export professional resumes tailored to the Tanzanian job market and education system.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project provides a simple and intuitive interface for users to manage all sections of their resume — including personal details, education, work experience, skills, certifications, referees, and a declaration section — with the ability to update and export to PDF.
 
-## Expanding the ESLint configuration
+The system supports user registration and authentication, enabling users to manage their own resume securely.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Frontend Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- User registration and login (JWT-based auth)
+- Create, view, update, and delete:
+  - Personal Details
+  - Education Background
+  - Work Experience
+  - Skills and Certifications
+  - Referees
+  - Declaration & Signature
+- Support for multiple entries (education, experience, etc.)
+- PDF Export (coming soon)
+- Responsive and mobile-friendly SPA (Single Page Application)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Tech Stack (Frontend)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Framework:** React 18 with Vite
+- **Styling:** Tailwind CSS
+- **Routing:** React Router
+- **State Management:** React Context API (or other, if you're using one)
+- **Form Handling:** React Hook Form + Yup (if applicable)
+- **API Communication:** Axios or Fetch
+- **PDF Export (planned):** html2pdf.js or react-pdf
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Project Structure (basic)
+
+```bash
+src/
+├── assets/            # Static files (images, logos, etc.)
+├── components/        # Reusable UI components
+├── features/          # Feature-based folders (e.g., education, work, personal)
+│   ├── Education/
+│   ├── Experience/
+│   └── ...
+├── layouts/           # Page layouts (e.g., AuthLayout, MainLayout)
+├── pages/             # Route-level components (e.g., Home, Login, ResumeEditor)
+├── services/          # API service functions (e.g., authService, resumeService)
+├── utils/             # Utility functions and helpers
+├── App.tsx            # Main app component
+├── main.tsx           # Entry point
+└── router/            # React Router config
 ```
