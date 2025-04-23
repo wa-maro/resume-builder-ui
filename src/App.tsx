@@ -8,22 +8,26 @@ import Templates from "./pages/Templates";
 import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AppLayout from "./layouts/AppLayout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Home />} />
 
-        <Route path="resume" element={<ResumeBuiler />} />
+          <Route path="resume" element={<ResumeBuiler />} />
 
-        <Route path="templates" element={<Templates />} />
-        <Route path="how-it-works" element={<HowItWorks />} />
-        <Route path="contact" element={<Contact />} />
+          <Route path="templates" element={<Templates />} />
+          <Route path="how-it-works" element={<HowItWorks />} />
+          <Route path="contact" element={<Contact />} />
 
-        <Route path="*" element={<NotFound />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
