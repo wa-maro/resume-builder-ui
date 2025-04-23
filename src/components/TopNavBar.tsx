@@ -11,7 +11,7 @@ const navLinks = [
 const TopNavBar = () => {
   return (
     <nav className="p-2">
-      <ul className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-3">
+      <ul className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-5">
         {navLinks.map((link) => (
           <NavItem key={link.to} to={link.to} label={link.label} />
         ))}
