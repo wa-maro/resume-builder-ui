@@ -1,10 +1,14 @@
 type LabelTYpe = {
   htmlFor: string;
   text: string;
+  style?: string;
 };
-const Label = ({ htmlFor, text }: LabelTYpe) => {
+const Label = ({ htmlFor, text, style }: LabelTYpe) => {
   return (
-    <label htmlFor={htmlFor} className="text-sm text-gray-600 capitalize">
+    <label
+      htmlFor={htmlFor}
+      className={style ? style : "text-sm text-gray-600 capitalize"}
+    >
       {text}
     </label>
   );

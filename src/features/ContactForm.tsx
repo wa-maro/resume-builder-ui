@@ -1,0 +1,85 @@
+import { useState } from "react";
+import Label from "../components/Label";
+import TextInput from "../components/TextInput";
+import { Send } from "lucide-react";
+
+const ContactForm = () => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const onChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // TODO: handle form submission (e.g., call API or send email)
+    // Connect to an email service (like EmailJS, Nodemailer API) or a backend endpoint
+  };
+
+  return (
+    <form
+      method="post"
+      className="space-y-6 bg-white p-8 shadow-md rounded-xl"
+      onSubmit={onSubmitHandler}
+    >
+      <div>
+        <Label
+          htmlFor="name"
+          text="name"
+          style="block font-medium text-gray-700 mb-1 capitalize"
+        />
+        <TextInput
+          name="name"
+          style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          value={form.name}
+          onChange={onChangeHandler}
+        />
+      </div>
+
+      <div>
+        <Label
+          htmlFor="email"
+          text="email"
+          style="block font-medium text-gray-700 mb-1 capitalize"
+        />
+        <TextInput
+          type="email"
+          name="email"
+          style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          value={form.email}
+          onChange={onChangeHandler}
+        />
+      </div>
+
+      <div>
+        <Label
+          htmlFor="message"
+          text="message"
+          style="block font-medium text-gray-700 mb-1 capitalize"
+        />
+        <textarea
+          name="message"
+          rows={5}
+          required
+          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 transition"
+      >
+        <Send className="w-4 h-4" />
+        Send Message
+      </button>
+    </form>
+  );
+};
+
+export default ContactForm;

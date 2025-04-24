@@ -27,12 +27,12 @@ const faqs = [
 ];
 
 const FAQSection = () => (
-  <section className="mt-10 bg-white py-12 border-t border-gray-200">
+  <section id="faq" className="mt-10 bg-white py-12 border-t border-gray-200">
     <div className="max-w-4xl mx-auto px-6 sm:px-12">
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
         Frequently Asked Questions
       </h2>
-      
+
       <div className="space-y-4">
         {faqs.map(({ question, answer }, index) => (
           <details
