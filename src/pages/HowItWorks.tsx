@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import StepCards from "../components/cards/StepCards";
+import FAQSection from "../features/FAQSection";
 
 const HowItWorks = () => (
   <>
@@ -25,6 +26,8 @@ const HowItWorks = () => (
         </Link>
       </div>
     </section>
+
+    <FAQSection />
   </>
 );
 
