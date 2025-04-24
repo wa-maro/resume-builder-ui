@@ -1,3 +1,5 @@
+import GridWrapper from "./GridWrapper";
+
 const testimonials = [
   {
     text: "I had an amazing experience! The platform was intuitive, and I was able to build my resume in no time. Highly recommend to anyone looking to create a professional resume.",
@@ -15,7 +17,7 @@ const testimonials = [
 
 const TestimonialCards = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <GridWrapper>
       {testimonials.map(({ text, author }, i) => (
         <article
           key={i}
@@ -29,7 +31,7 @@ const TestimonialCards = () => {
           </div>
         </article>
       ))}
-    </div>
+    </GridWrapper>
   );
 };
 

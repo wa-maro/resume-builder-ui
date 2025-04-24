@@ -1,4 +1,5 @@
 import { UserPlus, LayoutTemplate, Edit3, Download } from "lucide-react";
+import GridWrapper from "./GridWrapper";
 
 const steps = [
   {
@@ -32,7 +33,7 @@ const steps = [
 ];
 
 const StepCards = () => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <GridWrapper>
     {steps.map(({ icon, number, title, description }) => (
       <article
         key={number}
@@ -42,6 +43,7 @@ const StepCards = () => (
           <span className="w-8 h-8 rounded-full border border-teal-700 flex items-center justify-center">
             {icon}
           </span>
+
           <div className="flex-1">
             <h3 className="font-medium text-teal-700">{title}</h3>
             <p className="text-sm">{description}</p>
@@ -49,7 +51,7 @@ const StepCards = () => (
         </div>
       </article>
     ))}
-  </div>
+  </GridWrapper>
 );
 
 export default StepCards;

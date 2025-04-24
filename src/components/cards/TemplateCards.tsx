@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import GridWrapper from "./GridWrapper";
 
 const templates = [
   {
@@ -24,7 +25,7 @@ const templates = [
 ];
 
 const TemplateCards = () => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <GridWrapper>
     {templates.map(({ name, slug }) => (
       <article className="shadow-md rounded-xl pb-6 hover:shadow-lg transition-shadow duration-200">
         <div className="space-y-4 text-center">
@@ -42,7 +43,7 @@ const TemplateCards = () => (
         </div>
       </article>
     ))}
-  </div>
+  </GridWrapper>
 );
 
 export default TemplateCards;
