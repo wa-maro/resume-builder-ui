@@ -38,7 +38,7 @@ const Home = () => {
         </article>
       </section>
 
-      <section className="px-6 sm:px-12 py-10 space-y-8">
+      <section className="px-6 sm:px-12 py-10 space-y-8 bg-white">
         <div className="space-y-3">
           <h3 className="text-3xl text-center text-slate-700 font-medium">
             How it works
@@ -52,7 +52,7 @@ const Home = () => {
         <StepCards />
       </section>
 
-      <section className="px-6 sm:px-12 py-10 space-y-8">
+      <section className="px-6 sm:px-12 py-10 space-y-8 bg-white">
         <div className="flex justify-between items-center">
           <h3 className="text-3xl text-center text-slate-700 font-medium">
             Newest
