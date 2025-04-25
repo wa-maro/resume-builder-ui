@@ -38,8 +38,8 @@ const Home = () => {
         </article>
       </section>
 
-      <section className="px-6 sm:px-12 py-20 space-y-8 ">
-        <header className="space-y-3 text-center max-w-md mx-auto">
+      <section className="px-6 sm:px-12 py-20 space-y-8 bg-white">
+        <header className="space-y-3">
           <h3 className="text-3xl text-center text-slate-700 font-medium">
             How it works
           </h3>
