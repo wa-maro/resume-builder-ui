@@ -3,12 +3,13 @@ import { ArrowRight } from "lucide-react";
 import TemplateCards from "../components/cards/TemplateCards";
 import TestimonialCards from "../components/cards/TestimonialCards";
 import StepCards from "../components/cards/StepCards";
+import ctaImage from "../assets/cta-image.svg";
 
 const Home = () => {
   return (
     <>
-      <section className="px-6 sm:px-12 py-20 flex flex-col-reverse lg:flex-row items-center gap-12">
-        <article className="space-y-6 text-center lg:text-left">
+      <section className="px-6 flex flex-col-reverse md:flex-row items-center gap-12">
+        <article className="space-y-6 text-center md:text-left md:basis-1/2">
           <div className="space-y-3">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 max-w-md">
               Build Your Professional Resume in Minutes
@@ -28,11 +29,11 @@ const Home = () => {
           </Link>
         </article>
 
-        <article>
+        <article className="w-full max-w-sm lg:max-w-md">
           <img
-            src="https://placehold.co/600x400"
-            alt="Resume illustration"
-            className="w-full max-w-lg rounded-xl shadow-md"
+            src={ctaImage}
+            alt="Resume Builder Illustration"
+            className="w-full h-auto object-contain"
           />
         </article>
       </section>
