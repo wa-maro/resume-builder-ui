@@ -21,7 +21,7 @@ const TestimonialCards = () => {
       {testimonials.map(({ text, author }, i) => (
         <article
           key={i}
-          className="shadow rounded-xl hover:shadow-md transition-shadow duration-300"
+          className="shadow rounded-xl hover:shadow-md transition-shadow duration-300 bg-white"
         >
           <div className="p-6 space-y-2">
             <p className="text-sm text-gray-700">{text}</p>

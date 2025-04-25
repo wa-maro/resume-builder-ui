@@ -38,18 +38,27 @@ const Home = () => {
         </article>
       </section>
 
-      <section className="px-6 sm:px-12 py-10 space-y-8 bg-white">
-        <div className="space-y-3">
+      <section className="px-6 sm:px-12 py-10 space-y-8 ">
+        <header className="space-y-3 text-center max-w-md mx-auto">
           <h3 className="text-3xl text-center text-slate-700 font-medium">
             How it works
           </h3>
-          <p className="text-lg text-center">
-            Create your professional resume in just a few easy steps — no design
-            skills needed.
+          <p className="text-lg text-gray-600">
+            We’ve made it easy for anyone in Tanzania to build a job-winning
+            resume — no design or tech skills required.
           </p>
-        </div>
+        </header>
 
         <StepCards />
+
+        <div className="text-center pt-10">
+          <Link
+            to="/resume"
+            className="bg-rose-600 hover:bg-rose-700 text-white py-3 px-6 rounded-xl font-medium transition"
+          >
+            Start Building Your Resume
+          </Link>
+        </div>
       </section>
 
       <section className="px-6 sm:px-12 py-10 space-y-8 bg-white">
