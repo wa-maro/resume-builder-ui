@@ -3,7 +3,7 @@ import "./App.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
-import ResumeBuiler from "./pages/ResumeBuiler";
+import ResumeBuilder from "./pages/ResumeBuilder";
 import Templates from "./pages/Templates";
 import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
 
-          <Route path="resume" element={<ResumeBuiler />} />
+          <Route path="resume" element={<ResumeBuilder />} />
 
           <Route path="templates" element={<Templates />} />
           <Route path="how-it-works" element={<HowItWorks />} />
