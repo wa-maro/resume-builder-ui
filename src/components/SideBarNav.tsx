@@ -1,44 +1,33 @@
-import { Link } from "react-router-dom";
+import SideNavItem from "./SideNavItem";
+
+const navItems = [
+  { label: "Personal Info", to: "personal-info" },
+  {
+    label: "Education",
+    children: [
+      {
+        label: "School Qualifications",
+        to: "education-background/school-qualifications",
+      },
+      {
+        label: "Academic Qualifications",
+        to: "education-background/academic-qualifications",
+      },
+    ],
+  },
+  { label: "Experience", to: "work-experience" },
+  { label: "Skill", to: "skills" },
+  { label: "Referee", to: "referees" },
+  { label: "Summary & Declaration", to: "summary-and-declaration" },
+];
 
 const SideBarNav = () => {
   return (
     <nav>
       <ul className="space-y-2">
-        <li>
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">
-            Personal Info
-          </Link>
-        </li>
-        <li>
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">
-            Education
-          </Link>
-        </li>
-        <li>
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">
-            Experience
-          </Link>
-        </li>
-        <li>
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">
-            Skill
-          </Link>
-        </li>
-        <li>
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">
-            Referee
-          </Link>
-        </li>
-        <li>
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">
-            Summary
-          </Link>
-        </li>
-        <li>
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">
-            Declaration
-          </Link>
-        </li>
+        {navItems.map((item) => (
+          <SideNavItem key={item.label} item={item} />
+        ))}
       </ul>
     </nav>
   );
