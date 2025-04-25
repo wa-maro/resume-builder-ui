@@ -9,7 +9,7 @@ const HowItWorks = () => (
         <h1 className="text-3xl sm:text-4xl text-slate-700 font-semibold">
           How Our Resume Builder Works
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600  max-w-md mx-auto">
           We’ve made it easy for anyone in Tanzania to build a job-winning
           resume — no design or tech skills required.
         </p>

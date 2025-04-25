@@ -31,7 +31,7 @@ const TemplateCards = () => (
         <div className="space-y-4">
           <div className="w-full rounded-t-lg overflow-hidden flex items-center justify-center">
             <img
-              src="https://placehold.co/320x320"
+              src="https://placehold.co/400x400"
               alt={`${name} preview`}
               className="object-contain h-full"
             />

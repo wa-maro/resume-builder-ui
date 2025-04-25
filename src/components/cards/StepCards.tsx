@@ -37,7 +37,7 @@ const StepCards = () => (
     {steps.map(({ icon, number, title, description }) => (
       <article
         key={number}
-        className="shadow-md rounded-xl p-8 hover:shadow-lg transition-transform hover:-translate-y-1"
+        className="shadow-md rounded-xl p-8 hover:shadow-lg transition-transform hover:-translate-y-1 bg-white"
       >
         <div className="flex gap-2">
           <span className="w-8 h-8 rounded-full border border-rose-700 flex items-center justify-center">
