@@ -36,7 +36,7 @@ const ContactForm = () => {
         />
         <TextInput
           name="name"
-          style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
           value={form.name}
           onChange={onChangeHandler}
         />
@@ -51,7 +51,7 @@ const ContactForm = () => {
         <TextInput
           type="email"
           name="email"
-          style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
           value={form.email}
           onChange={onChangeHandler}
         />
@@ -67,13 +67,13 @@ const ContactForm = () => {
           name="message"
           rows={5}
           required
-          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
         />
       </div>
 
       <button
         type="submit"
-        className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 transition"
+        className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700 transition"
       >
         <Send className="w-4 h-4" />
         Send Message

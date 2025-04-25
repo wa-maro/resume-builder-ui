@@ -22,7 +22,7 @@ const Home = () => {
 
           <Link
             to="/resume"
-            className="inline-flex items-center gap-2 bg-teal-700 text-white hover:bg-teal-800 transition-colors rounded-lg font-medium px-8 py-3"
+            className="inline-flex items-center gap-2 bg-rose-700 text-white hover:bg-slate-800 transition-colors rounded-lg font-medium px-8 py-3"
           >
             Get Started
             <ArrowRight className="w-5 h-5" />
@@ -39,8 +39,10 @@ const Home = () => {
       </section>
 
       <section className="px-6 sm:px-12 py-10 space-y-8">
-        <div>
-          <h2 className="text-2xl text-center font-medium">How it works</h2>
+        <div className="space-y-3">
+          <h3 className="text-3xl text-center text-slate-700 font-medium">
+            How it works
+          </h3>
           <p className="text-lg text-center">
             Create your professional resume in just a few easy steps — no design
             skills needed.
@@ -52,11 +54,13 @@ const Home = () => {
 
       <section className="px-6 sm:px-12 py-10 space-y-8">
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl text-center font-medium">Newest</h2>
+          <h3 className="text-3xl text-center text-slate-700 font-medium">
+            Newest
+          </h3>
           <button>
             <a
               href="/templates"
-              className="underline hover:text-teal-700 hover:no-underline"
+              className="underline hover:text-slate-700 hover:no-underline"
             >
               View All
             </a>
@@ -68,7 +72,9 @@ const Home = () => {
 
       <section className="px-6 sm:px-12 py-10 space-y-8">
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl text-center font-medium">What They Say</h2>
+          <h3 className="text-3xl text-center text-slate-700 font-medium">
+            What They Say
+          </h3>
         </div>
 
         <TestimonialCards />

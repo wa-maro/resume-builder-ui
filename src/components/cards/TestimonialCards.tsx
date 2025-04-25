@@ -25,7 +25,7 @@ const TestimonialCards = () => {
         >
           <div className="p-6 space-y-2">
             <p className="text-sm text-gray-700">{text}</p>
-            <h3 className="font-semibold italic text-end text-gray-900">
+            <h3 className="font-semibold italic text-end text-rose-700">
               - {author}
             </h3>
           </div>
