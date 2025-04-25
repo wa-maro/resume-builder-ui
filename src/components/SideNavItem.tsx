@@ -19,7 +19,7 @@ const SideNavItem = ({ item }: SideNavItemProps) => {
       <li>
         <button
           onClick={() => setOpen(!open)}
-          className="w-full text-left px-2 py-1 text-gray-700 hover:text-blue-600 focus:outline-none"
+          className="w-full text-left px-2 py-1 text-slate-700 hover:text-emerald-600 focus:outline-none"
         >
           {item.label} {open ? "−" : "+"}
         </button>
@@ -41,8 +41,8 @@ const SideNavItem = ({ item }: SideNavItemProps) => {
         className={({ isActive }) =>
           `block px-2 py-1 rounded ${
             isActive
-              ? "text-blue-600 font-semibold bg-blue-100"
-              : "text-gray-700 hover:text-blue-600"
+              ? "text-emerald-600 bg-emerald-100"
+              : "text-slate-700 hover:text-emerald-600"
           }`
         }
       >

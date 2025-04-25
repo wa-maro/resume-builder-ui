@@ -1,9 +1,9 @@
 import SideNavItem from "./SideNavItem";
 
 const navItems = [
-  { label: "Personal Info", to: "personal-info" },
+  { label: "Personal Information", to: "personal-information" },
   {
-    label: "Education",
+    label: "Education Background",
     children: [
       {
         label: "School Qualifications",
@@ -15,9 +15,9 @@ const navItems = [
       },
     ],
   },
-  { label: "Experience", to: "work-experience" },
-  { label: "Skill", to: "skills" },
-  { label: "Referee", to: "referees" },
+  { label: "Work Experiences", to: "work-experiences" },
+  { label: "Skills", to: "skills" },
+  { label: "Referees", to: "referees" },
   { label: "Summary & Declaration", to: "summary-and-declaration" },
 ];
 
