@@ -32,7 +32,7 @@ const ContactForm = () => {
         <Label
           htmlFor="name"
           text="name"
-          style="block font-medium text-gray-700 mb-1 capitalize"
+          style="block text-gray-700 mb-1 capitalize"
         />
         <TextInput
           name="name"
@@ -46,7 +46,7 @@ const ContactForm = () => {
         <Label
           htmlFor="email"
           text="email"
-          style="block font-medium text-gray-700 mb-1 capitalize"
+          style="block text-gray-700 mb-1 capitalize"
         />
         <TextInput
           type="email"
@@ -61,7 +61,7 @@ const ContactForm = () => {
         <Label
           htmlFor="message"
           text="message"
-          style="block font-medium text-gray-700 mb-1 capitalize"
+          style="block text-gray-700 mb-1 capitalize"
         />
         <textarea
           name="message"

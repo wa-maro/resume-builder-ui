@@ -3,19 +3,22 @@ import RegisterForm from "../features/RegisterForm";
 
 const Register = () => {
   return (
-    <div className="max-w-lg mx-auto px-20 py-10">
-      <RegisterForm />
+    <main className="max-w-3xl px-4 md:px-0 mx-auto py-16 pt-0 md:pt-16">
+      <section className="space-y-8 bg-white p-8 shadow-md rounded-xl">
+        <h2 className="text-2xl font-semibold text-center capitalize">
+          Register new account
+        </h2>
 
-      <div className="text-xs flex items-center space-x-1.5 mt-2">
-        <p>Dont have an account?</p>
-        <Link
-          to="/login"
-          className="text-teal-600 font-medium underline decoration-dotted"
-        >
-          Login
-        </Link>
-      </div>
-    </div>
+        <RegisterForm />
+
+        <div className="flex items-center space-x-1.5 mt-2">
+          <p>Dont have an account?</p>
+          <Link to="/login" className="text-teal-600 font-medium">
+            Login
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 };
 

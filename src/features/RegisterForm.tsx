@@ -22,19 +22,29 @@ const RegisterForm = () => {
 
   return (
     <form method="post" onSubmit={onSubmitHandler}>
-      <div className="space-y-5">
-        <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="username" text="Username" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="basis-1/2 flex flex-col space-y-1.5">
+          <Label
+            style="block text-gray-700 mb-1 capitalize"
+            htmlFor="username"
+            text="Username"
+          />
           <TextInput
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
             name="username"
             value={user.username}
             onChange={onChangeHandler}
           />
         </div>
 
-        <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="email" text="email" />
+        <div className="basis-1/2 flex flex-col space-y-1.5">
+          <Label
+            style="block text-gray-700 mb-1 capitalize"
+            htmlFor="email"
+            text="email"
+          />
           <TextInput
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
             type="email"
             name="email"
             value={user.email}
@@ -42,18 +52,29 @@ const RegisterForm = () => {
           />
         </div>
 
-        <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="password" text="password" />
+        <div className="basis-1/2 flex flex-col space-y-1.5">
+          <Label
+            style="block text-gray-700 mb-1 capitalize"
+            htmlFor="password"
+            text="password"
+          />
           <TextInput
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
             type="password"
             name="password"
             value={user.password}
             onChange={onChangeHandler}
           />
         </div>
-        <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="passwordConfirm" text="password confirm" />
+
+        <div className="basis-1/2 flex flex-col space-y-1.5">
+          <Label
+            style="block text-gray-700 mb-1 capitalize"
+            htmlFor="passwordConfirm"
+            text="password confirm"
+          />
           <TextInput
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
             type="passwordConfirm"
             name="passwordConfirm"
             value={user.passwordConfirm}
@@ -61,10 +82,10 @@ const RegisterForm = () => {
           />
         </div>
 
-        <div>
+        <div className="basis-1/2">
           <button
             type="submit"
-            className="bg-violet-400 hover:bg-violet-500 me-auto w-full text-gray-100 rounded py-1.5 font-medium text-sm text-center"
+            className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700 transition"
           >
             Register
           </button>
