@@ -19,67 +19,76 @@ import ResumeLayout from "./layouts/ResumeLayout";
 import TemplateDetails from "./pages/TemplateDetails";
 import ProtectedRoute from "./context/ProtectedRoutes";
 import Unauthorized from "./pages/Unauthorized";
+import AuthProvider from "./context/authProvider";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AppLayout />}>
-          <Route index element={<Home />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AppLayout />}>
+            <Route index element={<Home />} />
 
-          <Route
-            path="resume"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <ResumeLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Navigate to="personal-information" />} />
-            <Route path="personal-information" element={<PersonalDetails />} />
-            <Route path="education-background">
-              <Route index element={<Navigate to="school-qualifications" />} />
-              <Route
-                path="school-qualifications"
-                element={<SchoolQualifications />}
-              />
-              <Route
-                path="academic-qualifications"
-                element={<AcademicQualifications />}
-              />
-            </Route>
-            <Route path="work-experiences" element={<WorkExperiences />} />
-            <Route path="skills" element={<Skills />} />
-            <Route path="referees" element={<Referees />} />
             <Route
-              path="summary-and-declaration"
-              element={<SummaryAndDeclaration />}
-            />
-          </Route>
-
-          <Route path="templates" element={<Templates />}>
-            <Route
-              path=":slug"
+              path="resume"
               element={
                 <ProtectedRoute allowedRoles={["user"]}>
-                  <TemplateDetails />
+                  <ResumeLayout />
                 </ProtectedRoute>
               }
-            />
+            >
+              <Route index element={<Navigate to="personal-information" />} />
+              <Route
+                path="personal-information"
+                element={<PersonalDetails />}
+              />
+              <Route path="education-background">
+                <Route
+                  index
+                  element={<Navigate to="school-qualifications" />}
+                />
+                <Route
+                  path="school-qualifications"
+                  element={<SchoolQualifications />}
+                />
+                <Route
+                  path="academic-qualifications"
+                  element={<AcademicQualifications />}
+                />
+              </Route>
+              <Route path="work-experiences" element={<WorkExperiences />} />
+              <Route path="skills" element={<Skills />} />
+              <Route path="referees" element={<Referees />} />
+              <Route
+                path="summary-and-declaration"
+                element={<SummaryAndDeclaration />}
+              />
+            </Route>
+
+            <Route path="templates" element={<Templates />}>
+              <Route
+                path=":slug"
+                element={
+                  <ProtectedRoute allowedRoles={["user"]}>
+                    <TemplateDetails />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+
+            <Route path="how-it-works" element={<HowItWorks />} />
+            <Route path="contact" element={<Contact />} />
+
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+
+            <Route path="unauthorized" element={<Unauthorized />} />
+
+            <Route path="*" element={<NotFound />} />
           </Route>
-
-          <Route path="how-it-works" element={<HowItWorks />} />
-          <Route path="contact" element={<Contact />} />
-
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-
-          <Route path="unauthorized" element={<Unauthorized />} />
-
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
