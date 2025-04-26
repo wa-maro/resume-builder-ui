@@ -1,12 +1,14 @@
+// src/pages/Unauthorized.tsx
+
 import { Link } from "react-router-dom";
 
-function NotFound() {
+const Unauthorized = () => {
   return (
     <main className="flex flex-col items-center justify-center min-h-[70vh] p-12 text-center">
-      <h1 className="text-5xl font-bold text-red-600">404</h1>
-      <p className="mt-4 text-2xl text-gray-700">Page Not Found</p>
+      <h1 className="text-5xl font-bold text-red-600">401</h1>
+      <p className="mt-4 text-2xl text-gray-700">Unauthorized</p>
       <p className="mt-2 text-gray-500">
-        The page you are looking for doesn't exist or has been moved.
+        You don't have permission to access this page.
       </p>
 
       <Link
@@ -17,6 +19,6 @@ function NotFound() {
       </Link>
     </main>
   );
-}
+};
 
-export default NotFound;
+export default Unauthorized;

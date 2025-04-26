@@ -17,6 +17,8 @@ import Referees from "./features/sections/Referees";
 import SummaryAndDeclaration from "./features/sections/SummaryAndDeclaration";
 import ResumeLayout from "./layouts/ResumeLayout";
 import TemplateDetails from "./pages/TemplateDetails";
+import ProtectedRoute from "./context/ProtectedRoutes";
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
   return (
@@ -25,7 +27,14 @@ function App() {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
 
-          <Route path="resume" element={<ResumeLayout />}>
+          <Route
+            path="resume"
+            element={
+              <ProtectedRoute allowedRoles={["user"]}>
+                <ResumeLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Navigate to="personal-information" />} />
             <Route path="personal-information" element={<PersonalDetails />} />
             <Route path="education-background">
@@ -49,7 +58,14 @@ function App() {
           </Route>
 
           <Route path="templates" element={<Templates />}>
-            <Route path=":slug" element={<TemplateDetails />} />
+            <Route
+              path=":slug"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <TemplateDetails />
+                </ProtectedRoute>
+              }
+            />
           </Route>
 
           <Route path="how-it-works" element={<HowItWorks />} />
@@ -57,6 +73,8 @@ function App() {
 
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+
+          <Route path="unauthorized" element={<Unauthorized />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
