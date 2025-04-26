@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 import Logo from "../components/Logo";
 import TopNavBar from "../components/TopNavBar";
+import { useAuth } from "../context/authContext";
+import LogoutForm from "../features/LogoutForm";
 
 const Header = () => {
+  const { user } = useAuth();
+
   const toggleNavBar = () => {
     const nav = document.getElementById("navbar-sticky");
     if (nav) nav.classList.toggle("hidden");
@@ -14,12 +18,18 @@ const Header = () => {
         <Logo />
 
         <div className="flex md:order-2 space-x-3 md:space-x-0">
-          <NavLink
-            to="login"
-            className="border border-rose-700 rounded-lg font-medium py-1.5 px-4 text-center text-rose-700"
-          >
-            Login
-          </NavLink>
+          {user !== undefined ? (
+            <div className="flex space-x-2">
+              <LogoutForm />
+            </div>
+          ) : (
+            <NavLink
+              to="login"
+              className="border border-rose-700 rounded-lg font-medium py-1.5 px-4 text-center text-rose-700"
+            >
+              Login
+            </NavLink>
+          )}
 
           <button
             onClick={toggleNavBar}

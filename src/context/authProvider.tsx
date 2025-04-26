@@ -54,8 +54,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const logout = async () => {
+    try {
+      setUser(undefined);
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || "Logout failed");
+      else throw new Error("Logout failed");
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, register, login }}>
+    <AuthContext.Provider value={{ user, register, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

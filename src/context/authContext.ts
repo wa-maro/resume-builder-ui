@@ -4,12 +4,14 @@ type AuthContextProps = {
   user?: UserType;
   register: (data: RegisterType) => Promise<void>;
   login: (data: LoginType) => Promise<void>;
+  logout: () => Promise<void>;
 };
 
 const initialContext = {
   user: undefined,
   register: async () => {},
   login: async () => {},
+  logout: async () => {},
 };
 
 const AuthContext = createContext<AuthContextProps>(initialContext);
