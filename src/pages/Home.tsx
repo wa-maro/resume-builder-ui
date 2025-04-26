@@ -8,7 +8,7 @@ import ctaImage from "../assets/cta-image.svg";
 const Home = () => {
   return (
     <>
-      <section className="sm:px-6 lg:px-20 flex flex-col-reverse md:flex-row items-center gap-12">
+      <section className="sm:px-6 lg:px-20 pb-20 flex flex-col-reverse md:flex-row items-center gap-12">
         <article className="space-y-6 text-center md:text-left md:basis-1/2">
           <div className="space-y-3 max-w-md md:max-w-lg">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900">

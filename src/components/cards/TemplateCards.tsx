@@ -27,7 +27,7 @@ const templates = [
 const TemplateCards = () => (
   <GridWrapper>
     {templates.map(({ name, slug }) => (
-      <article className="shadow-md rounded-xl pb-6 hover:shadow-lg transition-shadow duration-200">
+      <article key={slug} className="shadow-md rounded-xl pb-6 hover:shadow-lg transition-shadow duration-200">
         <div className="space-y-4">
           <div className="w-full rounded-t-lg overflow-hidden flex items-center justify-center">
             <img
