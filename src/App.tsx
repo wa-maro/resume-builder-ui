@@ -20,6 +20,7 @@ import TemplateDetails from "./pages/TemplateDetails";
 import ProtectedRoute from "./context/ProtectedRoutes";
 import Unauthorized from "./pages/Unauthorized";
 import AuthProvider from "./context/authProvider";
+import GuestRoute from "./context/GuestRoute";
 
 function App() {
   return (
@@ -79,8 +80,22 @@ function App() {
             <Route path="how-it-works" element={<HowItWorks />} />
             <Route path="contact" element={<Contact />} />
 
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
+            <Route
+              path="login"
+              element={
+                <GuestRoute>
+                  <Login />
+                </GuestRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <GuestRoute>
+                  <Register />
+                </GuestRoute>
+              }
+            />
 
             <Route path="unauthorized" element={<Unauthorized />} />
 

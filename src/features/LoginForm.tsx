@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TextInput from "../components/TextInput";
 import Label from "../components/Label";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
 const LoginForm = () => {
@@ -13,6 +13,10 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
   const { login } = useAuth();
+  const location = useLocation();
+
+  // If coming from ProtectedRoute
+  const from = location.state?.from?.pathname || "/";
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -23,7 +27,7 @@ const LoginForm = () => {
   ): Promise<void> => {
     event.preventDefault();
     try {
-      await login(user).finally(() => navigate("/"));
+      await login(user).finally(() => navigate(from, { replace: true }));
     } catch (error) {
       if (error instanceof Error) setError(error.message);
     }
