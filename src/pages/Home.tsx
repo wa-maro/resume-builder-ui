@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import TemplateCards from "../components/cards/TemplateCards";
 import TestimonialCards from "../components/cards/TestimonialCards";
 import StepCards from "../components/cards/StepCards";
+import TemplatePreviewCard from "../components/cards/TemplatePreviewCard";
 import ctaImage from "../assets/cta-image.svg";
 
 const Home = () => {
@@ -76,7 +76,11 @@ const Home = () => {
           </button>
         </div>
 
-        <TemplateCards />
+        <ul className="grid grid-cols-2 gap-4">
+          {Array.from({ length: 2 }).map((_, index) => (
+            <TemplatePreviewCard key={index} id={index + 1} />
+          ))}
+        </ul>
       </section>
 
       <section className="px-6 sm:px-12 py-10 space-y-8">
