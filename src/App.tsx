@@ -16,6 +16,7 @@ import Skills from "./features/sections/Skills";
 import Referees from "./features/sections/Referees";
 import SummaryAndDeclaration from "./features/sections/SummaryAndDeclaration";
 import ResumeLayout from "./layouts/ResumeLayout";
+import TemplateDetails from "./pages/TemplateDetails";
 
 function App() {
   return (
@@ -47,7 +48,10 @@ function App() {
             />
           </Route>
 
-          <Route path="templates" element={<Templates />} />
+          <Route path="templates" element={<Templates />}>
+            <Route path=":slug" element={<TemplateDetails />} />
+          </Route>
+
           <Route path="how-it-works" element={<HowItWorks />} />
           <Route path="contact" element={<Contact />} />
 
