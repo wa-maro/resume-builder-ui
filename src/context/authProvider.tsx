@@ -4,11 +4,20 @@ import AuthContext from "./authContext";
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<UserType | undefined>(undefined);
+  const [user, setUser] = useState<UserType | undefined>(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    if (token && (role === "user" || role === "admin")) return { token, role };
+    else return undefined;
+  });
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) setUser(JSON.parse(storedUser));
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (token && (role === "user" || role === "admin"))
+      setUser({ token, role });
+    else setUser(undefined);
   }, []);
 
   const register = async ({
@@ -43,10 +52,19 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         body: JSON.stringify({ usernameOrEmail, password }),
       });
 
+      if (!res.ok) {
+        const errorText = await res.text(); // because response might not be JSON!
+        throw new Error(errorText || "Network response was not ok");
+      }
+
       const data = await res.json();
       if (!data.success) throw new Error(data.message || "Login failed");
 
-      setUser(data.user);
+      if (data.user) {
+        setUser(data.user);
+        localStorage.setItem("role", data.user.role);
+        localStorage.setItem("token", data.user.token);
+      }
     } catch (error) {
       if (error instanceof Error)
         throw new Error(error.message || "Login failed");
@@ -57,6 +75,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = async () => {
     try {
       setUser(undefined);
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
     } catch (error) {
       if (error instanceof Error)
         throw new Error(error.message || "Logout failed");
