@@ -5,6 +5,13 @@ declare global {
     token: string;
     role: "user" | "admin";
   }
+
+  export interface RegisterType {
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }
 }
 
 export {};

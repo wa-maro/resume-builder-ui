@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
+import { useAuth } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<RegisterType>({
     username: "",
     email: "",
     password: "",
-    passwordConfirm: "",
+    confirmPassword: "",
   });
+  const navigate = useNavigate();
+  const { register } = useAuth();
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -18,10 +23,18 @@ const RegisterForm = () => {
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault();
+    try {
+      await register(user);
+      navigate("/login");
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+    }
   };
 
   return (
     <form method="post" onSubmit={onSubmitHandler}>
+      {error && <p className="text-red-500">{error}</p>}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="basis-1/2 flex flex-col space-y-1.5">
           <Label
@@ -70,14 +83,14 @@ const RegisterForm = () => {
         <div className="basis-1/2 flex flex-col space-y-1.5">
           <Label
             style="block text-gray-700 mb-1 capitalize"
-            htmlFor="passwordConfirm"
+            htmlFor="confirmPassword"
             text="password confirm"
           />
           <TextInput
             style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
-            type="passwordConfirm"
-            name="passwordConfirm"
-            value={user.passwordConfirm}
+            type="password"
+            name="confirmPassword"
+            value={user.confirmPassword}
             onChange={onChangeHandler}
           />
         </div>

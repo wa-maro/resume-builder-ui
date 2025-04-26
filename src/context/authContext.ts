@@ -2,10 +2,12 @@ import { createContext, useContext } from "react";
 
 type AuthContextProps = {
   user?: UserType;
+  register: (data: RegisterType) => Promise<void>;
 };
 
 const initialContext = {
   user: undefined,
+  register: async () => {},
 };
 
 const AuthContext = createContext<AuthContextProps>(initialContext);
