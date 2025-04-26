@@ -29,16 +29,33 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       return data;
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof Error)
         throw new Error(error.message || "Registration failed");
-      } else {
-        throw new Error("Registration failed");
-      }
+      else throw new Error("Registration failed");
+    }
+  };
+
+  const login = async ({ usernameOrEmail, password }: LoginType) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/v0/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usernameOrEmail, password }),
+      });
+
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message || "Login failed");
+
+      setUser(data.user);
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error(error.message || "Login failed");
+      else throw new Error("Login failed");
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, register }}>
+    <AuthContext.Provider value={{ user, register, login }}>
       {children}
     </AuthContext.Provider>
   );

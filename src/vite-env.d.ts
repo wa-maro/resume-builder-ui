@@ -12,6 +12,11 @@ declare global {
     password: string;
     confirmPassword: string;
   }
+
+  export interface LoginType {
+    usernameOrEmail: string;
+    password: string;
+  }
 }
 
 export {};
