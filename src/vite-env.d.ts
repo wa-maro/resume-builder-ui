@@ -74,6 +74,18 @@ declare global {
     grade: { division: string; points: string };
     resumeId: string;
   }
+
+  export interface Academic {
+    _id: string;
+    award: string;
+    institution: { name: string; location: string };
+    startYear: string;
+    endYear: string;
+    uploadedCertificate: string;
+    uploadedTranscript: string;
+    grade: { classification: string; gpa: string };
+    resumeId: string;
+  }
 }
 
 export {};
