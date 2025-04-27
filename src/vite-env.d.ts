@@ -17,6 +17,20 @@ declare global {
     usernameOrEmail: string;
     password: string;
   }
+
+  export interface Person {
+    _id: string;
+    fullName: string;
+    nationality: string;
+    dateOfBirth: string;
+    placeOfDomicile: string;
+    sex: string;
+    email: string;
+    phone: string;
+    physicalAddress: string;
+    disabilities: string;
+    resumeId: string;
+  }
 }
 
 export {};
