@@ -63,6 +63,17 @@ declare global {
     endDate: string;
     resumeId: string;
   }
+
+  export interface School {
+    _id: string;
+    award: string;
+    institution: { name: string; location: string };
+    startYear: string;
+    endYear: string;
+    uploadedCertificate: string;
+    grade: { division: string; points: string };
+    resumeId: string;
+  }
 }
 
 export {};
