@@ -10,33 +10,23 @@ const SkillForm = ({
   skill: Skill;
   setSkill: React.Dispatch<React.SetStateAction<Skill>>;
 }) => {
-  const handleChange = (
-    ev: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+  const onChangeHandler = (
+    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => setSkill({ ...skill, [ev.target.name]: ev.target.value });
 
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
-      <div className="text-sm flex items-center space-x-2 mt-6 mb-5">
-        <span className="h-0.5 bg-teal-400 flex-1"></span>
-        <span>New Skill</span>
-        <span className="h-0.5 bg-teal-400 flex-1"></span>
-      </div>
-
+    <form method="post" onSubmit={onSubmitHandler}>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
         <div className="flex flex-col gap-1">
           <Label text="category" htmlFor="category" />
           <Select
             label="Choose category"
             name="category"
-            onChange={handleChange}
+            onChange={onChangeHandler}
             value={skill.category}
           >
             <option value="personal">Personal</option>
@@ -48,7 +38,7 @@ const SkillForm = ({
           <TextInput
             name="name"
             placeholder="E.g. Communication"
-            onChange={handleChange}
+            onChange={onChangeHandler}
             value={skill.name}
           />
         </div>
@@ -63,7 +53,7 @@ const SkillForm = ({
               className="bg-gray-100 outline-none border border-gray-400 rounded px-2.5 py-2 text-sm flex-1"
               name="proficiency"
               id="proficiency"
-              onChange={handleChange}
+              onChange={onChangeHandler}
               value={skill.proficiency}
             />
             <p>{skill.proficiency}%</p>
@@ -87,7 +77,7 @@ const SkillForm = ({
           className="font-medium text-sm text-gray-500 bg-gray-100 rounded max-w-fit cursor-pointer file:cursor-pointer file:border-0 file:py-1.5 file:px-2.5 file:mr-4 file:bg-gray-800 file:text-white"
           type="file"
           name="certification"
-          onChange={handleChange}
+          onChange={onChangeHandler}
           value={skill.certification}
         />
       </div>

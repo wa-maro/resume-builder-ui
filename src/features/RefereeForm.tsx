@@ -10,25 +10,15 @@ const RefereeForm = ({
   setReference: React.Dispatch<React.SetStateAction<Reference>>;
 }) => {
   const onChangeHandler = (
-    ev: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => setReference({ ...reference, [ev.target.name]: ev.target.value });
 
-  const onSubmitHandler = async (
-    event: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
   return (
     <form method="post" onSubmit={onSubmitHandler}>
-      <div className="text-sm flex items-center space-x-2 mt-6 mb-5">
-        <span className="h-0.5 bg-teal-400 flex-1"></span>
-        <span>New Referee</span>
-        <span className="h-0.5 bg-teal-400 flex-1"></span>
-      </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
         <div className="flex flex-col gap-1">
           <Label text="full name" htmlFor="fullName" />
