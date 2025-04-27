@@ -5,17 +5,7 @@ import SectionHeader from "../../components/SectionHeader";
 import RefereeTable from "../RefereeTable";
 
 const Referees = () => {
-  const [references] = useState<Reference[]>([]);
-  const [reference, setReference] = useState<Reference>({
-    _id: "",
-    fullName: "",
-    position: "",
-    organization: "",
-    email: "",
-    phone: "",
-    physicalAddress: "",
-    resumeId: "",
-  });
+  const [references, setReferences] = useState<Reference[]>([]);
 
   return (
     <>
@@ -23,7 +13,7 @@ const Referees = () => {
 
       <SectionDivider title="New Referee" />
 
-      <RefereeForm reference={reference} setReference={setReference} />
+      <RefereeForm references={references} setReferences={setReferences} />
 
       <SectionDivider title="Referees" />
 

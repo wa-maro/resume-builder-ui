@@ -1,10 +1,6 @@
 import { Edit, X } from "lucide-react";
 
-const RefereeTable = ({
-  references,
-}: {
-  references: Reference[];
-}) => {
+const RefereeTable = ({ references }: { references: Reference[] }) => {
   return (
     <div className="overflow-x-auto pb-5">
       <table className="w-full text-sm text-left text-gray-500">

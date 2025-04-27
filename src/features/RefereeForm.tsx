@@ -2,20 +2,39 @@ import { Plus } from "lucide-react";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
 import ActionButton from "../components/ActionButton";
+import { useState } from "react";
+
+const newReferee = {
+  _id: "",
+  fullName: "",
+  position: "",
+  organization: "",
+  email: "",
+  phone: "",
+  physicalAddress: "",
+  resumeId: "",
+};
 
 const RefereeForm = ({
-  reference,
-  setReference,
+  references,
+  setReferences,
 }: {
-  reference: Reference;
-  setReference: React.Dispatch<React.SetStateAction<Reference>>;
+  references: Reference[];
+  setReferences: React.Dispatch<React.SetStateAction<Reference[]>>;
 }) => {
+  const [reference, setReference] = useState<Reference>(newReferee);
+
   const onChangeHandler = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => setReference({ ...reference, [ev.target.name]: ev.target.value });
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (references.length >= 3) return;
+
+    setReferences([...references, reference]);
+    setReference(newReferee);
   };
 
   return (
