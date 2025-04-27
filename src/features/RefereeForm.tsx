@@ -42,13 +42,13 @@ const RefereeForm = ({
           />
         </div>
         <div className="flex flex-col gap-1">
-          <Label text="institution" htmlFor="institution" />
+          <Label text="organization" htmlFor="organization" />
           <TextInput
             type="text"
-            name="institution"
-            placeholder="Institution name"
+            name="organization"
+            placeholder="organization name"
             onChange={onChangeHandler}
-            value={reference.institution}
+            value={reference.organization}
           />
         </div>
         <div className="flex flex-col gap-1">

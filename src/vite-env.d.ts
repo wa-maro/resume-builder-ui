@@ -36,7 +36,7 @@ declare global {
     _id: string;
     fullName: string;
     position: string;
-    institution: string;
+    organization: string;
     email: string;
     phone: string;
     physicalAddress: string;

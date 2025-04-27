@@ -8,7 +8,7 @@ const Referees = () => {
     _id: "",
     fullName: "",
     position: "",
-    institution: "",
+    organization: "",
     email: "",
     phone: "",
     physicalAddress: "",
