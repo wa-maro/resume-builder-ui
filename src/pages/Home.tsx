@@ -8,7 +8,7 @@ import ctaImage from "../assets/cta-image.svg";
 const Home = () => {
   return (
     <>
-      <section className="sm:px-6 lg:px-20 pb-20 flex flex-col-reverse md:flex-row items-center gap-12">
+      <section className="sm:px-6 lg:px-20 pt-10 pb-20 flex flex-col-reverse md:flex-row items-center gap-12">
         <article className="space-y-6 text-center md:text-left md:basis-1/2">
           <div className="space-y-3 max-w-md md:max-w-lg">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900">
@@ -76,8 +76,8 @@ const Home = () => {
           </button>
         </div>
 
-        <ul className="grid grid-cols-2 gap-4">
-          {Array.from({ length: 2 }).map((_, index) => (
+        <ul className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
+          {Array.from({ length: 3 }).map((_, index) => (
             <TemplatePreviewCard key={index} id={index + 1} />
           ))}
         </ul>

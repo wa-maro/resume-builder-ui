@@ -104,7 +104,7 @@ const PersonalDetailForm = ({
           <TextInput
             type="email"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             onChange={onChangeHandler}
             value={person.email}
           />
@@ -114,7 +114,7 @@ const PersonalDetailForm = ({
           <TextInput
             type="tel"
             name="phone"
-            placeholder="phone"
+            placeholder="Phone"
             onChange={onChangeHandler}
             value={person.phone}
           />

@@ -19,7 +19,7 @@ const SideNavItem = ({ item }: SideNavItemProps) => {
       <li>
         <button
           onClick={() => setOpen(!open)}
-          className="w-full text-left px-2 py-1 text-slate-700 hover:text-rose-600 focus:outline-none"
+          className="w-full text-left text-sm px-2 py-1 text-slate-700 hover:text-rose-600 focus:outline-none"
         >
           {item.label} {open ? "−" : "+"}
         </button>
@@ -39,7 +39,7 @@ const SideNavItem = ({ item }: SideNavItemProps) => {
       <NavLink
         to={item.to!}
         className={({ isActive }) =>
-          `block px-2 py-1 rounded ${
+          `block px-2 py-1 rounded text-sm ${
             isActive
               ? "text-rose-600 bg-rose-100"
               : "text-slate-700 hover:text-rose-600"
