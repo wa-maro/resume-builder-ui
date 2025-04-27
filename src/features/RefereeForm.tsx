@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
+import ActionButton from "../components/ActionButton";
 
 const RefereeForm = ({
   reference,
@@ -82,15 +83,11 @@ const RefereeForm = ({
         </div>
       </div>
 
-      <div className="mt-5 flex justify-end">
-        <button
-          type="submit"
-          className="bg-violet-400 text-gray-100 rounded-s font-medium px-3.5 py-1.5 text-sm text-nowrap text-center flex items-center gap-x-2"
-        >
-          <Plus size={16} />
-          <span>Add</span>
-        </button>
-      </div>
+      <ActionButton
+        text="Add"
+        theme="bg-violet-600"
+        icon={<Plus size={16} />}
+      />
     </form>
   );
 };

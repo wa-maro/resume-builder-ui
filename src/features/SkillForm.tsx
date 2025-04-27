@@ -3,6 +3,7 @@ import Label from "../components/Label";
 import Select from "../components/Select";
 import TextInput from "../components/TextInput";
 import TextArea from "../components/TextArea";
+import ActionButton from "../components/ActionButton";
 
 const SkillForm = ({
   skill,
@@ -84,15 +85,11 @@ const SkillForm = ({
         />
       </div>
 
-      <div className="mt-5 flex justify-end">
-        <button
-          type="submit"
-          className="bg-violet-400 text-gray-100 rounded-s font-medium px-3.5 py-1.5 text-sm text-nowrap text-center flex items-center gap-x-2"
-        >
-          <Plus size={16} />
-          <span>Add</span>
-        </button>
-      </div>
+      <ActionButton
+        text="Add"
+        theme="bg-violet-600"
+        icon={<Plus size={16} />}
+      />
     </form>
   );
 };

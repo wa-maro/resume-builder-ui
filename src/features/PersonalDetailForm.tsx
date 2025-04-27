@@ -3,6 +3,7 @@ import Label from "../components/Label";
 import TextInput from "../components/TextInput";
 import Select from "../components/Select";
 import SectionDivider from "../components/SectionDivider";
+import ActionButton from "../components/ActionButton";
 
 const PersonalDetailForm = ({
   person,
@@ -123,15 +124,11 @@ const PersonalDetailForm = ({
         </div>
       </div>
 
-      <div className="mt-8">
-        <button
-          type="submit"
-          className="rounded-e font-medium px-3.5 py-1.5 text-sm text-nowrap text-center flex items-center space-x-2 bg-teal-600 text-gray-200 cursor-pointer"
-        >
-          <span>Next</span>
-          <ArrowRight size={16} />
-        </button>
-      </div>
+      <ActionButton
+        text="Next"
+        theme="bg-teal-600"
+        icon={<ArrowRight size={16} />}
+      />
     </form>
   );
 };
