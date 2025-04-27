@@ -31,6 +31,17 @@ declare global {
     disabilities: string;
     resumeId: string;
   }
+
+  export interface Reference {
+    _id: string;
+    fullName: string;
+    position: string;
+    institution: string;
+    email: string;
+    phone: string;
+    physicalAddress: string;
+    resumeId: string;
+  }
 }
 
 export {};
