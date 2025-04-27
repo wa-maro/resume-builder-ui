@@ -1,11 +1,31 @@
+import { useState } from "react";
+import WorkExperienceForm from "../WorkExperienceForm";
+import SectionHeader from "../../components/SectionHeader";
+import SectionDivider from "../../components/SectionDivider";
+
 const WorkExperiences = () => {
+  const [experience, setExperience] = useState<Experience>({
+    _id: "",
+    jobTitle: "",
+    company: { name: "", location: "" },
+    responsibilities: "",
+    currentlyWorking: false,
+    startDate: "",
+    endDate: "",
+    resumeId: "",
+  });
+
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">WorkExperience</h2>
-      <p className="text-gray-600">
-        Select a section from the sidebar to begin editing your resume.
-      </p>
-    </div>
+    <>
+      <SectionHeader title="Work Experience" mandatory={false} />
+
+      <SectionDivider title="New Experience" />
+
+      <WorkExperienceForm
+        experience={experience}
+        setExperience={setExperience}
+      />
+    </>
   );
 };
 

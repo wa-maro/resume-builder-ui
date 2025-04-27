@@ -52,6 +52,17 @@ declare global {
     certification: string;
     resumeId: string;
   }
+
+  export interface Experience {
+    _id: string;
+    jobTitle: string;
+    company: { name: string; location: string };
+    responsibilities: string;
+    currentlyWorking: boolean;
+    startDate: string;
+    endDate: string;
+    resumeId: string;
+  }
 }
 
 export {};
