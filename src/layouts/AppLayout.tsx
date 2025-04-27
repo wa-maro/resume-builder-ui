@@ -6,7 +6,7 @@ const AppLayout = () => {
     <div className="bg-gray-50">
       <Header />
 
-      <div className="mt-20 max-w-7xl mx-auto">
+      <div className="mt-16 max-w-7xl mx-auto">
         <Outlet />
       </div>
     </div>
