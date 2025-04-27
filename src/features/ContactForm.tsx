@@ -2,6 +2,7 @@ import { useState } from "react";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
 import { Send } from "lucide-react";
+import TextArea from "../components/TextArea";
 
 const ContactForm = () => {
   const [form, setForm] = useState({
@@ -16,7 +17,7 @@ const ContactForm = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO: handle form submission (e.g., call API or send email)
     // Connect to an email service (like EmailJS, Nodemailer API) or a backend endpoint
@@ -63,11 +64,11 @@ const ContactForm = () => {
           text="message"
           style="block text-gray-700 mb-1 capitalize"
         />
-        <textarea
+        <TextArea
           name="message"
-          rows={5}
-          required
-          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
+          required={true}
+          value={form.message}
+          onChange={onChangeHandler}
         />
       </div>
 

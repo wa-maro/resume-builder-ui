@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import Label from "../components/Label";
 import Select from "../components/Select";
 import TextInput from "../components/TextInput";
+import TextArea from "../components/TextArea";
 
 const SkillForm = ({
   skill,
@@ -11,7 +12,9 @@ const SkillForm = ({
   setSkill: React.Dispatch<React.SetStateAction<Skill>>;
 }) => {
   const onChangeHandler = (
-    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ev: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => setSkill({ ...skill, [ev.target.name]: ev.target.value });
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -63,11 +66,10 @@ const SkillForm = ({
 
       <div className="flex flex-col gap-1 mt-5">
         <Label htmlFor="description" text="description (if any)" />
-        <textarea
+        <TextArea
           name="description"
-          rows={4}
-          required
-          className="w-full outline-none border border-gray-400 rounded px-2.5 py-2 "
+          onChange={onChangeHandler}
+          value={skill.description}
         />
       </div>
 
