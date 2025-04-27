@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PersonalDetailForm from "../PersonalDetailForm";
+import SectionHeader from "../../components/SectionHeader";
 
 const PersonalDetails = () => {
   const [person, setPerson] = useState<Person>({
@@ -18,12 +19,7 @@ const PersonalDetails = () => {
 
   return (
     <>
-      <article>
-        <h2 className="font-medium text-sm text-gray-600">
-          Personal Information
-        </h2>
-        <p className="text-xs text-gray-600">Mandatory Step</p>
-      </article>
+      <SectionHeader title="Personal Information" />
 
       <PersonalDetailForm person={person} setPerson={setPerson} />
     </>

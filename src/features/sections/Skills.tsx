@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SkillForm from "../SkillForm";
 import SectionDivider from "../../components/SectionDivider";
+import SectionHeader from "../../components/SectionHeader";
 
 const Skills = () => {
   const [skill, setSkill] = useState<Skill>({
@@ -15,10 +16,7 @@ const Skills = () => {
 
   return (
     <>
-      <article>
-        <h2 className="font-medium text-sm text-gray-600">Skills</h2>
-        <p className="text-xs text-gray-600">Mandatory Step</p>
-      </article>
+      <SectionHeader title="Skills" mandatory={false} />
 
       <SectionDivider title="New Skill" />
 

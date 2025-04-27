@@ -1,6 +1,7 @@
 import { useState } from "react";
 import RefereeForm from "../RefereeForm";
 import SectionDivider from "../../components/SectionDivider";
+import SectionHeader from "../../components/SectionHeader";
 
 const Referees = () => {
   const [reference, setReference] = useState<Reference>({
@@ -16,10 +17,7 @@ const Referees = () => {
 
   return (
     <>
-      <article>
-        <h2 className="font-medium text-sm text-gray-600">Referees</h2>
-        <p className="text-xs text-gray-600">Mandatory Step</p>
-      </article>
+      <SectionHeader title="Referees" />
 
       <SectionDivider title="New Referee" />
 

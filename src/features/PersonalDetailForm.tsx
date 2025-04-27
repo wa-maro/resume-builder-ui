@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
 import Select from "../components/Select";
+import SectionDivider from "../components/SectionDivider";
 
 const PersonalDetailForm = ({
   person,
@@ -22,13 +23,9 @@ const PersonalDetailForm = ({
 
   return (
     <form method="post" onSubmit={onSubmitHandler}>
-      <div className="text-sm flex items-center space-x-2 mt-6 mb-5">
-        <span className="h-0.5 bg-teal-400 flex-1"></span>
-        <span>Personal Details</span>
-        <span className="h-0.5 bg-teal-400 flex-1"></span>
-      </div>
+      <SectionDivider title="Personal Details" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 mb-10">
         <div className="flex flex-col gap-1.5">
           <Label text="Full Name" htmlFor="fullName" />
           <TextInput
@@ -92,11 +89,7 @@ const PersonalDetailForm = ({
         </div>
       </div>
 
-      <div className="text-sm flex items-center space-x-2 mt-10 mb-5">
-        <span className="h-0.5 bg-teal-400 flex-1"></span>
-        <span>Contanct Details</span>
-        <span className="h-0.5 bg-teal-400 flex-1"></span>
-      </div>
+      <SectionDivider title="Contanct Details" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
         <div className="flex flex-col gap-1.5">
