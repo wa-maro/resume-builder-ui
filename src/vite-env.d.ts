@@ -42,6 +42,16 @@ declare global {
     physicalAddress: string;
     resumeId: string;
   }
+
+  export interface Skill {
+    _id: string;
+    category: string;
+    name: string;
+    proficiency: number;
+    description: string;
+    certification: string;
+    resumeId: string;
+  }
 }
 
 export {};

@@ -1,11 +1,26 @@
+import { useState } from "react";
+import SkillForm from "../SkillForm";
+
 const Skills = () => {
+  const [skill, setSkill] = useState<Skill>({
+    _id: "",
+    category: "",
+    name: "",
+    proficiency: 50,
+    description: "",
+    certification: "",
+    resumeId: "",
+  });
+
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Skills</h2>
-      <p className="text-gray-600">
-        Select a section from the sidebar to begin editing your resume.
-      </p>
-    </div>
+    <>
+      <article>
+        <h2 className="font-medium text-sm text-gray-600">Skills</h2>
+        <p className="text-xs text-gray-600">Mandatory Step</p>
+      </article>
+
+      <SkillForm skill={skill} setSkill={setSkill} />
+    </>
   );
 };
 
