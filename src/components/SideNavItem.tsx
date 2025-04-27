@@ -12,7 +12,7 @@ interface SideNavItemProps {
 }
 
 const SideNavItem = ({ item }: SideNavItemProps) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   if (item.children && item.children.length > 0) {
     return (
@@ -39,7 +39,7 @@ const SideNavItem = ({ item }: SideNavItemProps) => {
       <NavLink
         to={item.to!}
         className={({ isActive }) =>
-          `block px-2 py-1 rounded text-sm ${
+          `block px-2 py-1 rounded text-sm text-nowrap ${
             isActive
               ? "text-rose-600 bg-rose-100"
               : "text-slate-700 hover:text-rose-600"
