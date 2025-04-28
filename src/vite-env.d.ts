@@ -75,7 +75,7 @@ declare global {
     resumeId?: string;
   }
 
-  export interface Academic {
+  export interface Profession {
     _id?: string;
     award: string;
     institution: { name: string; location: string };

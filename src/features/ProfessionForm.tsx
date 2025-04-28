@@ -4,7 +4,7 @@ import Label from "../components/Label";
 import TextInput from "../components/TextInput";
 import { useState } from "react";
 
-const newAcademic: Academic = {
+const newProfession: Profession = {
   award: "",
   institution: { name: "", location: "" },
   startYear: "",
@@ -14,28 +14,29 @@ const newAcademic: Academic = {
   grade: { classification: "", gpa: "" },
 };
 
-const AcademicForm = ({
-  academics,
-  setAcademics,
+const ProfessionForm = ({
+  professions,
+  setProfessions,
 }: {
-  academics: Academic[];
-  setAcademics: React.Dispatch<React.SetStateAction<Academic[]>>;
+  professions: Profession[];
+  setProfessions: React.Dispatch<React.SetStateAction<Profession[]>>;
 }) => {
+  const [profession, setProfession] = useState<Profession>(newProfession);
+
   const onChangeHandler = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setAcademic({ ...academic, [e.target.name]: e.target.value });
+    setProfession({ ...profession, [e.target.name]: e.target.value });
   };
-  const [academic, setAcademic] = useState<Academic>(newAcademic);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // set resume ID
-    academic.resumeId = "";
+    profession.resumeId = "";
 
-    setAcademics([...academics, academic]);
-    setAcademic(newAcademic);
+    setProfessions([...professions, profession]);
+    setProfession(newProfession);
   };
 
   return (
@@ -47,7 +48,7 @@ const AcademicForm = ({
             name="award"
             placeholder="Bachelor of Science with Education"
             onChange={onChangeHandler}
-            value={academic.award}
+            value={profession.award}
           />
         </div>
 
@@ -56,11 +57,14 @@ const AcademicForm = ({
           <TextInput
             name="institutionName"
             placeholder="University of Dodoma"
-            value={academic.institution.name}
+            value={profession.institution.name}
             onChange={(e) =>
-              setAcademic({
-                ...academic,
-                institution: { ...academic.institution, name: e.target.value },
+              setProfession({
+                ...profession,
+                institution: {
+                  ...profession.institution,
+                  name: e.target.value,
+                },
               })
             }
           />
@@ -71,12 +75,12 @@ const AcademicForm = ({
           <TextInput
             name="institutionLocation"
             placeholder="Mbinga, Tanzania"
-            value={academic.institution.location}
+            value={profession.institution.location}
             onChange={(e) =>
-              setAcademic({
-                ...academic,
+              setProfession({
+                ...profession,
                 institution: {
-                  ...academic.institution,
+                  ...profession.institution,
                   location: e.target.value,
                 },
               })
@@ -93,7 +97,7 @@ const AcademicForm = ({
               name="startYear"
               placeholder="Jan 2010"
               onChange={onChangeHandler}
-              value={academic.startYear}
+              value={profession.startYear}
             />
           </div>
 
@@ -103,7 +107,7 @@ const AcademicForm = ({
               name="endYear"
               placeholder="Nov 2010"
               onChange={onChangeHandler}
-              value={academic.endYear}
+              value={profession.endYear}
             />
           </div>
         </div>
@@ -114,11 +118,14 @@ const AcademicForm = ({
             <TextInput
               name="classification"
               placeholder="Lower second"
-              value={academic.grade.classification}
+              value={profession.grade.classification}
               onChange={(e) =>
-                setAcademic({
-                  ...academic,
-                  grade: { ...academic.grade, classification: e.target.value },
+                setProfession({
+                  ...profession,
+                  grade: {
+                    ...profession.grade,
+                    classification: e.target.value,
+                  },
                 })
               }
             />
@@ -129,11 +136,11 @@ const AcademicForm = ({
             <TextInput
               name="gpa"
               placeholder="3.4"
-              value={academic.grade.gpa}
+              value={profession.grade.gpa}
               onChange={(e) =>
-                setAcademic({
-                  ...academic,
-                  grade: { ...academic.grade, gpa: e.target.value },
+                setProfession({
+                  ...profession,
+                  grade: { ...profession.grade, gpa: e.target.value },
                 })
               }
             />
@@ -150,7 +157,7 @@ const AcademicForm = ({
             name="uploadedCertificate"
             placeholder="upload certificate"
             onChange={onChangeHandler}
-            value={academic.uploadedCertificate}
+            value={profession.uploadedCertificate}
           />
         </div>
         <div className="flex flex-col gap-1 col-span-1">
@@ -161,7 +168,7 @@ const AcademicForm = ({
             name="uploadedTranscript"
             placeholder="upload Transcript"
             onChange={onChangeHandler}
-            value={academic.uploadedTranscript}
+            value={profession.uploadedTranscript}
           />
         </div>
       </div>
@@ -175,4 +182,4 @@ const AcademicForm = ({
   );
 };
 
-export default AcademicForm;
+export default ProfessionForm;

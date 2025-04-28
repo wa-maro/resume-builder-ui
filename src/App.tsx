@@ -10,7 +10,7 @@ import NotFound from "./pages/NotFound";
 import AppLayout from "./layouts/AppLayout";
 import PersonalDetails from "./features/sections/PersonalDetails";
 import SchoolQualifications from "./features/sections/SchoolQualifications";
-import AcademicQualifications from "./features/sections/AcademicQualifications";
+import ProfessionQualifications from "./features/sections/ProfessionQualifications";
 import WorkExperiences from "./features/sections/WorkExperiences";
 import Skills from "./features/sections/Skills";
 import Referees from "./features/sections/Referees";
@@ -53,8 +53,8 @@ function App() {
                   element={<SchoolQualifications />}
                 />
                 <Route
-                  path="academic-qualifications"
-                  element={<AcademicQualifications />}
+                  path="profession-qualifications"
+                  element={<ProfessionQualifications />}
                 />
               </Route>
               <Route path="work-experiences" element={<WorkExperiences />} />

@@ -10,8 +10,8 @@ const navItems = [
         to: "education-background/school-qualifications",
       },
       {
-        label: "Academic Qualifications",
-        to: "education-background/academic-qualifications",
+        label: "Profession Qualifications",
+        to: "education-background/profession-qualifications",
       },
     ],
   },

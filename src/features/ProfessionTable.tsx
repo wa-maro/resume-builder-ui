@@ -1,6 +1,6 @@
 import { Edit, Eye, X } from "lucide-react";
 
-const AcademicTable = ({ academics }: { academics: Academic[] }) => {
+const ProfessionTable = ({ professions }: { professions: Profession[] }) => {
   return (
     <div className="overflow-x-auto pb-5">
       <table className="w-full text-sm text-left text-gray-500">
@@ -15,20 +15,20 @@ const AcademicTable = ({ academics }: { academics: Academic[] }) => {
         </thead>
 
         <tbody>
-          {academics.length ? (
-            academics.map((academic) => (
+          {professions.length ? (
+            professions.map((rofession) => (
               <tr
-                key={academic._id}
+                key={rofession._id}
                 className="odd:bg-white even:bg-gray-50 border-b"
               >
                 <td className="py-4 text-nowrap">
-                  {academic.startYear.slice(3)} - {academic.endYear.slice(3)}
+                  {rofession.startYear.slice(3)} - {rofession.endYear.slice(3)}
                 </td>
-                <td className="ps-4 py-4 text-nowrap">{academic.award}</td>
+                <td className="ps-4 py-4 text-nowrap">{rofession.award}</td>
                 <td className="ps-4 py-4 text-nowrap flex flex-col -space-y-0.5">
-                  <p className="text-nowrap">{academic.institution.name},</p>
+                  <p className="text-nowrap">{rofession.institution.name},</p>
                   <p className="italic text-nowrap">
-                    {academic.institution.location}
+                    {rofession.institution.location}
                   </p>
                 </td>
                 <td className="ps-4 py-4 text-nowrap">
@@ -76,4 +76,4 @@ const AcademicTable = ({ academics }: { academics: Academic[] }) => {
   );
 };
 
-export default AcademicTable;
+export default ProfessionTable;
