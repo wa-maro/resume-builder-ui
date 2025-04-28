@@ -3,14 +3,28 @@ import Label from "../components/Label";
 import TextInput from "../components/TextInput";
 import TextArea from "../components/TextArea";
 import ActionButton from "../components/ActionButton";
+import { useState } from "react";
+
+const newExperience: Experience = {
+  _id: "",
+  jobTitle: "",
+  company: { name: "", location: "" },
+  responsibilities: "",
+  currentlyWorking: false,
+  startDate: "",
+  endDate: "",
+  resumeId: "",
+};
 
 const WorkExperienceForm = ({
-  experience,
-  setExperience,
+  experiences,
+  setExperiences,
 }: {
-  experience: Experience;
-  setExperience: React.Dispatch<React.SetStateAction<Experience>>;
+  experiences: Experience[];
+  setExperiences: React.Dispatch<React.SetStateAction<Experience[]>>;
 }) => {
+  const [experience, setExperience] = useState<Experience>(newExperience);
+
   const onChangeHandler = (
     ev: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -19,6 +33,7 @@ const WorkExperienceForm = ({
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setExperiences([...experiences, experience]);
   };
 
   return (

@@ -2,18 +2,10 @@ import { useState } from "react";
 import WorkExperienceForm from "../WorkExperienceForm";
 import SectionHeader from "../../components/SectionHeader";
 import SectionDivider from "../../components/SectionDivider";
+import WorkExperienceTable from "../WorkExperienceTable";
 
 const WorkExperiences = () => {
-  const [experience, setExperience] = useState<Experience>({
-    _id: "",
-    jobTitle: "",
-    company: { name: "", location: "" },
-    responsibilities: "",
-    currentlyWorking: false,
-    startDate: "",
-    endDate: "",
-    resumeId: "",
-  });
+  const [experiences, setExperiences] = useState<Experience[]>([]);
 
   return (
     <>
@@ -22,9 +14,13 @@ const WorkExperiences = () => {
       <SectionDivider title="New Experience" />
 
       <WorkExperienceForm
-        experience={experience}
-        setExperience={setExperience}
+        experiences={experiences}
+        setExperiences={setExperiences}
       />
+
+      <SectionDivider title="Experiences" />
+
+      <WorkExperienceTable experiences={experiences} />
     </>
   );
 };
