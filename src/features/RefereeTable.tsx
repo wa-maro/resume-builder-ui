@@ -6,10 +6,10 @@ const RefereeTable = ({ references }: { references: Reference[] }) => {
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
-            <th className="py-4">Full name</th>
-            <th className="py-4">Position</th>
-            <th className="py-4">Organization</th>
-            <th className="py-4 sr-only">Action</th>
+            <th className="py-4 text-nowrap">Full name</th>
+            <th className="ps-4 py-4 text-nowrap">Position</th>
+            <th className="ps-4 py-4 text-nowrap">Organization</th>
+            <th className="ps-4 py-4 text-nowrap sr-only">Action</th>
           </tr>
         </thead>
 
@@ -21,9 +21,12 @@ const RefereeTable = ({ references }: { references: Reference[] }) => {
                 className="odd:bg-white even:bg-gray-50 border-b"
               >
                 <td className="py-4 text-nowrap">{referee.fullName}</td>
-                <td className="py-4 text-nowrap">{referee.position}</td>
-                <td className="py-4 text-nowrap">{referee.organization}</td>
-                <td className="py-4 text-nowrap">
+                <td className="ps-4 py-4 text-nowrap">{referee.position}</td>
+                <td className="ps-4 py-4 text-nowrap flex flex-col -space-y-0.5">
+                  <p>{referee.organization},</p>
+                  <p className="italic">{referee.physicalAddress}</p>
+                </td>
+                <td className="ps-4 py-4 text-nowrap">
                   <div className="flex items-center space-x-5">
                     <button title="edit" className="cursor-pointer">
                       <Edit size={14} />

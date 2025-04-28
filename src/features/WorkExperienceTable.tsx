@@ -10,10 +10,10 @@ const WorkExperienceTable = ({
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
-            <th className="py-4">Date</th>
-            <th className="py-4">Job Title</th>
-            <th className="py-4">Company</th>
-            <th className="py-4 sr-only">Action</th>
+            <th className="py-4 text-nowrap">Date</th>
+            <th className="ps-4 py-4 text-nowrap">Job Title</th>
+            <th className="ps-4 py-4 text-nowrap">Company</th>
+            <th className="ps-4 py-4 text-nowrap sr-only">Action</th>
           </tr>
         </thead>
 
@@ -27,12 +27,12 @@ const WorkExperienceTable = ({
                 <td className="py-4 text-nowrap">
                   {experience.startDate.slice(3)} - {experience.endDate.slice(3)}
                 </td>
-                <td className="py-4 text-nowrap">{experience.jobTitle}</td>
-                <td className="py-4 text-nowrap flex flex-col -space-y-0.5">
+                <td className="ps-4 py-4 text-nowrap">{experience.jobTitle}</td>
+                <td className="ps-4 py-4 text-nowrap flex flex-col -space-y-0.5">
                   <p>{experience.company.name},</p>
                   <p className="italic">{experience.company.location}</p>
                 </td>
-                <td className="py-4 text-nowrap">
+                <td className="ps-4 py-4 text-nowrap">
                   <div className="flex items-center space-x-5">
                     <button title="edit" className="cursor-pointer">
                       <Edit size={14} />
