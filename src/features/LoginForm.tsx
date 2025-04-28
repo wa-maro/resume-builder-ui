@@ -22,12 +22,11 @@ const LoginForm = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const onSubmitHandler = async (
-    event: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await login(user).finally(() => navigate(from, { replace: true }));
+      await login(user)
+      navigate(from, { replace: true });
     } catch (error) {
       if (error instanceof Error) setError(error.message);
     }

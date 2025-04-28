@@ -19,9 +19,7 @@ const RegisterForm = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const onSubmitHandler = async (
-    event: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await register(user);
