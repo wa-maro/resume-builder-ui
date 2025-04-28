@@ -2,22 +2,38 @@ import { Plus } from "lucide-react";
 import ActionButton from "../components/ActionButton";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
+import { useState } from "react";
+
+const newAcademic: Academic = {
+  _id: "",
+  award: "",
+  institution: { name: "", location: "" },
+  startYear: "",
+  endYear: "",
+  uploadedCertificate: "",
+  uploadedTranscript: "",
+  grade: { classification: "", gpa: "" },
+  resumeId: "",
+};
 
 const AcademicForm = ({
-  academic,
-  setAcademic,
+  academics,
+  setAcademics,
 }: {
-  academic: Academic;
-  setAcademic: React.Dispatch<React.SetStateAction<Academic>>;
+  academics: Academic[];
+  setAcademics: React.Dispatch<React.SetStateAction<Academic[]>>;
 }) => {
   const onChangeHandler = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setAcademic({ ...academic, [e.target.name]: e.target.value });
   };
+  const [academic, setAcademic] = useState<Academic>(newAcademic);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setAcademics([...academics, academic]);
   };
 
   return (
