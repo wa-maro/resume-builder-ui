@@ -34,6 +34,7 @@ const WorkExperienceForm = ({
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setExperiences([...experiences, experience]);
+    setExperience(newExperience)
   };
 
   return (

@@ -3,21 +3,37 @@ import { Plus } from "lucide-react";
 import TextInput from "../components/TextInput";
 import Select from "../components/Select";
 import Label from "../components/Label";
+import { useState } from "react";
+
+const newSchool = {
+  _id: "",
+  award: "",
+  institution: { name: "", location: "" },
+  startYear: "",
+  endYear: "",
+  grade: { division: "", points: "" },
+  uploadedCertificate: "",
+  resumeId: "",
+};
 
 const SchoolForm = ({
-  school,
-  setSchool,
+  schools,
+  setSchools,
 }: {
-  school: School;
-  setSchool: React.Dispatch<React.SetStateAction<School>>;
+  schools: School[];
+  setSchools: React.Dispatch<React.SetStateAction<School[]>>;
 }) => {
+  const [school, setSchool] = useState<School>(newSchool);
+
   const onChangeHandler = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => setSchool({ ...school, [ev.target.name]: ev.target.value });
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(school);
+
+    setSchools([...schools, school]);
+    setSchool(newSchool);
   };
 
   return (
