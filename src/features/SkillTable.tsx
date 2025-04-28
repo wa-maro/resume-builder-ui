@@ -47,7 +47,9 @@ const SkillTable = ({ skills }: { skills: Skill[] }) => {
             ))
           ) : (
             <tr>
-              <td className="px-6 py-4 text-rose-700">No skill is added yet</td>
+              <td className="py-4 text-nowrap text-rose-700">
+                No skill is added yet
+              </td>
             </tr>
           )}
         </tbody>

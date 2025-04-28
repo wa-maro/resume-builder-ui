@@ -4,14 +4,27 @@ import Select from "../components/Select";
 import TextInput from "../components/TextInput";
 import TextArea from "../components/TextArea";
 import ActionButton from "../components/ActionButton";
+import { useState } from "react";
+
+const newSkill = {
+  _id: "",
+  category: "",
+  name: "",
+  proficiency: 50,
+  description: "",
+  certification: "",
+  resumeId: "",
+};
 
 const SkillForm = ({
-  skill,
-  setSkill,
+  skills,
+  setSkills,
 }: {
-  skill: Skill;
-  setSkill: React.Dispatch<React.SetStateAction<Skill>>;
+  skills: Skill[];
+  setSkills: React.Dispatch<React.SetStateAction<Skill[]>>;
 }) => {
+  const [skill, setSkill] = useState<Skill>(newSkill);
+
   const onChangeHandler = (
     ev: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -20,6 +33,11 @@ const SkillForm = ({
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (skills.length >= 3) return;
+
+    setSkills([...skills, skill]);
+    setSkill(newSkill);
   };
 
   return (

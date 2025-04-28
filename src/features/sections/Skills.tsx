@@ -2,17 +2,10 @@ import { useState } from "react";
 import SkillForm from "../SkillForm";
 import SectionDivider from "../../components/SectionDivider";
 import SectionHeader from "../../components/SectionHeader";
+import SkillTable from "../SkillTable";
 
 const Skills = () => {
-  const [skill, setSkill] = useState<Skill>({
-    _id: "",
-    category: "",
-    name: "",
-    proficiency: 50,
-    description: "",
-    certification: "",
-    resumeId: "",
-  });
+  const [skills, setSkills] = useState<Skill[]>([]);
 
   return (
     <>
@@ -20,7 +13,11 @@ const Skills = () => {
 
       <SectionDivider title="New Skill" />
 
-      <SkillForm skill={skill} setSkill={setSkill} />
+      <SkillForm skills={skills} setSkills={setSkills} />
+
+      <SectionDivider title="Skills" />
+
+      <SkillTable skills={skills} />
     </>
   );
 };
