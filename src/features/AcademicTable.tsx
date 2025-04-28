@@ -1,6 +1,6 @@
 import { Edit, Eye, X } from "lucide-react";
 
-const SchoolTable = ({ schools }: { schools: School[] }) => {
+const AcademicTable = ({ academics }: { academics: Academic[] }) => {
   return (
     <div className="overflow-x-auto pb-5">
       <table className="w-full text-sm text-left text-gray-500">
@@ -15,19 +15,19 @@ const SchoolTable = ({ schools }: { schools: School[] }) => {
         </thead>
 
         <tbody>
-          {schools.length ? (
-            schools.map((school) => (
+          {academics.length ? (
+            academics.map((academic) => (
               <tr
-                key={school._id}
+                key={academic._id}
                 className="odd:bg-white even:bg-gray-50 border-b"
               >
                 <td className="py-4 text-wrap">
-                  {school.startYear.slice(3)} - {school.endYear.slice(3)}
+                  {academic.startYear.slice(3)} - {academic.endYear.slice(3)}
                 </td>
-                <td className="ps-4 py-4 text-wrap">{school.award}</td>
+                <td className="ps-4 py-4 text-wrap">{academic.award}</td>
                 <td className="ps-4 py-4 text-wrap flex flex-col -space-y-0.5">
-                  <p>{school.institution.name},</p>
-                  <p className="italic">{school.institution.location}</p>
+                  <p>{academic.school.name},</p>
+                  <p className="italic">{academic.school.location}</p>
                 </td>
                 <td className="ps-4 py-4 text-nowrap">
                   <button
@@ -55,7 +55,7 @@ const SchoolTable = ({ schools }: { schools: School[] }) => {
           ) : (
             <tr>
               <td className="py-4 text-wrap text-rose-700">
-                No school qualification is added yet
+                No academic qualification is added yet
               </td>
             </tr>
           )}
@@ -65,4 +65,4 @@ const SchoolTable = ({ schools }: { schools: School[] }) => {
   );
 };
 
-export default SchoolTable;
+export default AcademicTable;

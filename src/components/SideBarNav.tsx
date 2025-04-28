@@ -6,8 +6,8 @@ const navItems = [
     label: "Education Background",
     children: [
       {
-        label: "School Qualifications",
-        to: "education-background/school-qualifications",
+        label: "Academic Qualifications",
+        to: "education-background/academic-qualifications",
       },
       {
         label: "Profession Qualifications",

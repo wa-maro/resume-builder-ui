@@ -28,7 +28,7 @@ declare global {
     email: string;
     phone: string;
     physicalAddress: string;
-    disabilities?: string;
+    disabilities: string;
     resumeId?: string;
   }
 
@@ -38,7 +38,7 @@ declare global {
     position: string;
     organization: string;
     email: string;
-    phone?: string;
+    phone: string;
     physicalAddress: string;
     resumeId?: string;
   }
@@ -48,8 +48,8 @@ declare global {
     category: string;
     name: string;
     proficiency: number;
-    description?: string;
-    certification?: string;
+    description: string;
+    certification: string;
     resumeId?: string;
   }
 
@@ -60,14 +60,14 @@ declare global {
     responsibilities: string;
     currentlyWorking: boolean;
     startDate: string;
-    endDate?: string;
+    endDate: string;
     resumeId?: string;
   }
 
-  export interface School {
+  export interface Academic {
     _id?: string;
     award: string;
-    institution: { name: string; location: string };
+    school: { name: string; location: string };
     startYear: string;
     endYear: string;
     grade: { division: string; points: string };

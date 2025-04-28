@@ -5,36 +5,36 @@ import Select from "../components/Select";
 import Label from "../components/Label";
 import { useState } from "react";
 
-const newSchool: School = {
+const newAcademic: Academic = {
   award: "",
-  institution: { name: "", location: "" },
+  school: { name: "", location: "" },
   startYear: "",
   endYear: "",
   grade: { division: "", points: "" },
   uploadedCertificate: "",
 };
 
-const SchoolForm = ({
-  schools,
-  setSchools,
+const AcademicForm = ({
+  academics,
+  setAcademics,
 }: {
-  schools: School[];
-  setSchools: React.Dispatch<React.SetStateAction<School[]>>;
+  academics: Academic[];
+  setAcademics: React.Dispatch<React.SetStateAction<Academic[]>>;
 }) => {
-  const [school, setSchool] = useState<School>(newSchool);
+  const [academic, setAcademic] = useState<Academic>(newAcademic);
 
   const onChangeHandler = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => setSchool({ ...school, [ev.target.name]: ev.target.value });
+  ) => setAcademic({ ...academic, [ev.target.name]: ev.target.value });
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // set resume ID
-    school.resumeId = "";
+    academic.resumeId = "";
 
-    setSchools([...schools, school]);
-    setSchool(newSchool);
+    setAcademics([...academics, academic]);
+    setAcademic(newAcademic);
   };
 
   return (
@@ -46,7 +46,7 @@ const SchoolForm = ({
             label="Select Award"
             name="award"
             onChange={onChangeHandler}
-            value={school.award}
+            value={academic.award}
           >
             <option value="PSLE">Primary Education Certificate (PSLE)</option>
             <option value="CSEE">
@@ -59,31 +59,31 @@ const SchoolForm = ({
         </div>
 
         <div className="flex flex-col gap-1">
-          <Label text="institution name" htmlFor="institutionName" />
+          <Label text="school name" htmlFor="schoolName" />
           <TextInput
-            name="institutionName"
+            name="schoolName"
             placeholder="Kipololo Secondary School"
-            value={school.institution.name}
+            value={academic.school.name}
             onChange={(e) =>
-              setSchool({
-                ...school,
-                institution: { ...school.institution, name: e.target.value },
+              setAcademic({
+                ...academic,
+                school: { ...academic.school, name: e.target.value },
               })
             }
           />
         </div>
 
         <div className="flex flex-col gap-1">
-          <Label text="institution location" htmlFor="institutionLocation" />
+          <Label text="school location" htmlFor="schoolLocation" />
           <TextInput
-            name="institutionLocation"
+            name="schoolLocation"
             placeholder="Mbinga, Tanzania"
-            value={school.institution.location}
+            value={academic.school.location}
             onChange={(e) =>
-              setSchool({
-                ...school,
-                institution: {
-                  ...school.institution,
+              setAcademic({
+                ...academic,
+                school: {
+                  ...academic.school,
                   location: e.target.value,
                 },
               })
@@ -100,7 +100,7 @@ const SchoolForm = ({
               name="startYear"
               placeholder="Jan 2010"
               onChange={onChangeHandler}
-              value={school.startYear}
+              value={academic.startYear}
             />
           </div>
 
@@ -110,7 +110,7 @@ const SchoolForm = ({
               name="endYear"
               placeholder="Nov 2010"
               onChange={onChangeHandler}
-              value={school.endYear}
+              value={academic.endYear}
             />
           </div>
         </div>
@@ -121,11 +121,11 @@ const SchoolForm = ({
             <TextInput
               name="division"
               placeholder="III"
-              value={school.grade.division}
+              value={academic.grade.division}
               onChange={(e) =>
-                setSchool({
-                  ...school,
-                  grade: { ...school.grade, division: e.target.value },
+                setAcademic({
+                  ...academic,
+                  grade: { ...academic.grade, division: e.target.value },
                 })
               }
             />
@@ -136,11 +136,11 @@ const SchoolForm = ({
             <TextInput
               name="points"
               placeholder="24"
-              value={school.grade.points}
+              value={academic.grade.points}
               onChange={(e) =>
-                setSchool({
-                  ...school,
-                  grade: { ...school.grade, points: e.target.value },
+                setAcademic({
+                  ...academic,
+                  grade: { ...academic.grade, points: e.target.value },
                 })
               }
             />
@@ -157,7 +157,7 @@ const SchoolForm = ({
           id="uploadedCertificate"
           placeholder="upload certificate"
           onChange={onChangeHandler}
-          value={school.uploadedCertificate}
+          value={academic.uploadedCertificate}
         />
       </div>
 
@@ -170,4 +170,4 @@ const SchoolForm = ({
   );
 };
 
-export default SchoolForm;
+export default AcademicForm;
