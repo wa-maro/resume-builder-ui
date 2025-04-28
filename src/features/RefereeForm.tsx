@@ -4,15 +4,13 @@ import TextInput from "../components/TextInput";
 import ActionButton from "../components/ActionButton";
 import { useState } from "react";
 
-const newReferee = {
-  _id: "",
+const newReferee: Reference = {
   fullName: "",
   position: "",
   organization: "",
   email: "",
   phone: "",
   physicalAddress: "",
-  resumeId: "",
 };
 
 const RefereeForm = ({
@@ -32,6 +30,9 @@ const RefereeForm = ({
     event.preventDefault();
 
     if (references.length >= 3) return;
+
+    // set resume ID
+    reference.resumeId = "";
 
     setReferences([...references, reference]);
     setReference(newReferee);

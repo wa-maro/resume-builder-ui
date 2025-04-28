@@ -6,14 +6,12 @@ import ActionButton from "../components/ActionButton";
 import { useState } from "react";
 
 const newExperience: Experience = {
-  _id: "",
   jobTitle: "",
   company: { name: "", location: "" },
   responsibilities: "",
   currentlyWorking: false,
   startDate: "",
   endDate: "",
-  resumeId: "",
 };
 
 const WorkExperienceForm = ({
@@ -33,8 +31,12 @@ const WorkExperienceForm = ({
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // set resume ID
+    experience.resumeId = "";
+
     setExperiences([...experiences, experience]);
-    setExperience(newExperience)
+    setExperience(newExperience);
   };
 
   return (

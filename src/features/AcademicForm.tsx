@@ -5,7 +5,6 @@ import TextInput from "../components/TextInput";
 import { useState } from "react";
 
 const newAcademic: Academic = {
-  _id: "",
   award: "",
   institution: { name: "", location: "" },
   startYear: "",
@@ -13,7 +12,6 @@ const newAcademic: Academic = {
   uploadedCertificate: "",
   uploadedTranscript: "",
   grade: { classification: "", gpa: "" },
-  resumeId: "",
 };
 
 const AcademicForm = ({
@@ -33,7 +31,11 @@ const AcademicForm = ({
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // set resume ID
+    academic.resumeId = "";
+
     setAcademics([...academics, academic]);
+    setAcademic(newAcademic);
   };
 
   return (

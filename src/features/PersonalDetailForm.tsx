@@ -4,14 +4,25 @@ import TextInput from "../components/TextInput";
 import Select from "../components/Select";
 import SectionDivider from "../components/SectionDivider";
 import ActionButton from "../components/ActionButton";
+import { useState } from "react";
 
-const PersonalDetailForm = ({
-  person,
-  setPerson,
-}: {
-  person: Person;
-  setPerson: React.Dispatch<React.SetStateAction<Person>>;
-}) => {
+const newPerson: Person = {
+  _id: "",
+  fullName: "",
+  nationality: "",
+  dateOfBirth: "",
+  placeOfDomicile: "",
+  sex: "",
+  email: "",
+  phone: "",
+  physicalAddress: "",
+  disabilities: "",
+  resumeId: "",
+};
+
+const PersonalDetailForm = () => {
+  const [person, setPerson] = useState<Person>(newPerson);
+
   const onChangeHandler = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -20,6 +31,9 @@ const PersonalDetailForm = ({
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // set resume ID
+    person.resumeId = "";
   };
 
   return (

@@ -19,7 +19,7 @@ declare global {
   }
 
   export interface Person {
-    _id: string;
+    _id?: string;
     fullName: string;
     nationality: string;
     dateOfBirth: string;
@@ -28,55 +28,55 @@ declare global {
     email: string;
     phone: string;
     physicalAddress: string;
-    disabilities: string;
-    resumeId: string;
+    disabilities?: string;
+    resumeId?: string;
   }
 
   export interface Reference {
-    _id: string;
+    _id?: string;
     fullName: string;
     position: string;
     organization: string;
     email: string;
-    phone: string;
+    phone?: string;
     physicalAddress: string;
-    resumeId: string;
+    resumeId?: string;
   }
 
   export interface Skill {
-    _id: string;
+    _id?: string;
     category: string;
     name: string;
     proficiency: number;
-    description: string;
-    certification: string;
-    resumeId: string;
+    description?: string;
+    certification?: string;
+    resumeId?: string;
   }
 
   export interface Experience {
-    _id: string;
+    _id?: string;
     jobTitle: string;
     company: { name: string; location: string };
     responsibilities: string;
     currentlyWorking: boolean;
     startDate: string;
-    endDate: string;
-    resumeId: string;
+    endDate?: string;
+    resumeId?: string;
   }
 
   export interface School {
-    _id: string;
+    _id?: string;
     award: string;
     institution: { name: string; location: string };
     startYear: string;
     endYear: string;
-    uploadedCertificate: string;
     grade: { division: string; points: string };
-    resumeId: string;
+    uploadedCertificate: string;
+    resumeId?: string;
   }
 
   export interface Academic {
-    _id: string;
+    _id?: string;
     award: string;
     institution: { name: string; location: string };
     startYear: string;
@@ -84,7 +84,7 @@ declare global {
     uploadedCertificate: string;
     uploadedTranscript: string;
     grade: { classification: string; gpa: string };
-    resumeId: string;
+    resumeId?: string;
   }
 }
 

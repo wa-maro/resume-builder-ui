@@ -5,15 +5,13 @@ import Select from "../components/Select";
 import Label from "../components/Label";
 import { useState } from "react";
 
-const newSchool = {
-  _id: "",
+const newSchool: School = {
   award: "",
   institution: { name: "", location: "" },
   startYear: "",
   endYear: "",
   grade: { division: "", points: "" },
   uploadedCertificate: "",
-  resumeId: "",
 };
 
 const SchoolForm = ({
@@ -31,6 +29,9 @@ const SchoolForm = ({
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // set resume ID
+    school.resumeId = "";
 
     setSchools([...schools, school]);
     setSchool(newSchool);

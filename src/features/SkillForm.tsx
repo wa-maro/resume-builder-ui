@@ -6,14 +6,12 @@ import TextArea from "../components/TextArea";
 import ActionButton from "../components/ActionButton";
 import { useState } from "react";
 
-const newSkill = {
-  _id: "",
+const newSkill: Skill = {
   category: "",
   name: "",
   proficiency: 50,
   description: "",
   certification: "",
-  resumeId: "",
 };
 
 const SkillForm = ({
@@ -34,7 +32,8 @@ const SkillForm = ({
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (skills.length >= 3) return;
+    // set resume ID
+    skill.resumeId = "";
 
     setSkills([...skills, skill]);
     setSkill(newSkill);
