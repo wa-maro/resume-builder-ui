@@ -4,7 +4,7 @@ import TextInput from "../components/TextInput";
 import ActionButton from "../components/ActionButton";
 import { useState } from "react";
 
-const newReferee: Reference = {
+const newReferee: Referee = {
   fullName: "",
   position: "",
   organization: "",
@@ -17,10 +17,10 @@ const RefereeForm = ({
   references,
   setReferences,
 }: {
-  references: Reference[];
-  setReferences: React.Dispatch<React.SetStateAction<Reference[]>>;
+  references: Referee[];
+  setReferences: React.Dispatch<React.SetStateAction<Referee[]>>;
 }) => {
-  const [reference, setReference] = useState<Reference>(newReferee);
+  const [reference, setReference] = useState<Referee>(newReferee);
 
   const onChangeHandler = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

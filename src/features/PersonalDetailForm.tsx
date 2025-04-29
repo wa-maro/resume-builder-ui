@@ -6,13 +6,13 @@ import SectionDivider from "../components/SectionDivider";
 import ActionButton from "../components/ActionButton";
 import { useState } from "react";
 
-const newPerson: Person = {
+const newPerson: PersonalInfo = {
   _id: "",
   fullName: "",
   nationality: "",
   dateOfBirth: "",
   placeOfDomicile: "",
-  sex: "",
+  gender: "",
   email: "",
   phone: "",
   physicalAddress: "",
@@ -21,7 +21,7 @@ const newPerson: Person = {
 };
 
 const PersonalDetailForm = () => {
-  const [person, setPerson] = useState<Person>(newPerson);
+  const [person, setPerson] = useState<PersonalInfo>(newPerson);
 
   const onChangeHandler = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -56,7 +56,7 @@ const PersonalDetailForm = () => {
             label="Choose gender"
             name="sex"
             onChange={onChangeHandler}
-            value={person.sex}
+            value={person.gender}
           >
             <option value="female">Female</option>
             <option value="male">Male</option>

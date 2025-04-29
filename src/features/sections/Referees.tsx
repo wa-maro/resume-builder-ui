@@ -5,7 +5,7 @@ import SectionHeader from "../../components/SectionHeader";
 import RefereeTable from "../RefereeTable";
 
 const Referees = () => {
-  const [references, setReferences] = useState<Reference[]>([]);
+  const [references, setReferences] = useState<Referee[]>([]);
 
   return (
     <>

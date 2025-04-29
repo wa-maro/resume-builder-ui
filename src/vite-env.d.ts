@@ -18,13 +18,13 @@ declare global {
     password: string;
   }
 
-  export interface Person {
+  export interface PersonalInfo {
     _id?: string;
     fullName: string;
     nationality: string;
     dateOfBirth: string;
     placeOfDomicile: string;
-    sex: string;
+    gender: string;
     email: string;
     phone: string;
     physicalAddress: string;
@@ -32,7 +32,7 @@ declare global {
     resumeId?: string;
   }
 
-  export interface Reference {
+  export interface Referee {
     _id?: string;
     fullName: string;
     position: string;
