@@ -7,14 +7,7 @@ type AuthContextProps = {
   logout: () => Promise<void>;
 };
 
-const initialContext = {
-  user: undefined,
-  register: async () => {},
-  login: async () => {},
-  logout: async () => {},
-};
-
-const AuthContext = createContext<AuthContextProps>(initialContext);
+const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
