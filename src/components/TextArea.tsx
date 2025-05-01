@@ -1,10 +1,12 @@
 const TextArea = ({
   name,
+  placeholder,
   required = false,
   value,
   onChange,
 }: {
   name: string;
+  placeholder?: string;
   required?: boolean;
   value: string;
   style?: string;
@@ -13,6 +15,7 @@ const TextArea = ({
   return (
     <textarea
       name={name}
+      placeholder={placeholder}
       value={value}
       rows={5}
       required={required}
