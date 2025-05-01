@@ -51,10 +51,10 @@ const PersonalDetailForm = () => {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label text="Sex" htmlFor="sex" />
+          <Label text="gender" htmlFor="gender" />
           <Select
             label="Choose gender"
-            name="sex"
+            name="gender"
             onChange={onChangeHandler}
             value={person.gender}
           >

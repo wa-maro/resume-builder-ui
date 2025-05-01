@@ -1,4 +1,4 @@
-import PersonalDetailForm from "../PersonalDetailForm";
+import PersonalDetailForm from "../PersonalInfoForm";
 import SectionHeader from "../../components/SectionHeader";
 
 const PersonalDetails = () => {

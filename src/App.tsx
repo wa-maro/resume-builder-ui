@@ -8,7 +8,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import AppLayout from "./layouts/AppLayout";
-import PersonalDetails from "./features/sections/PersonalDetails";
+import PersonalDetails from "./features/sections/PersonalInfo";
 import AcademicQualifications from "./features/sections/AcademicQualifications";
 import ProfessionQualifications from "./features/sections/ProfessionQualifications";
 import WorkExperiences from "./features/sections/WorkExperiences";
