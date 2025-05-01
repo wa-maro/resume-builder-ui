@@ -7,7 +7,7 @@ import ActionButton from "../components/ActionButton";
 import { useState } from "react";
 
 const newPerson: PersonalInfo = {
-  _id: "",
+  id: "",
   fullName: "",
   nationality: "",
   dateOfBirth: "",

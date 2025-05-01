@@ -19,7 +19,7 @@ declare global {
   }
 
   export interface PersonalInfo {
-    _id?: string;
+    id?: string;
     fullName: string;
     nationality: string;
     dateOfBirth: string;
@@ -33,7 +33,7 @@ declare global {
   }
 
   export interface Referee {
-    _id?: string;
+    id?: string;
     fullName: string;
     position: string;
     organization: string;
@@ -44,7 +44,7 @@ declare global {
   }
 
   export interface Skill {
-    _id?: string;
+    id?: string;
     category: string;
     name: string;
     proficiency: number;
@@ -54,7 +54,7 @@ declare global {
   }
 
   export interface Experience {
-    _id?: string;
+    id?: string;
     jobTitle: string;
     company: { name: string; location: string };
     responsibilities: string;
@@ -65,7 +65,7 @@ declare global {
   }
 
   export interface Academic {
-    _id?: string;
+    id?: string;
     award: string;
     school: { name: string; location: string };
     startYear: string;
@@ -76,7 +76,7 @@ declare global {
   }
 
   export interface Profession {
-    _id?: string;
+    id?: string;
     award: string;
     institution: { name: string; location: string };
     startYear: string;

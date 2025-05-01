@@ -21,11 +21,12 @@ const WorkExperienceTable = ({
           {experiences.length ? (
             experiences.map((experience) => (
               <tr
-                key={experience._id}
+                key={experience.id}
                 className="odd:bg-white even:bg-gray-50 border-b"
               >
                 <td className="py-4 text-nowrap">
-                  {experience.startDate.slice(3)} - {experience.endDate.slice(3)}
+                  {experience.startDate.slice(3)} -{" "}
+                  {experience.endDate.slice(3)}
                 </td>
                 <td className="ps-4 py-4 text-nowrap">{experience.jobTitle}</td>
                 <td className="ps-4 py-4 text-nowrap flex flex-col -space-y-0.5">

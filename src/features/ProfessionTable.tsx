@@ -18,7 +18,7 @@ const ProfessionTable = ({ professions }: { professions: Profession[] }) => {
           {professions.length ? (
             professions.map((rofession) => (
               <tr
-                key={rofession._id}
+                key={rofession.id}
                 className="odd:bg-white even:bg-gray-50 border-b"
               >
                 <td className="py-4 text-nowrap">

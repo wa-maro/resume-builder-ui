@@ -18,7 +18,7 @@ const AcademicTable = ({ academics }: { academics: Academic[] }) => {
           {academics.length ? (
             academics.map((academic) => (
               <tr
-                key={academic._id}
+                key={academic.id}
                 className="odd:bg-white even:bg-gray-50 border-b"
               >
                 <td className="py-4 text-wrap">

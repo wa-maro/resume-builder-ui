@@ -17,7 +17,7 @@ const RefereeTable = ({ references }: { references: Referee[] }) => {
           {references.length ? (
             references.map((referee) => (
               <tr
-                key={referee._id}
+                key={referee.id}
                 className="odd:bg-white even:bg-gray-50 border-b"
               >
                 <td className="py-4 text-nowrap">{referee.fullName}</td>

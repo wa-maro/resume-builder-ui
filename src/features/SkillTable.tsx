@@ -17,7 +17,7 @@ const SkillTable = ({ skills }: { skills: Skill[] }) => {
           {skills.length ? (
             skills.map((skill) => (
               <tr
-                key={skill._id}
+                key={skill.id}
                 className="odd:bg-white even:bg-gray-50 border-b"
               >
                 <td className="py-4 text-nowrap">{skill.name}</td>
