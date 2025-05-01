@@ -21,6 +21,8 @@ import ProtectedRoute from "./context/ProtectedRoutes";
 import Unauthorized from "./pages/Unauthorized";
 import AuthProvider from "./context/authProvider";
 import GuestRoute from "./context/GuestRoute";
+import Resume from "./pages/Resume";
+import ResumeSectionGuard from "./context/ResumeSectionGuard";
 
 function App() {
   return (
@@ -38,32 +40,34 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              <Route index element={<Navigate to="personal-information" />} />
-              <Route
-                path="personal-information"
-                element={<PersonalDetails />}
-              />
-              <Route path="education-background">
+              <Route index element={<Resume />} />
+              <Route element={<ResumeSectionGuard />}>
                 <Route
-                  index
-                  element={<Navigate to="academic-qualifications" />}
+                  path="personal-information"
+                  element={<PersonalDetails />}
                 />
+                <Route path="education-background">
+                  <Route
+                    index
+                    element={<Navigate to="academic-qualifications" />}
+                  />
+                  <Route
+                    path="academic-qualifications"
+                    element={<AcademicQualifications />}
+                  />
+                  <Route
+                    path="profession-qualifications"
+                    element={<ProfessionQualifications />}
+                  />
+                </Route>
+                <Route path="work-experiences" element={<WorkExperiences />} />
+                <Route path="skills" element={<Skills />} />
+                <Route path="referees" element={<Referees />} />
                 <Route
-                  path="academic-qualifications"
-                  element={<AcademicQualifications />}
-                />
-                <Route
-                  path="profession-qualifications"
-                  element={<ProfessionQualifications />}
+                  path="summary-and-declaration"
+                  element={<SummaryAndDeclaration />}
                 />
               </Route>
-              <Route path="work-experiences" element={<WorkExperiences />} />
-              <Route path="skills" element={<Skills />} />
-              <Route path="referees" element={<Referees />} />
-              <Route
-                path="summary-and-declaration"
-                element={<SummaryAndDeclaration />}
-              />
             </Route>
 
             <Route path="templates" element={<Templates />}>
