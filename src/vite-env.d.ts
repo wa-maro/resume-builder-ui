@@ -100,6 +100,8 @@ declare global {
     title: string;
     summary: string;
     declaration?: Declaration;
+    createdAt?: string;
+    updatedAt?: string;
   }
 }
 

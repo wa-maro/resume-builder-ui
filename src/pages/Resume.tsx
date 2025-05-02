@@ -8,6 +8,7 @@ import ActionButton from "../components/ActionButton";
 import { ArrowRight, Plus } from "lucide-react";
 import { useAuth } from "../context/auth/authContext";
 import { useResume } from "../context/resume/ResumeContext";
+import { useNavigate } from "react-router-dom";
 
 interface Resume {
   title: string;
@@ -23,6 +24,7 @@ const Resume = () => {
   const { user } = useAuth();
   const { resume, createResume } = useResume();
   const [formData, setFormData] = useState<Resume>(initialForm);
+  const navigate = useNavigate();
 
   function onChangeHandler(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,6 +41,10 @@ const Resume = () => {
     createResume(formData);
     setFormData(initialForm);
   }
+
+  const onNextHandler = (): void => {
+    navigate("personal-information");
+  };
 
   return (
     <>
@@ -91,7 +97,8 @@ const Resume = () => {
 
             <div className="flex">
               <button
-                type="submit"
+                type="button"
+                onClick={onNextHandler}
                 className="flex items-center font-medium bg-slate-700 hover:bg-slate-600 text-gray-200 text-nowrap cursor-pointer px-3.5 py-1.5 gap-x-2 rounded-e"
               >
                 <span className="capitalize">Continue</span>
