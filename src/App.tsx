@@ -19,7 +19,7 @@ import ResumeLayout from "./layouts/ResumeLayout";
 import TemplateDetails from "./pages/TemplateDetails";
 import ProtectedRoute from "./context/ProtectedRoutes";
 import Unauthorized from "./pages/Unauthorized";
-import AuthProvider from "./context/authProvider";
+import AuthProvider from "./context/auth/authProvider";
 import GuestRoute from "./context/GuestRoute";
 import Resume from "./pages/Resume";
 import ResumeSectionGuard from "./context/ResumeSectionGuard";

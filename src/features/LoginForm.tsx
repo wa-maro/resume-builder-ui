@@ -2,7 +2,7 @@ import { useState } from "react";
 import TextInput from "../components/TextInput";
 import Label from "../components/Label";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/auth/authContext";
 
 const LoginForm = () => {
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +25,7 @@ const LoginForm = () => {
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await login(user)
+      await login(user);
       navigate(from, { replace: true });
     } catch (error) {
       if (error instanceof Error) setError(error.message);

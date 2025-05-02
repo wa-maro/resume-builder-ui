@@ -2,7 +2,8 @@
 
 declare global {
   export interface UserType {
-    token: string;
+    id: string;
+    username: string;
     role: "user" | "admin";
   }
 

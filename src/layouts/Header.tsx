@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Logo from "../components/Logo";
 import TopNavBar from "../components/TopNavBar";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/auth/authContext";
 import LogoutForm from "../features/LogoutForm";
 
 const Header = () => {

@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/auth/authContext";
 
 const LogoutForm = () => {
   const { logout } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/auth/authContext";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {

@@ -1,24 +1,31 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AuthContext from "./authContext";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
-const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<UserType | undefined>(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-    if (token && (role === "user" || role === "admin")) return { token, role };
-    else return undefined;
-  });
+type LoginResponseType = {
+  success: boolean;
+  message: string;
+  user?: UserType;
+  token?: string;
+};
+
+function getFromStorage() {
+  // TODO: get real user from the database
+  const token = localStorage.getItem("token");
+  const localUser = localStorage.getItem("user");
+  const user: UserType = localUser && JSON.parse(localUser);
+
+  if (user && token) return user;
+  return undefined;
+}
+
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<UserType | undefined>(undefined);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-
-    if (token && (role === "user" || role === "admin"))
-      setUser({ token, role });
-    else setUser(undefined);
-  }, []);
+    setUser(getFromStorage());
+  }, [setUser]);
 
   const register = async ({
     username,
@@ -57,13 +64,14 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         throw new Error(errorText || "Network response was not ok");
       }
 
-      const data = await res.json();
-      if (!data.success) throw new Error(data.message || "Login failed");
+      const { message, success, token, user }: LoginResponseType =
+        await res.json();
+      if (!success) throw new Error(message || "Login failed");
 
-      if (data.user) {
-        setUser(data.user);
-        localStorage.setItem("role", data.user.role);
-        localStorage.setItem("token", data.user.token);
+      if (token && user) {
+        setUser(user);
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", token);
       }
     } catch (error) {
       if (error instanceof Error)
@@ -76,7 +84,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setUser(undefined);
       localStorage.removeItem("token");
-      localStorage.removeItem("role");
+      localStorage.removeItem("user");
     } catch (error) {
       if (error instanceof Error)
         throw new Error(error.message || "Logout failed");
