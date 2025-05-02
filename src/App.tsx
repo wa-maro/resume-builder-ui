@@ -23,6 +23,7 @@ import AuthProvider from "./context/auth/authProvider";
 import GuestRoute from "./context/GuestRoute";
 import Resume from "./pages/Resume";
 import ResumeSectionGuard from "./context/ResumeSectionGuard";
+import ResumeProvider from "./context/resume/ResumeProvider";
 
 function App() {
   return (
@@ -36,7 +37,9 @@ function App() {
               path="resume"
               element={
                 <ProtectedRoute allowedRoles={["user"]}>
-                  <ResumeLayout />
+                  <ResumeProvider>
+                    <ResumeLayout />
+                  </ResumeProvider>
                 </ProtectedRoute>
               }
             >

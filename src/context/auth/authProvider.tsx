@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AuthContext from "./authContext";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
@@ -21,12 +21,7 @@ function getFromStorage() {
 }
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<UserType | undefined>(undefined);
-
-  useEffect(() => {
-    setUser(getFromStorage());
-  }, [setUser]);
-
+  const [user, setUser] = useState<UserType | undefined>(getFromStorage());
   const register = async ({
     username,
     email,

@@ -6,39 +6,47 @@ import TextArea from "../components/TextArea";
 import SectionDivider from "../components/SectionDivider";
 import ActionButton from "../components/ActionButton";
 import { ArrowRight, Plus } from "lucide-react";
+import { useAuth } from "../context/auth/authContext";
+import { useResume } from "../context/resume/ResumeContext";
 
 interface Resume {
   title: string;
   summary: string;
 }
 
-const initialResume: Resume = {
+const initialForm: Resume = {
   title: "",
   summary: "",
 };
 
 const Resume = () => {
-  const { resumeId } = { resumeId: null };
-  const [resume, setResume] = useState<Resume>(initialResume);
+  const { user } = useAuth();
+  const { resume, createResume } = useResume();
+  const [formData, setFormData] = useState<Resume>(initialForm);
 
   function onChangeHandler(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void {
-    setResume({ ...resume, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (!user) return;
   }
 
   function onSubmitHandler(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    setResume(initialResume);
+
+    if (!user) return;
+
+    createResume(formData);
+    setFormData(initialForm);
   }
 
   return (
     <>
       <h1 className="text-lg sm:text-xl font-semibold text-gray-800 text-center sm:text-left mb-3">
-        Welcome, John!
+        Welcome, {user && `${user.username}!`}
       </h1>
 
-      {!resumeId ? (
+      {!resume ? (
         <form onSubmit={onSubmitHandler} className="pb-6">
           <SectionDivider title="Professional Summary" />
 
@@ -47,7 +55,7 @@ const Resume = () => {
             <TextInput
               name="title"
               placeholder="e.g. Software Engineer"
-              value={resume.title}
+              value={formData.title}
               onChange={onChangeHandler}
             />
           </div>
@@ -58,7 +66,7 @@ const Resume = () => {
               name="summary"
               required
               placeholder="Briefly summarize your background, skills, and goals."
-              value={resume.summary}
+              value={formData.summary}
               onChange={onChangeHandler}
             />
           </div>
@@ -73,16 +81,24 @@ const Resume = () => {
         <div className="space-y-6">
           <ProgressBar />
 
-          <div className="bg-gray-100 p-4 rounded-md shadow">
-            <h2 className="text-xl font-semibold">{resume.title}</h2>
-            <p className="text-gray-700 mt-2">{resume.summary}</p>
-          </div>
+          <SectionDivider title="Professional Summary" />
 
-          <ActionButton
-            text="Continue"
-            theme="bg-slate-700 hover:bg-slate-600"
-            icon={<ArrowRight size={16} />}
-          />
+          <div className="px-6 flex gap-6 flex-wrap flex-col max-w-5xl">
+            <div className="md:max-w-lg space-y-2">
+              <h2 className="text-xl font-semibold">{resume.title}</h2>
+              <p className="text-gray-700">{resume.summary}</p>
+            </div>
+
+            <div className="flex">
+              <button
+                type="submit"
+                className="flex items-center font-medium bg-slate-700 hover:bg-slate-600 text-gray-200 text-nowrap cursor-pointer px-3.5 py-1.5 gap-x-2 rounded-e"
+              >
+                <span className="capitalize">Continue</span>
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>

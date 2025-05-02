@@ -87,6 +87,20 @@ declare global {
     grade: { classification: string; gpa: string };
     resumeId?: string;
   }
+
+  export interface Declaration {
+    statement: string;
+    signature: string;
+    date: string; // format: DD/MM/YYYY
+  }
+
+  export interface Resume {
+    id?: string;
+    user?: string;
+    title: string;
+    summary: string;
+    declaration?: Declaration;
+  }
 }
 
 export {};
