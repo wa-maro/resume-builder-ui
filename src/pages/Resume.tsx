@@ -1,5 +1,5 @@
 import ProgressBar from "../components/ProgressBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
 import TextArea from "../components/TextArea";
@@ -22,7 +22,7 @@ const initialForm: Resume = {
 
 const Resume = () => {
   const { user } = useAuth();
-  const { resume, createResume } = useResume();
+  const { resume, createResume, getResume } = useResume();
   const [formData, setFormData] = useState<Resume>(initialForm);
   const navigate = useNavigate();
 
@@ -45,6 +45,14 @@ const Resume = () => {
   const onNextHandler = (): void => {
     navigate("personal-information");
   };
+
+  useEffect(() => {
+    if (!resume) {
+      (async () => {
+        await getResume();
+      })();
+    }
+  }, [resume, getResume]);
 
   return (
     <>

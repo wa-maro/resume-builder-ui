@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ResumeContext from "./ResumeContext";
 
-interface CreateResumeResponse {
+interface ResumeFetchResponse {
   success: boolean;
   message: string;
   resume?: Resume;
@@ -24,7 +24,7 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
         body: JSON.stringify({ title: data.title, summary: data.summary }),
       });
 
-      const result: CreateResumeResponse = await res.json();
+      const result: ResumeFetchResponse = await res.json();
 
       if (!result.success) throw new Error(result.message);
 
@@ -34,30 +34,26 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  useEffect(() => {
-    const getResume = async () => {
-      try {
-        const res = await fetch("http://127.0.0.1:8080/api/v0/resume", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const result: CreateResumeResponse = await res.json();
+  const getResume = async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:8080/api/v0/resume", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const result: ResumeFetchResponse = await res.json();
 
-        if (!result.success) throw new Error(result.message);
+      if (!result.success) throw new Error(result.message);
 
-        setResume(result.resume);
-      } catch (error) {
-        console.error("Can get resume", error);
-      }
-    };
-
-    getResume();
-  });
+      setResume(result.resume);
+    } catch (error) {
+      console.error("Can get resume", error);
+    }
+  };
 
   return (
-    <ResumeContext.Provider value={{ resume, createResume }}>
+    <ResumeContext.Provider value={{ resume, createResume, getResume }}>
       {children}
     </ResumeContext.Provider>
   );
