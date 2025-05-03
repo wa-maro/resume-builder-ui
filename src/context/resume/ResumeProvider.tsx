@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import ResumeContext from "./ResumeContext";
 
-interface ResumeFetchResponse {
-  success: boolean;
-  message: string;
-  resume?: Resume;
-}
-
 const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   const [resume, setResume] = useState<Resume | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
@@ -25,11 +19,12 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
         body: JSON.stringify({ title: data.title, summary: data.summary }),
       });
 
-      const result: ResumeFetchResponse = await res.json();
+      const result: FetchResponse<Resume> = await res.json();
 
       if (!result.success) throw new Error(result.message);
 
-      setResume(result.resume);
+      setResume(result.data);
+      console.log(result.data);
     } catch (error) {
       console.error("Resume creation failed:", error);
     }
@@ -45,12 +40,12 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const result: ResumeFetchResponse = await res.json();
+      const result: FetchResponse<Resume> = await res.json();
 
       if (!result.success) throw new Error(result.message);
 
-      if (result.resume) {
-        setResume(result.resume);
+      if (result.data) {
+        setResume(result.data);
       } else {
         setResume(undefined);
       }

@@ -95,13 +95,19 @@ declare global {
   }
 
   export interface Resume {
-    id?: string;
+    _id?: string;
     user?: string;
     title: string;
     summary: string;
     declaration?: Declaration;
     createdAt?: string;
     updatedAt?: string;
+  }
+
+  interface FetchResponse<T = unknown> {
+    success: boolean;
+    message: string;
+    data?: T;
   }
 }
 
