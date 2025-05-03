@@ -12,7 +12,7 @@ interface SideNavItemProps {
 }
 
 const SideNavItem = ({ item }: SideNavItemProps) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   if (item.children && item.children.length > 0) {
     return (

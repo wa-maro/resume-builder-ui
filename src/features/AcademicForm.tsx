@@ -4,6 +4,7 @@ import TextInput from "../components/TextInput";
 import Select from "../components/Select";
 import Label from "../components/Label";
 import { useState } from "react";
+import FileInput from "../components/FileInput";
 
 const newAcademic: Academic = {
   award: "",
@@ -150,12 +151,8 @@ const AcademicForm = ({
 
       <div className="mt-5 flex flex-col gap-1">
         <Label text="Certificate" htmlFor="uploadedCertificate" />
-        <input
-          className="font-medium text-sm text-gray-500 bg-gray-100 rounded max-w-fit cursor-pointer file:cursor-pointer file:border-0 file:py-1.5 file:px-2.5 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white placeholder:capitalize"
-          type="file"
+        <FileInput
           name="uploadedCertificate"
-          id="uploadedCertificate"
-          placeholder="upload certificate"
           onChange={onChangeHandler}
           value={academic.uploadedCertificate}
         />

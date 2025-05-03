@@ -18,6 +18,7 @@ const TextArea = ({
       placeholder={placeholder}
       value={value}
       rows={5}
+      id={name}
       required={required}
       onChange={onChange}
       className="w-full outline-none border border-gray-400 rounded px-2.5 py-2 "

@@ -3,6 +3,7 @@ import ActionButton from "../components/ActionButton";
 import Label from "../components/Label";
 import TextInput from "../components/TextInput";
 import { useState } from "react";
+import FileInput from "../components/FileInput";
 
 const newProfession: Profession = {
   award: "",
@@ -151,22 +152,16 @@ const ProfessionForm = ({
       <div className="flex flex-wrap gap-5 md:gap-6 mt-5">
         <div className="flex flex-col gap-1 col-span-1">
           <Label text="Certificate" htmlFor="uploadedCertificate" />
-          <input
-            className="font-medium text-sm text-gray-500 bg-gray-100 rounded max-w-fit cursor-pointer file:cursor-pointer file:border-0 file:py-1.5 file:px-2.5 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white placeholder:capitalize"
-            type="file"
+          <FileInput
             name="uploadedCertificate"
-            placeholder="upload certificate"
             onChange={onChangeHandler}
             value={profession.uploadedCertificate}
           />
         </div>
         <div className="flex flex-col gap-1 col-span-1">
           <Label text="Transcript" htmlFor="uploadedTranscript" />
-          <input
-            className="font-medium text-sm text-gray-500 bg-gray-100 rounded max-w-fit cursor-pointer file:cursor-pointer file:border-0 file:py-1.5 file:px-2.5 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white placeholder:capitalize"
-            type="file"
+          <FileInput
             name="uploadedTranscript"
-            placeholder="upload Transcript"
             onChange={onChangeHandler}
             value={profession.uploadedTranscript}
           />

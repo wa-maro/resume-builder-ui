@@ -5,6 +5,7 @@ import TextInput from "../components/TextInput";
 import TextArea from "../components/TextArea";
 import ActionButton from "../components/ActionButton";
 import { useState } from "react";
+import FileInput from "../components/FileInput";
 
 const newSkill: Skill = {
   category: "",
@@ -93,9 +94,7 @@ const SkillForm = ({
 
       <div className="flex flex-col gap-1 mt-5">
         <Label text="Certificate (if any)" htmlFor="certification" />
-        <input
-          className="font-medium text-sm text-gray-500 bg-gray-100 rounded max-w-fit cursor-pointer file:cursor-pointer file:border-0 file:py-1.5 file:px-2.5 file:mr-4 file:bg-gray-800 file:text-white"
-          type="file"
+        <FileInput
           name="certification"
           onChange={onChangeHandler}
           value={skill.certification}
