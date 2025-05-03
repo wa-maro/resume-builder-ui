@@ -19,17 +19,33 @@ declare global {
     password: string;
   }
 
+  export type Disability =
+    | "none"
+    | "visual"
+    | "hearing"
+    | "mobility"
+    | "cognitive"
+    | "other";
+
   export interface PersonalInfo {
-    id?: string;
+    _id?: string;
     fullName: string;
     nationality: string;
-    dateOfBirth: string;
-    placeOfDomicile: string;
-    gender: string;
-    email: string;
-    phone: string;
+    dateOfBirth: string; // Format: DD/MM/YYYY
+    placeOfDomicile?: string;
+    gender: "male" | "female";
+    email?: string;
+    phone?: string;
     physicalAddress: string;
-    disabilities: string;
+    disabilities?: (
+      | "none"
+      | "visual"
+      | "hearing"
+      | "mobility"
+      | "cognitive"
+      | "other"
+    )[];
+    maritualStatus?: "single" | "married" | "divorced" | "widowed";
     resumeId?: string;
   }
 
