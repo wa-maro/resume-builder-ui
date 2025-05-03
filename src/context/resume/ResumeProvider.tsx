@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResumeContext from "./ResumeContext";
 
 interface ResumeFetchResponse {
@@ -9,6 +9,7 @@ interface ResumeFetchResponse {
 
 const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   const [resume, setResume] = useState<Resume | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const token = localStorage.getItem("token");
   if (!token) throw new Error("Token is required");
@@ -35,6 +36,8 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const getResume = async () => {
+    setLoading(true);
+
     try {
       const res = await fetch("http://127.0.0.1:8080/api/v0/resume", {
         method: "GET",
@@ -46,14 +49,29 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (!result.success) throw new Error(result.message);
 
-      setResume(result.resume);
+      if (result.resume) {
+        setResume(result.resume);
+      } else {
+        setResume(undefined);
+      }
     } catch (error) {
       console.error("Can get resume", error);
+      setResume(undefined);
+    } finally {
+      setLoading(false);
     }
   };
 
+  useEffect(() => {
+    (async () => {
+      await getResume();
+    })();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ResumeContext.Provider value={{ resume, createResume, getResume }}>
+    <ResumeContext.Provider value={{ resume, createResume, loading }}>
       {children}
     </ResumeContext.Provider>
   );
