@@ -3,6 +3,7 @@ import SectionHeader from "../../components/SectionHeader";
 import { useEffect, useState } from "react";
 import { useResume } from "../../context/resume/ResumeContext";
 import Spinner from "../../components/Spinner";
+import { toYYYDDMM } from "../../utility/dateFormat";
 
 const initialPerson: PersonalInfo = {
   _id: "",
@@ -70,7 +71,11 @@ const PersonalDetails = () => {
       const result: FetchResponse<PersonalInfo> = await res.json();
       if (!result.success) throw new Error(result.message);
 
-      if (result.data) setPerson(result.data);
+      if (result.data)
+        setPerson({
+          ...result.data,
+          dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
+        });
       else setPerson(initialPerson);
     } catch (error) {
       console.error("Can't get personal information", error);
@@ -96,7 +101,6 @@ const PersonalDetails = () => {
 
       <PersonalDetailForm
         person={person}
-        initialPerson={initialPerson}
         setPerson={setPerson}
         addPersonalInfo={addPersonalInfo}
       />

@@ -1,13 +1,13 @@
-export const toDDMMYYYY = (dateString: string): string => {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // months are 0-indexed
-  const year = date.getFullYear();
+export const toDDMMYYYY = (date: string): string => {
+  const d = new Date(date);
+  const day = d.getDate().toString().padStart(2, "0");
+  const month = (d.getMonth() + 1).toString().padStart(2, "0"); // months are 0-indexed
+  const year = d.getFullYear();
   return `${day}/${month}/${year}`;
 };
 
-export const toYYYDDMM = (dateStr?: string): string => {
-  if (!dateStr || !dateStr.includes("/")) return ""; // fallback
-  const [day, month, year] = dateStr.split("/");
+export const toYYYDDMM = (date: string): string => {
+  if (!date.includes("/")) return ""; // fallback
+  const [day, month, year] = date.split("/");
   return `${year}-${month}-${day}`;
 };

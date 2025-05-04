@@ -5,7 +5,7 @@ import Select from "../components/Select";
 import SectionDivider from "../components/SectionDivider";
 import ActionButton from "../components/ActionButton";
 import { omitFields } from "../utility/omitFields";
-import { toDDMMYYYY, toYYYDDMM } from "../utility/dateFormat";
+import { toDDMMYYYY } from "../utility/dateFormat";
 
 const disabilityOptions: Disability[] = [
   "none",
@@ -18,12 +18,10 @@ const disabilityOptions: Disability[] = [
 
 const PersonalDetailForm = ({
   person,
-  initialPerson,
   setPerson,
   addPersonalInfo,
 }: {
   person: PersonalInfo;
-  initialPerson: PersonalInfo;
   setPerson: React.Dispatch<React.SetStateAction<PersonalInfo>>;
   addPersonalInfo: (data: PersonalInfo) => Promise<void>;
 }) => {
@@ -63,7 +61,6 @@ const PersonalDetailForm = ({
     };
 
     await addPersonalInfo(data);
-    setPerson(initialPerson);
   };
 
   return (
@@ -98,7 +95,7 @@ const PersonalDetailForm = ({
             type="date"
             name="dateOfBirth"
             onChange={onChangeHandler}
-            value={toYYYDDMM(person.dateOfBirth)}
+            value={person.dateOfBirth}
           />
         </div>
         <div className="flex flex-col gap-1.5">
