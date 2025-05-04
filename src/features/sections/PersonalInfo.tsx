@@ -46,7 +46,11 @@ const PersonalDetails = () => {
       const result: FetchResponse<PersonalInfo> = await res.json();
       if (!result.success) throw new Error(result.message);
 
-      if (result.data) setPerson(result.data);
+      if (result.data)
+        setPerson({
+          ...result.data,
+          dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
+        });
       else setPerson(initialPerson);
     } catch (error) {
       console.error("Failed to add personal info:", error);
@@ -85,6 +89,35 @@ const PersonalDetails = () => {
     }
   };
 
+  const updatePersonalInfo = async (data: PersonalInfo) => {
+    try {
+      const res = await fetch(
+        `http://127.0.0.1:8080/api/v0/resume/${resume?._id}/personal-information/${person?._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (!res.ok) throw new Error("Request Error");
+
+      const result: FetchResponse<PersonalInfo> = await res.json();
+      if (!result.success) throw new Error(result.message);
+
+      if (result.data)
+        setPerson({
+          ...result.data,
+          dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
+        });
+      else setPerson(initialPerson);
+    } catch (error) {
+      console.error("Failed to update personal info:", error);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       await getPersonalInfo();
@@ -103,6 +136,7 @@ const PersonalDetails = () => {
         person={person}
         setPerson={setPerson}
         addPersonalInfo={addPersonalInfo}
+        updatePersonalInfo={updatePersonalInfo}
       />
     </>
   );

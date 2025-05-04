@@ -20,10 +20,12 @@ const PersonalDetailForm = ({
   person,
   setPerson,
   addPersonalInfo,
+  updatePersonalInfo,
 }: {
   person: PersonalInfo;
   setPerson: React.Dispatch<React.SetStateAction<PersonalInfo>>;
   addPersonalInfo: (data: PersonalInfo) => Promise<void>;
+  updatePersonalInfo: (data: PersonalInfo) => Promise<void>;
 }) => {
   const onChangeHandler = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -60,7 +62,8 @@ const PersonalDetailForm = ({
       dateOfBirth: toDDMMYYYY(person.dateOfBirth),
     };
 
-    await addPersonalInfo(data);
+    if (!person._id) await addPersonalInfo(data);
+    else await updatePersonalInfo(data);
   };
 
   return (
