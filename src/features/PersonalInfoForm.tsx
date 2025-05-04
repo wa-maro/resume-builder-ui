@@ -4,6 +4,8 @@ import TextInput from "../components/TextInput";
 import Select from "../components/Select";
 import SectionDivider from "../components/SectionDivider";
 import ActionButton from "../components/ActionButton";
+import { omitFields } from "../utility/omitFields";
+import { toDDMMYYYY, toYYYDDMM } from "../utility/dateFormat";
 
 const disabilityOptions: Disability[] = [
   "none",
@@ -16,10 +18,14 @@ const disabilityOptions: Disability[] = [
 
 const PersonalDetailForm = ({
   person,
+  initialPerson,
   setPerson,
+  addPersonalInfo,
 }: {
   person: PersonalInfo;
+  initialPerson: PersonalInfo;
   setPerson: React.Dispatch<React.SetStateAction<PersonalInfo>>;
+  addPersonalInfo: (data: PersonalInfo) => Promise<void>;
 }) => {
   const onChangeHandler = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -28,7 +34,7 @@ const PersonalDetailForm = ({
   };
 
   function onCheckBox(e: React.ChangeEvent<HTMLInputElement>): void {
-    const value = e.target.value as Disability;
+    const value = e.target.value.trim() as Disability;
     const isChecked = e.target.checked;
 
     let updated = [...(person.disabilities ?? [])];
@@ -50,6 +56,14 @@ const PersonalDetailForm = ({
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const data: PersonalInfo = {
+      ...omitFields(person, ["_id", "resume", "createdAt", "updatedAt"]),
+      dateOfBirth: toDDMMYYYY(person.dateOfBirth),
+    };
+
+    await addPersonalInfo(data);
+    setPerson(initialPerson);
   };
 
   return (
@@ -84,7 +98,7 @@ const PersonalDetailForm = ({
             type="date"
             name="dateOfBirth"
             onChange={onChangeHandler}
-            value={person.dateOfBirth}
+            value={toYYYDDMM(person.dateOfBirth)}
           />
         </div>
         <div className="flex flex-col gap-1.5">
@@ -109,6 +123,20 @@ const PersonalDetailForm = ({
             value={person.placeOfDomicile ?? ""}
           />
         </div>
+        <div className="flex flex-col gap-1.5">
+          <Label text="maritual Status" htmlFor="maritualStatus" />
+          <Select
+            label="Choose maritual status"
+            name="maritualStatus"
+            onChange={onChangeHandler}
+            value={person.maritualStatus ?? ""}
+          >
+            <option value="single">single</option>
+            <option value="married">married</option>
+            <option value="divorced">divorced</option>
+            <option value="widowed">widowed</option>
+          </Select>
+        </div>
       </div>
 
       <div className="flex flex-col gap-1 max-w-xs mt-5 mb-10">
@@ -127,7 +155,7 @@ const PersonalDetailForm = ({
                   checked={(person.disabilities ?? []).includes(option)}
                   onChange={onCheckBox}
                 />
-                <label>{option}</label>
+                <label htmlFor={option}>{option}</label>
               </li>
             ))}
           </ul>

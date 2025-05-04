@@ -1,30 +1,65 @@
 import PersonalDetailForm from "../PersonalInfoForm";
 import SectionHeader from "../../components/SectionHeader";
 import { useState } from "react";
+import { useResume } from "../../context/resume/ResumeContext";
 
 const initialPerson: PersonalInfo = {
   _id: "",
   fullName: "",
-  nationality: "",
+  gender: "",
   dateOfBirth: "",
+  nationality: "",
   placeOfDomicile: "",
-  gender: "male", // or "female"
+  maritualStatus: "",
+  disabilities: ["none"],
   email: "",
   phone: "",
-  physicalAddress: "", // changed from physicalAddress
-  disabilities: ["none"],
-  maritualStatus: "single", // optional, can be left out
-  resumeId: "",
+  physicalAddress: "",
+  resume: "",
 };
 
 const PersonalDetails = () => {
   const [person, setPerson] = useState<PersonalInfo>(initialPerson);
+  const { resume } = useResume();
+
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("Token is required");
+
+  const addPersonalInfo = async (data: PersonalInfo) => {
+    try {
+      const res = await fetch(
+        `http://127.0.0.1:8080/api/v0/resume/${resume?._id}/personal-information`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (!res.ok) throw new Error("Request Error");
+
+      const result: FetchResponse<PersonalInfo> = await res.json();
+      if (!result.success) throw new Error(result.message);
+
+      if (result.data) setPerson(result.data);
+      else setPerson(initialPerson);
+    } catch (error) {
+      console.error("Failed to add personal info:", error);
+    }
+  };
 
   return (
     <>
       <SectionHeader title="Personal Information" />
 
-      <PersonalDetailForm person={person} setPerson={setPerson} />
+      <PersonalDetailForm
+        person={person}
+        initialPerson={initialPerson}
+        setPerson={setPerson}
+        addPersonalInfo={addPersonalInfo}
+      />
     </>
   );
 };

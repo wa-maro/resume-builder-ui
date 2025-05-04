@@ -29,14 +29,13 @@ declare global {
 
   export interface PersonalInfo {
     _id?: string;
+    resume?: string;
     fullName: string;
-    nationality: string;
+    gender: "male" | "female" | "";
     dateOfBirth: string; // Format: DD/MM/YYYY
+    nationality: string;
     placeOfDomicile?: string;
-    gender: "male" | "female";
-    email?: string;
-    phone?: string;
-    physicalAddress: string;
+    maritualStatus?: "single" | "married" | "divorced" | "widowed" | "";
     disabilities?: (
       | "none"
       | "visual"
@@ -45,8 +44,11 @@ declare global {
       | "cognitive"
       | "other"
     )[];
-    maritualStatus?: "single" | "married" | "divorced" | "widowed";
-    resumeId?: string;
+    email?: string;
+    phone?: string;
+    physicalAddress: string;
+    createdAt?: string;
+    updatedAt?: string;
   }
 
   export interface Referee {
