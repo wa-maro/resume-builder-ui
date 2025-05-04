@@ -125,7 +125,15 @@ declare global {
   interface FetchResponse<T = unknown> {
     success: boolean;
     message: string;
+    errors?: {
+      message: string;
+    }[];
     data?: T;
+  }
+
+  interface Alert {
+    success: boolean;
+    messages: string[];
   }
 }
 

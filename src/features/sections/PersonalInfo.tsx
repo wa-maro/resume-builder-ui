@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useResume } from "../../context/resume/ResumeContext";
 import Spinner from "../../components/Spinner";
 import { toYYYDDMM } from "../../utility/dateFormat";
+import Alert from "../../components/Alert";
+import { logAlert } from "../../utility/logging";
 
 const initialPerson: PersonalInfo = {
   _id: "",
@@ -24,6 +26,7 @@ const PersonalDetails = () => {
   const [person, setPerson] = useState<PersonalInfo>(initialPerson);
   const { resume } = useResume();
   const [loading, setLoading] = useState<boolean>(true);
+  const [alert, setAlert] = useState<Alert>();
 
   const token = localStorage.getItem("token");
   if (!token) throw new Error("Token is required");
@@ -41,17 +44,15 @@ const PersonalDetails = () => {
           body: JSON.stringify(data),
         }
       );
-      if (!res.ok) throw new Error("Request Error");
 
       const result: FetchResponse<PersonalInfo> = await res.json();
-      if (!result.success) throw new Error(result.message);
+      const ok = logAlert(result, setAlert);
+      if (!ok || !result.data) return;
 
-      if (result.data)
-        setPerson({
-          ...result.data,
-          dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
-        });
-      else setPerson(initialPerson);
+      setPerson({
+        ...result.data,
+        dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
+      });
     } catch (error) {
       console.error("Failed to add personal info:", error);
     }
@@ -70,17 +71,17 @@ const PersonalDetails = () => {
           },
         }
       );
-      if (!res.ok) throw new Error("Request Error");
 
       const result: FetchResponse<PersonalInfo> = await res.json();
-      if (!result.success) throw new Error(result.message);
 
-      if (result.data)
-        setPerson({
-          ...result.data,
-          dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
-        });
-      else setPerson(initialPerson);
+      const ok = logAlert(result, setAlert);
+      if (!ok || !result.data) return;
+
+      setPerson({
+        ...result.data,
+        dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
+      });
+      logAlert(result, setAlert);
     } catch (error) {
       console.error("Can't get personal information", error);
       setPerson(initialPerson);
@@ -102,17 +103,15 @@ const PersonalDetails = () => {
           body: JSON.stringify(data),
         }
       );
-      if (!res.ok) throw new Error("Request Error");
 
       const result: FetchResponse<PersonalInfo> = await res.json();
-      if (!result.success) throw new Error(result.message);
+      const ok = logAlert(result, setAlert);
+      if (!ok || !result.data) return;
 
-      if (result.data)
-        setPerson({
-          ...result.data,
-          dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
-        });
-      else setPerson(initialPerson);
+      setPerson({
+        ...result.data,
+        dateOfBirth: toYYYDDMM(result.data.dateOfBirth),
+      });
     } catch (error) {
       console.error("Failed to update personal info:", error);
     }
@@ -129,8 +128,12 @@ const PersonalDetails = () => {
   if (loading) return <Spinner />;
 
   return (
-    <>
+    <div className="relative">
       <SectionHeader title="Personal Information" />
+
+      <div className="absolute right-0 top-0">
+        {alert && <Alert alert={alert} setAlert={setAlert} />}
+      </div>
 
       <PersonalDetailForm
         person={person}
@@ -138,7 +141,7 @@ const PersonalDetails = () => {
         addPersonalInfo={addPersonalInfo}
         updatePersonalInfo={updatePersonalInfo}
       />
-    </>
+    </div>
   );
 };
 
