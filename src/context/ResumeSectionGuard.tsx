@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useResume } from "./resume/ResumeContext";
+import Spinner from "../components/Spinner";
 
 const ResumeSectionGuard = () => {
   const { resume, loading } = useResume();
@@ -14,12 +15,7 @@ const ResumeSectionGuard = () => {
     return () => clearTimeout(timeout);
   }, [resume, loading, navigate]);
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center h-full">
-        <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500 border-opacity-50"></div>
-      </div>
-    );
+  if (loading) return <Spinner />;
 
   return <Outlet />;
 };
