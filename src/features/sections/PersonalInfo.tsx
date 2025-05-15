@@ -22,6 +22,9 @@ const initialPerson: PersonalInfo = {
   resume: "",
 };
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/v0";
+
 const PersonalDetails = () => {
   const [person, setPerson] = useState<PersonalInfo>(initialPerson);
   const { resume } = useResume();
@@ -34,7 +37,7 @@ const PersonalDetails = () => {
   const addPersonalInfo = async (data: PersonalInfo) => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8080/api/v0/resume/${resume?._id}/personal-information`,
+        `${API_BASE_URL}/resume/${resume?._id}/personal-information`,
         {
           method: "POST",
           headers: {
@@ -63,7 +66,7 @@ const PersonalDetails = () => {
 
     try {
       const res = await fetch(
-        `http://127.0.0.1:8080/api/v0/resume/${resume?._id}/personal-information`,
+        `${API_BASE_URL}/resume/${resume?._id}/personal-information`,
         {
           method: "GET",
           headers: {
@@ -93,7 +96,7 @@ const PersonalDetails = () => {
   const updatePersonalInfo = async (data: PersonalInfo) => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8080/api/v0/resume/${resume?._id}/personal-information/${person?._id}`,
+        `${API_BASE_URL}/resume/${resume?._id}/personal-information/${person?._id}`,
         {
           method: "PATCH",
           headers: {
