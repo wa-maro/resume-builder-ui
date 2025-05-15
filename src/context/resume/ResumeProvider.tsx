@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import ResumeContext from "./ResumeContext";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/v0";
+
 const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   const [resume, setResume] = useState<Resume | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
@@ -10,7 +13,7 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
 
   const createResume = async (data: Resume) => {
     try {
-      const res = await fetch("http://127.0.0.1:8080/api/v0/resume", {
+      const res = await fetch(`${API_BASE_URL}/resume`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,7 +37,7 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:8080/api/v0/resume", {
+      const res = await fetch(`${API_BASE_URL}/resume`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

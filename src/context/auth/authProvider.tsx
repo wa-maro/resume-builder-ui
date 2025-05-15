@@ -1,7 +1,8 @@
 import { useState } from "react";
 import AuthContext from "./authContext";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/v0";
 
 type LoginResponseType = {
   success: boolean;
@@ -29,7 +30,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     confirmPassword,
   }: RegisterType) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/v0/auth/register`, {
+      const res = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password, confirmPassword }),
@@ -48,7 +49,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async ({ usernameOrEmail, password }: LoginType) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/v0/auth/login`, {
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ usernameOrEmail, password }),
