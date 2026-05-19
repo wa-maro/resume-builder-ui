@@ -1,11 +1,12 @@
-import { ArrowRight } from "lucide-react";
-import Label from "../components/Label";
-import TextInput from "../components/TextInput";
-import Select from "../components/Select";
+import Label from "../components/form/Label";
+import TextInput from "../components/form/TextInput";
+import Select from "../components/form/Select";
 import SectionDivider from "../components/SectionDivider";
-import ActionButton from "../components/ActionButton";
 import { omitFields } from "../utility/omitFields";
 import { toDDMMYYYY } from "../utility/dateFormat";
+import ActionButton from "../components/ui/ActionButton";
+import { Edit, Plus, Save, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const disabilityOptions: Disability[] = [
   "none",
@@ -16,17 +17,25 @@ const disabilityOptions: Disability[] = [
   "other",
 ];
 
+type PersonalInfoProps = {
+  person: PersonalInfo;
+  setPerson: React.Dispatch<React.SetStateAction<PersonalInfo>>;
+  addPersonalInfo: (data: PersonalInfo) => Promise<void>;
+  updatePersonalInfo: (data: PersonalInfo) => Promise<void>;
+  isEditing: boolean;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const PersonalDetailForm = ({
   person,
   setPerson,
   addPersonalInfo,
   updatePersonalInfo,
-}: {
-  person: PersonalInfo;
-  setPerson: React.Dispatch<React.SetStateAction<PersonalInfo>>;
-  addPersonalInfo: (data: PersonalInfo) => Promise<void>;
-  updatePersonalInfo: (data: PersonalInfo) => Promise<void>;
-}) => {
+  isEditing,
+  setIsEditing,
+}: PersonalInfoProps) => {
+  const { t } = useTranslation();
+
   const onChangeHandler = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -64,85 +73,93 @@ const PersonalDetailForm = ({
 
     if (!person._id) await addPersonalInfo(data);
     else await updatePersonalInfo(data);
+
+    setIsEditing(false);
   };
 
   return (
     <form method="post" onSubmit={onSubmitHandler}>
-      <SectionDivider title="Personal Details" />
+      <SectionDivider title={t("personal_details")} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-x-6">
         <div className="flex flex-col gap-1.5">
-          <Label text="Full Name" htmlFor="fullName" />
+          <Label text={t("full_name")} htmlFor="fullName" />
           <TextInput
             name="fullName"
-            placeholder="Full Name"
+            placeholder={t("full_name")}
             onChange={onChangeHandler}
             value={person.fullName}
+            disabled={!isEditing}
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label text="gender" htmlFor="gender" />
+          <Label text={t("gender")} htmlFor="gender" />
           <Select
-            label="Choose gender"
+            label={t("choose_gender")}
             name="gender"
             onChange={onChangeHandler}
             value={person.gender}
+            disabled={!isEditing}
           >
-            <option value="female">Female</option>
-            <option value="male">Male</option>
+            <option value="female">{t("female")}</option>
+            <option value="male">{t("male")}</option>
           </Select>
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label text="date of birth" htmlFor="dateOfBirth" />
+          <Label text={t("date_of_birth")} htmlFor="dateOfBirth" />
           <TextInput
             type="date"
             name="dateOfBirth"
             onChange={onChangeHandler}
             value={person.dateOfBirth}
+            disabled={!isEditing}
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label text="nationality" htmlFor="nationality" />
+          <Label text={t("nationality")} htmlFor="nationality" />
           <Select
             name="nationality"
-            label="Choose nationality"
+            label={t("choose_nationality")}
             onChange={onChangeHandler}
             value={person.nationality}
+            disabled={!isEditing}
           >
-            <option value="tanzania">Tanzanian</option>
-            <option value="kenya">Kenyan</option>
-            <option value="uganda">Uganda</option>
+            <option value="tanzania">{t("tanzania")}</option>
+            <option value="kenya">{t("kenya")}</option>
+            <option value="uganda">{t("uganda")}</option>
           </Select>
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label text="place Of Domicile" htmlFor="placeOfDomicile" />
+          <Label text={t("place_of_domicile")} htmlFor="placeOfDomicile" />
           <TextInput
             name="placeOfDomicile"
-            placeholder="District, Region"
+            placeholder={t("place_of_domicile_placeholder")}
             onChange={onChangeHandler}
             value={person.placeOfDomicile ?? ""}
+            disabled={!isEditing}
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label text="maritual Status" htmlFor="maritualStatus" />
+          <Label text={t("marital_status")} htmlFor="maritualStatus" />
           <Select
-            label="Choose maritual status"
+            label={t("choose_marital_status")}
             name="maritualStatus"
             onChange={onChangeHandler}
             value={person.maritualStatus ?? ""}
+            disabled={!isEditing}
           >
-            <option value="single">single</option>
-            <option value="married">married</option>
-            <option value="divorced">divorced</option>
-            <option value="widowed">widowed</option>
+            <option value="single">{t("single")}</option>
+            <option value="married">{t("married")}</option>
+            <option value="divorced">{t("divorced")}</option>
+            <option value="widowed">{t("widowed")}</option>
           </Select>
         </div>
       </div>
 
-      <div className="flex flex-col gap-1 max-w-xs mt-5 mb-10">
+      <div className="flex flex-col gap-1 max-w-xs my-5">
         <fieldset>
           <legend className="text-sm text-gray-600 capitalize mb-1">
-            Disabilities
+            {t("disabilities")}
           </legend>
           <ul className="grid grid-cols-2 gap-1">
             {disabilityOptions.map((option) => (
@@ -154,53 +171,82 @@ const PersonalDetailForm = ({
                   value={option}
                   checked={(person.disabilities ?? []).includes(option)}
                   onChange={onCheckBox}
+                  disabled={!isEditing}
                 />
-                <label htmlFor={option}>{option}</label>
+                <label htmlFor={option}>{t(`${option}`)}</label>
               </li>
             ))}
           </ul>
         </fieldset>
       </div>
 
-      <SectionDivider title="Contanct Details" />
+      <SectionDivider title={t("contact_details")} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-x-6">
         <div className="flex flex-col gap-1.5">
-          <Label text="email" htmlFor="email" />
+          <Label text={t("email")} htmlFor="email" />
           <TextInput
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder={t("email")}
             onChange={onChangeHandler}
             value={person.email ?? ""}
+            disabled={!isEditing}
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label text="phone" htmlFor="phone" />
+          <Label text={t("phone")} htmlFor="phone" />
           <TextInput
             type="tel"
             name="phone"
-            placeholder="Phone"
+            placeholder={t("phone")}
             onChange={onChangeHandler}
             value={person.phone ?? ""}
+            disabled={!isEditing}
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label text="Physical Address" htmlFor="physicalAddress" />
+          <Label text={t("physical_address")} htmlFor="physicalAddress" />
           <TextInput
-            name="physicalAddress"
-            placeholder="P.O Box ..."
+            name={t("physicalAddress")}
+            placeholder={t("placeholder_physical_address")}
             onChange={onChangeHandler}
             value={person.physicalAddress}
+            disabled={!isEditing}
           />
         </div>
       </div>
 
-      <ActionButton
-        text="Next"
-        theme="bg-teal-600"
-        icon={<ArrowRight size={16} />}
-      />
+      <div className="">
+        {!isEditing ? (
+          <button
+            className={`${
+              person._id
+                ? "bg-blue-600 hover:bg-blue-700"
+                : "bg-emerald-600 hover:bg-emerald-700"
+            } text-white rounded cursor-pointer px-5 py-1.5 flex items-center gap-x-2 mt-5`}
+            onClick={() => setIsEditing(true)}
+          >
+            {person._id ? t("update") : t("add")}
+            {person._id ? <Edit size={16} /> : <Plus size={16} />}
+          </button>
+        ) : (
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-slate-800 rounded-s text-white cursor-pointer px-3.5 py-1.5 flex items-center gap-x-2 mt-5"
+              onClick={() => setIsEditing(false)}
+            >
+              <X size={16} />
+              {t("cancel")}
+            </button>
+            <ActionButton
+              text={t("save")}
+              theme="bg-teal-600"
+              icon={<Save size={16} />}
+            />
+          </div>
+        )}
+      </div>
     </form>
   );
 };

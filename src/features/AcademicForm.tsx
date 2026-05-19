@@ -1,90 +1,164 @@
-import ActionButton from "../components/ActionButton";
 import { Plus } from "lucide-react";
-import TextInput from "../components/TextInput";
-import Select from "../components/Select";
-import Label from "../components/Label";
-import { useState } from "react";
-import FileInput from "../components/FileInput";
+import ActionButton from "../components/ui/ActionButton";
+import Label from "../components/form/Label";
+import TextInput from "../components/form/TextInput";
+import { useEffect, useState } from "react";
+import FileInput from "../components/form/FileInput";
+import Select from "../components/form/Select";
+import { useTranslation } from "react-i18next";
 
-const newAcademic: Academic = {
+const defaultAcademic: Academic = {
+  level: "",
   award: "",
-  school: { name: "", location: "" },
+  institution: { name: "", location: "" },
   startYear: "",
   endYear: "",
-  grade: { division: "", points: "" },
-  uploadedCertificate: "",
+  certificate: "",
+  transcript: "",
+  grade: { classification: "", gpa: "" },
 };
+
+interface AcademicFormProps {
+  academics: Academic[];
+  setAcademics: React.Dispatch<React.SetStateAction<Academic[]>>;
+  editing?: Academic | null;
+  setEditing?: React.Dispatch<React.SetStateAction<Academic | null>>;
+  onSave?: (school: Academic) => void;
+}
 
 const AcademicForm = ({
   academics,
+  editing,
+  setEditing,
   setAcademics,
-}: {
-  academics: Academic[];
-  setAcademics: React.Dispatch<React.SetStateAction<Academic[]>>;
-}) => {
-  const [academic, setAcademic] = useState<Academic>(newAcademic);
+  onSave,
+}: AcademicFormProps) => {
+  const { t } = useTranslation();
+  const [academic, setAcademic] = useState<Academic>(defaultAcademic);
+
+  // Prefill form when editing
+  useEffect(() => {
+    if (editing) setAcademic(editing);
+    else setAcademic(defaultAcademic);
+  }, [editing]);
+
+  const onFileChange =
+    (field: "certificate" | "transcript") =>
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      const file = ev.target.files?.[0];
+      if (file) setAcademic((prev) => ({ ...prev, [field]: file }));
+    };
 
   const onChangeHandler = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => setAcademic({ ...academic, [ev.target.name]: ev.target.value });
+  ) => {
+    const { name, value } = ev.target;
+    setAcademic((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmitHandler = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
 
-    // set resume ID
-    academic.resumeId = "";
+    // Validation
+    if (!academic.level) return alert("Academic level is required");
+    if (!academic.award) return alert("Award is required");
+    if (!academic.institution.name || !academic.institution.location)
+      return alert("Institution name and location are required");
 
-    setAcademics([...academics, academic]);
-    setAcademic(newAcademic);
+    // Convert strings to numbers
+    const academicToSave: Academic = {
+      ...academic,
+      startYear: Number(academic.startYear),
+      endYear: Number(academic.endYear),
+      grade: {
+        ...academic.grade,
+        gpa:
+          academic.grade.gpa !== "" && !isNaN(Number(academic.grade.gpa))
+            ? Number(academic.grade.gpa)
+            : "",
+      },
+      institution: {
+        name: academic.institution.name.trim(),
+        location: academic.institution.location.trim(),
+      },
+    };
+
+    if (onSave) {
+      onSave(academicToSave);
+    } else {
+      // Local add/edit
+      if (editing) {
+        setAcademics((prev) =>
+          prev.map((s) => (s._id === academic._id ? academicToSave : s))
+        );
+        setEditing?.(null);
+      } else {
+        setAcademics([...academics, academicToSave]);
+      }
+    }
+
+    setAcademic(defaultAcademic);
   };
 
   return (
     <form method="post" onSubmit={onSubmitHandler}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-        <div className="flex flex-col gap-1">
-          <Label text="award" htmlFor="award" />
+      <div className="grid grid-cols-5 gap-4 gap-x-6">
+        <div className="flex flex-col gap-1 col-span-1">
+          <Label text={t("level")} htmlFor="level" />
           <Select
-            label="Select Award"
-            name="award"
-            onChange={onChangeHandler}
-            value={academic.award}
-          >
-            <option value="PSLE">Primary Education Certificate (PSLE)</option>
-            <option value="CSEE">
-              Certificate of Secondary Education Examination (CSEE)
-            </option>
-            <option value="ACSEE">
-              Advanced Certificate of Secondary Education Examination (ACSEE)
-            </option>
-          </Select>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <Label text="school name" htmlFor="schoolName" />
-          <TextInput
-            name="schoolName"
-            placeholder="Kipololo Secondary School"
-            value={academic.school.name}
+            label={t("select_level")}
+            name="level"
+            value={academic.level}
             onChange={(e) =>
               setAcademic({
                 ...academic,
-                school: { ...academic.school, name: e.target.value },
+                level: e.target.value as AcademicLevel,
+              })
+            }
+          >
+            <option value="Diploma">{t("diploma")}</option>
+            <option value="Advanced Diploma">{t("advanced_diploma")}</option>
+            <option value="Bachelor's">{t("bachelors")}</option>
+            <option value="Postgraduate Diploma">
+              {t("postgraduate_diploma")}
+            </option>
+            <option value="Master's">{t("masters")}</option>
+            <option value="Doctorate (PhD)">{t("doctorate")}</option>
+          </Select>
+        </div>
+
+        <div className="flex flex-col gap-1 col-span-2">
+          <Label text={t("institution_name")} htmlFor="institutionName" />
+          <TextInput
+            name="institutionName"
+            placeholder="University of Dodoma"
+            value={academic.institution.name}
+            onChange={(e) =>
+              setAcademic({
+                ...academic,
+                institution: {
+                  ...academic.institution,
+                  name: e.target.value,
+                },
               })
             }
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <Label text="school location" htmlFor="schoolLocation" />
+        <div className="flex flex-col gap-1 col-span-2">
+          <Label
+            text={t("institution_location")}
+            htmlFor="institutionLocation"
+          />
           <TextInput
-            name="schoolLocation"
+            name="institutionLocation"
             placeholder="Mbinga, Tanzania"
-            value={academic.school.location}
+            value={academic.institution.location}
             onChange={(e) =>
               setAcademic({
                 ...academic,
-                school: {
-                  ...academic.school,
+                institution: {
+                  ...academic.institution,
                   location: e.target.value,
                 },
               })
@@ -93,73 +167,95 @@ const AcademicForm = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 md:gap-6 mt-5">
-        <div className="flex gap-x-8">
-          <div className="flex flex-col gap-1">
-            <Label text="Start Year" htmlFor="startYear" />
-            <TextInput
-              name="startYear"
-              placeholder="Jan 2010"
-              onChange={onChangeHandler}
-              value={academic.startYear}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <Label text="End Year" htmlFor="endYear" />
-            <TextInput
-              name="endYear"
-              placeholder="Nov 2010"
-              onChange={onChangeHandler}
-              value={academic.endYear}
-            />
-          </div>
+      <div className="grid grid-cols-5 gap-4 gap-x-6 mt-5">
+        <div className="flex flex-col gap-1 col-span-1">
+          <Label text={t("start_year")} htmlFor="startYear" />
+          <TextInput
+            name="startYear"
+            placeholder="2010"
+            onChange={onChangeHandler}
+            value={academic.startYear.toString()}
+          />
         </div>
 
-        <div className="flex gap-x-8">
-          <div className="flex flex-col gap-1">
-            <Label text="Grade (Division)" htmlFor="division" />
-            <TextInput
-              name="division"
-              placeholder="III"
-              value={academic.grade.division}
-              onChange={(e) =>
-                setAcademic({
-                  ...academic,
-                  grade: { ...academic.grade, division: e.target.value },
-                })
-              }
-            />
-          </div>
+        <div className="flex flex-col gap-1 col-span-1">
+          <Label text={t("end_year")} htmlFor="endYear" />
+          <TextInput
+            name="endYear"
+            placeholder="2014"
+            onChange={onChangeHandler}
+            value={academic.endYear.toString()}
+          />
+        </div>
 
-          <div className="flex flex-col gap-1">
-            <Label text="Grade (Points)" htmlFor="points" />
-            <TextInput
-              name="points"
-              placeholder="24"
-              value={academic.grade.points}
-              onChange={(e) =>
-                setAcademic({
-                  ...academic,
-                  grade: { ...academic.grade, points: e.target.value },
-                })
-              }
-            />
-          </div>
+        <div className="flex flex-col gap-1 col-span-3">
+          <Label text={t("award")} htmlFor="award" />
+          <TextInput
+            name="award"
+            placeholder="Bachelor of Science with Education"
+            onChange={onChangeHandler}
+            value={academic.award}
+          />
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col gap-1">
-        <Label text="Certificate" htmlFor="uploadedCertificate" />
-        <FileInput
-          name="uploadedCertificate"
-          onChange={onChangeHandler}
-          value={academic.uploadedCertificate}
-        />
+      <div className="grid grid-cols-5 gap-4 gap-x-6 mt-5">
+        <div className="flex flex-col gap-1 col-span-1">
+          <Label text={t("grade_classification")} htmlFor="classification" />
+          <Select
+            label={t("select_classification")}
+            name="classification"
+            value={academic.grade.classification}
+            onChange={(e) =>
+              setAcademic({
+                ...academic,
+                grade: {
+                  ...academic.grade,
+                  classification: e.target.value as AcademicClassification,
+                },
+              })
+            }
+          >
+            <option value="First Class">{t("first_class")}</option>
+            <option value="Upper Second">{t("upper_second")}</option>
+            <option value="Lower Second">{t("lower_second")}</option>
+            <option value="Pass">{t("pass")}</option>
+            <option value="Fail">{t("fail")}</option>
+          </Select>
+        </div>
+
+        <div className="flex flex-col gap-1 col-span-1">
+          <Label text="Grade (GPA)" htmlFor="gpa" />
+          <TextInput
+            name="gpa"
+            placeholder="3.4"
+            value={academic.grade.gpa.toString()}
+            onChange={(e) =>
+              setAcademic({
+                ...academic,
+                grade: { ...academic.grade, gpa: e.target.value },
+              })
+            }
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-4 gap-x-6 mt-5">
+        <div className="flex flex-col gap-1 col-span-1">
+          <Label text={t("certificate")} htmlFor="certificate" />
+          <FileInput
+            name="certificate"
+            onChange={onFileChange("certificate")}
+          />
+        </div>
+        <div className="flex flex-col gap-1 col-span-1">
+          <Label text={t("transcript")} htmlFor="transcript" />
+          <FileInput name="transcript" onChange={onFileChange("transcript")} />
+        </div>
       </div>
 
       <ActionButton
-        text="Add"
+        text={editing ? t("update") : t("add")}
         theme="bg-violet-600"
         icon={<Plus size={16} />}
       />

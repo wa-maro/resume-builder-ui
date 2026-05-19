@@ -12,7 +12,6 @@ type LoginResponseType = {
 };
 
 function getFromStorage() {
-  // TODO: get real user from the database
   const token = localStorage.getItem("token");
   const localUser = localStorage.getItem("user");
   const user: UserType = localUser && JSON.parse(localUser);
@@ -23,6 +22,8 @@ function getFromStorage() {
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<UserType | undefined>(getFromStorage());
+
+  // Users can register
   const register = async ({
     username,
     email,
@@ -33,7 +34,13 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const res = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password, confirmPassword }),
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          confirmPassword,
+          role: "user",
+        }),
       });
 
       const data = await res.json();
@@ -47,6 +54,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  // Both users & admins login
   const login = async ({ usernameOrEmail, password }: LoginType) => {
     try {
       const res = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -56,19 +64,25 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       if (!res.ok) {
-        const errorText = await res.text(); // because response might not be JSON!
+        const errorText = await res.text();
         throw new Error(errorText || "Network response was not ok");
       }
 
       const { message, success, token, user }: LoginResponseType =
         await res.json();
+
       if (!success) throw new Error(message || "Login failed");
 
-      if (token && user) {
-        setUser(user);
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("token", token);
+      if (!token || !user) {
+        throw new Error("Login failed: missing user or token");
       }
+
+      const cleanUser = { ...user, role: user.role || "user" };
+      setUser(cleanUser);
+      localStorage.setItem("user", JSON.stringify(cleanUser));
+      localStorage.setItem("token", token);
+
+      return cleanUser;
     } catch (error) {
       if (error instanceof Error)
         throw new Error(error.message || "Login failed");
@@ -76,16 +90,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const logout = async () => {
-    try {
-      setUser(undefined);
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-    } catch (error) {
-      if (error instanceof Error)
-        throw new Error(error.message || "Logout failed");
-      else throw new Error("Logout failed");
-    }
+  const logout = () => {
+    setUser(undefined);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
 
   return (

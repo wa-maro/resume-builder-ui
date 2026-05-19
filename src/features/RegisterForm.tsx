@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import Label from "../components/Label";
-import TextInput from "../components/TextInput";
+import Label from "../components/form/Label";
+import TextInput from "../components/form/TextInput";
 import { useAuth } from "../context/auth/authContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const RegisterForm = () => {
+  const { t } = useTranslation();
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<RegisterType>({
     username: "",
@@ -14,6 +16,7 @@ const RegisterForm = () => {
   });
   const navigate = useNavigate();
   const { register } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -21,11 +24,20 @@ const RegisterForm = () => {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (user.password !== user.confirmPassword) {
+      setError(t("passwords_do_not_match"));
+      return;
+    }
+
     try {
+      setLoading(true);
       await register(user);
       navigate("/login");
     } catch (error) {
       if (error instanceof Error) setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -38,10 +50,10 @@ const RegisterForm = () => {
           <Label
             style="block text-gray-700 mb-1 capitalize"
             htmlFor="username"
-            text="Username"
+            text={t("username")}
           />
           <TextInput
-            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-700"
             name="username"
             value={user.username}
             onChange={onChangeHandler}
@@ -52,10 +64,10 @@ const RegisterForm = () => {
           <Label
             style="block text-gray-700 mb-1 capitalize"
             htmlFor="email"
-            text="email"
+            text={t("email")}
           />
           <TextInput
-            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-700"
             type="email"
             name="email"
             value={user.email}
@@ -67,10 +79,10 @@ const RegisterForm = () => {
           <Label
             style="block text-gray-700 mb-1 capitalize"
             htmlFor="password"
-            text="password"
+            text={t("password")}
           />
           <TextInput
-            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-700"
             type="password"
             name="password"
             value={user.password}
@@ -82,10 +94,10 @@ const RegisterForm = () => {
           <Label
             style="block text-gray-700 mb-1 capitalize"
             htmlFor="confirmPassword"
-            text="password confirm"
+            text={t("password_confirm")}
           />
           <TextInput
-            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-700"
             type="password"
             name="confirmPassword"
             value={user.confirmPassword}
@@ -96,9 +108,10 @@ const RegisterForm = () => {
         <div className="basis-1/2">
           <button
             type="submit"
-            className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700 transition"
+            disabled={loading}
+            className="flex justify-center cursor-pointer items-center gap-2 bg-amber-700 text-white px-4 py-2 rounded-md hover:bg-amber-800 transition"
           >
-            Register
+            {loading ? t("loading") : t("register")}
           </button>
         </div>
       </div>

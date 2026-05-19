@@ -1,10 +1,13 @@
 import { NavLink } from "react-router-dom";
-import Logo from "../components/Logo";
+import Logo from "../components/ui/Logo";
 import TopNavBar from "../components/TopNavBar";
 import { useAuth } from "../context/auth/authContext";
-import LogoutForm from "../features/LogoutForm";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
+import UserProfileMenu from "../components/UserProfileMenu";
 
 const Header = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
 
   const toggleNavBar = () => {
@@ -14,20 +17,24 @@ const Header = () => {
 
   return (
     <header className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl flex flex-wrap items-center mx-auto space-x-6 p-4">
         <Logo />
 
-        <div className="flex md:order-2 space-x-3 md:space-x-0">
+        <TopNavBar />
+
+        <div className="flex ms-auto md:order-2 space-x-2">
+          <LanguageSwitcher />
+
           {user !== undefined ? (
             <div className="flex space-x-2">
-              <LogoutForm />
+              <UserProfileMenu />
             </div>
           ) : (
             <NavLink
               to="login"
-              className="border border-rose-700 rounded-lg font-medium py-1.5 px-4 text-center text-rose-700"
+              className="border border-amber-800 rounded-lg font-medium py-1 px-4 text-center text-amber-800"
             >
-              Login
+              {t("login")}
             </NavLink>
           )}
 
@@ -36,7 +43,7 @@ const Header = () => {
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">{t("open_main_menu")}</span>
             <svg
               className="w-5 h-5"
               aria-hidden="true"
@@ -54,8 +61,6 @@ const Header = () => {
             </svg>
           </button>
         </div>
-
-        <TopNavBar />
       </div>
     </header>
   );

@@ -5,6 +5,10 @@ declare global {
     id: string;
     username: string;
     role: "user" | "admin";
+    email: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
   }
 
   export interface RegisterType {
@@ -52,74 +56,177 @@ declare global {
   }
 
   export interface Referee {
-    id?: string;
+    _id?: string;
     fullName: string;
     position: string;
     organization: string;
     email: string;
     phone: string;
     physicalAddress: string;
-    resumeId?: string;
+    resume?: string;
   }
 
   export interface Skill {
-    id?: string;
-    category: string;
+    _id?: string;
+    category: "personal" | "professional" | "";
     name: string;
     proficiency: number;
+    description?: string;
+    resume?: string;
+    certificate?: FIle | string;
+  }
+
+  export interface Project {
+    _id?: string;
+    title: string;
     description: string;
-    certification: string;
-    resumeId?: string;
+    image: File | string;
+    socialLinks?: string[];
+    tools?: string[];
+    resume?: string;
+  }
+
+  export interface CompanyInfo {
+    name: string;
+    location: string;
   }
 
   export interface Experience {
-    id?: string;
-    jobTitle: string;
-    company: { name: string; location: string };
+    _id?: string;
+    position: string;
+    company: CompanyInfo;
     responsibilities: string;
     currentlyWorking: boolean;
     startDate: string;
-    endDate: string;
-    resumeId?: string;
+    endDate?: string;
+    resume?: string;
+  }
+
+  // 🎓 School Qualification
+  export type SchoolLevel = "Primary" | "O-Level" | "A-Level" | "";
+  export type SchoolCertificate =
+    | "Primary School Leaving Examination (PSLE)"
+    | "The Certificate of Secondary Education Examination (CSEE)"
+    | "Advanced Certificate of Secondary Education Examination (ACSEE)"
+    | "";
+  export type GradeDivision = "I" | "II" | "III" | "IV" | "0" | "";
+
+  export interface SchoolInfo {
+    name: string;
+    location: string;
+  }
+
+  export interface SchoolGrade {
+    division?: GradeDivision;
+    points?: string;
+  }
+
+  export interface School {
+    _id?: string;
+    level: SchoolLevel;
+    award: SchoolCertificate;
+    school: SchoolInfo;
+    startYear: number | string;
+    endYear: number | string;
+    grade?: SchoolGrade;
+    resume?: string;
+    certificate?: FIle | string;
+  }
+
+  // 🎓 Academic Qualification
+  export type AcademicLevel =
+    | "Diploma"
+    | "Advanced Diploma"
+    | "Bachelor's"
+    | "Postgraduate Diploma"
+    | "Master's"
+    | "Doctorate (PhD)"
+    | "";
+
+  export type AcademicClassification =
+    | "First Class"
+    | "Upper Second"
+    | "Lower Second"
+    | "Pass"
+    | "Fail"
+    | "";
+
+  export interface AcademicGrade {
+    classification: AcademicClassification;
+    gpa: number | string; // 1.0 - 5.0 (step 0.1)
+  }
+
+  export interface InstitutionInfo {
+    name: string;
+    location: string;
   }
 
   export interface Academic {
-    id?: string;
-    award: string;
-    school: { name: string; location: string };
-    startYear: string;
-    endYear: string;
-    grade: { division: string; points: string };
-    uploadedCertificate: string;
-    resumeId?: string;
-  }
-
-  export interface Profession {
-    id?: string;
-    award: string;
-    institution: { name: string; location: string };
-    startYear: string;
-    endYear: string;
-    uploadedCertificate: string;
-    uploadedTranscript: string;
-    grade: { classification: string; gpa: string };
-    resumeId?: string;
+    _id?: string;
+    level: AcademicLevel;
+    award: string; // e.g., "Bachelor of Science"
+    institution: InstitutionInfo;
+    startYear: number | string;
+    endYear: number | string;
+    grade: AcademicGrade;
+    resume?: string;
+    certificate?: FIle | string;
+    transcript?: FIle | string;
   }
 
   export interface Declaration {
     statement: string;
-    signature: string;
-    date: string; // format: DD/MM/YYYY
+    signature?: string;
+    date: string;
   }
 
   export interface Resume {
     _id?: string;
-    user?: string;
     title: string;
     summary: string;
     declaration?: Declaration;
-    createdAt?: string;
-    updatedAt?: string;
+    avatar?: File | string;
+    user?: string;
+  }
+
+  export interface ResumePreview {
+    _id: string;
+    user: string;
+    title: string;
+    summary: string;
+    avatar: string;
+    declaration?: Declaration;
+    createdAt: string;
+    updatedAt: string;
+    sections: {
+      personalInfo?: PersonalInfo | null;
+      educationBackground?: {
+        _id: string;
+        resume: string;
+        schoolQualifications: School[];
+        academicQualifications: Academic[];
+      } | null;
+      projects: Project[];
+      workExperiences: Experience[];
+      skills: Skill[];
+      referees: Referee[];
+    };
+  }
+
+  export type VARIANT =
+    | "minimal"
+    | "classic"
+    | "modern"
+    | "card"
+    | "cards"
+    | "grid"
+    | "list"
+    | "timeline"
+    | "progress"
+    | "inline";
+
+  interface TemplateProps {
+    preview: ResumePreview;
   }
 
   interface FetchResponse<T = unknown> {
@@ -131,9 +238,42 @@ declare global {
     data?: T;
   }
 
+  interface ResumePreviewResponse extends FetchResponse<ResumePreview> {}
+
   interface Alert {
     success: boolean;
     messages: string[];
+  }
+
+  export interface FileData {
+    id: string;
+    name: string;
+    type: "image" | "pdf";
+    file: Blob;
+    purpose: string;
+    createdAt: number;
+  }
+
+  export interface FAQ {
+    _id?: string;
+    question: string;
+    answer: string;
+    order: number;
+    isActive: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+  }
+
+  export interface Message {
+    _id?: string;
+    name: string;
+    email: string;
+    message: string;
+    reply: string;
+    isReplied: boolean;
+    isActive: boolean;
+    createdAt?: string;
+    updatedAt?: string;
   }
 }
 

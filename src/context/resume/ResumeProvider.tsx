@@ -60,6 +60,28 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const updateResume = async (id: string, data: Partial<Resume>) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/resume/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result: FetchResponse<Resume> = await res.json();
+
+      if (!result.success) throw new Error(result.message);
+
+      setResume(result.data);
+      console.log("Resume updated:", result.data);
+    } catch (error) {
+      console.error("Resume update failed:", error);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       await getResume();
@@ -69,7 +91,9 @@ const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <ResumeContext.Provider value={{ resume, createResume, loading }}>
+    <ResumeContext.Provider
+      value={{ resume, createResume, updateResume, loading }}
+    >
       {children}
     </ResumeContext.Provider>
   );

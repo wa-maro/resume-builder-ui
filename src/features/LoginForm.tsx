@@ -1,18 +1,22 @@
 import { useState } from "react";
-import TextInput from "../components/TextInput";
-import Label from "../components/Label";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth/authContext";
+import { useTranslation } from "react-i18next";
+import TextInput from "../components/form/TextInput";
+import Label from "../components/form/Label";
+import Alert from "../components/ui/Alert";
 
 const LoginForm = () => {
-  const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
+  const [error, setError] = useState<Alert>();
   const [user, setUser] = useState<LoginType>({
     usernameOrEmail: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
   const { login } = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
 
   // If coming from ProtectedRoute
@@ -24,27 +28,47 @@ const LoginForm = () => {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     try {
-      await login(user);
-      navigate(from, { replace: true });
+      setLoading(true);
+
+      const loggedInUser = await login(user);
+
+      if (loggedInUser.role === "admin") {
+        navigate("/admin/dashboard", { replace: true });
+      } else if (loggedInUser.role === "user") {
+        navigate("/resume", { replace: true });
+      } else {
+        navigate(from, { replace: true });
+      }
     } catch (error) {
-      if (error instanceof Error) setError(error.message);
+      if (error instanceof Error)
+        setError({
+          success: false,
+          messages: [error.message],
+        });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form method="post" onSubmit={onSubmitHandler}>
-      {error && <p className="text-red-500">{error}</p>}
+    <form method="post" onSubmit={onSubmitHandler} className="relative">
+      {error && (
+        <div className="absolute right-0 top-0">
+          <Alert alert={error} setAlert={setError} />
+        </div>
+      )}
 
       <div className="space-y-5">
         <div className="flex flex-col space-y-1.5">
           <Label
             style="block text-gray-700 mb-1 capitalize"
             htmlFor="usernameOrEmail"
-            text="Username"
+            text={t("username")}
           />
           <TextInput
-            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-700"
             name="usernameOrEmail"
             value={user.usernameOrEmail}
             onChange={onChangeHandler}
@@ -55,10 +79,10 @@ const LoginForm = () => {
           <Label
             style="block text-gray-700 mb-1 capitalize"
             htmlFor="password"
-            text="password"
+            text={t("password")}
           />
           <TextInput
-            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-rose-600"
+            style="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-700"
             type="password"
             name="password"
             value={user.password}
@@ -69,9 +93,10 @@ const LoginForm = () => {
         <div>
           <button
             type="submit"
-            className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700 transition w-full"
+            disabled={loading}
+            className="flex items-center justify-center cursor-pointer gap-2 bg-amber-700 text-white px-4 py-2 rounded-md hover:bg-amber-800 transition w-full"
           >
-            Login
+            {loading ? t("loading") : t("login")}
           </button>
         </div>
       </div>

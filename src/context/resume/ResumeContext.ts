@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 type ResumeContextType = {
   resume?: Resume;
   createResume: (data: Resume) => Promise<void>;
+  updateResume: (id: string, data: Resume) => Promise<void>;
   loading: boolean;
 };
 

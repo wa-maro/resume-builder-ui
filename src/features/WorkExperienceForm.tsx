@@ -1,120 +1,185 @@
+import { useEffect, useState } from "react";
+import Label from "../components/form/Label";
+import TextInput from "../components/form/TextInput";
+import TextArea from "../components/form/TextArea";
+import ActionButton from "../components/ui/ActionButton";
 import { Plus } from "lucide-react";
-import Label from "../components/Label";
-import TextInput from "../components/TextInput";
-import TextArea from "../components/TextArea";
-import ActionButton from "../components/ActionButton";
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Select from "../components/form/Select";
+import { jobTitles } from "./ResumeForm";
 
-const newExperience: Experience = {
-  jobTitle: "",
+const defaultExperience: Experience = {
+  position: "",
   company: { name: "", location: "" },
   responsibilities: "",
   currentlyWorking: false,
   startDate: "",
   endDate: "",
+  resume: "",
 };
 
 const WorkExperienceForm = ({
   experiences,
   setExperiences,
+  editing,
+  setEditing,
+  onSave,
 }: {
   experiences: Experience[];
   setExperiences: React.Dispatch<React.SetStateAction<Experience[]>>;
+  editing: Experience | null;
+  setEditing?: React.Dispatch<React.SetStateAction<Experience | null>>;
+  onSave?: (experience: Experience) => void;
 }) => {
-  const [experience, setExperience] = useState<Experience>(newExperience);
+  const { t } = useTranslation();
+  const [experience, setExperience] = useState<Experience>(defaultExperience);
+
+  // Populate form when editing
+  useEffect(() => {
+    if (editing) setExperience(editing);
+    else setExperience(defaultExperience);
+  }, [editing]);
 
   const onChangeHandler = (
     ev: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
-  ) => setExperience({ ...experience, [ev.target.name]: ev.target.value });
+  ) => {
+    const { name, type, value, checked } = ev.target as HTMLInputElement;
+
+    const keys = name.split(".");
+    const updatedExperience = { ...experience };
+    let current: any = updatedExperience;
+
+    for (let i = 0; i < keys.length - 1; i++) {
+      const key = keys[i];
+      current[key] = { ...current[key] };
+      current = current[key];
+    }
+
+    // Checkbox handling
+    current[keys[keys.length - 1]] = type === "checkbox" ? checked : value;
+
+    // Auto-clear endDate if currentlyWorking is checked
+    if (name === "currentlyWorking" && checked) {
+      updatedExperience.endDate = "";
+    }
+
+    setExperience(updatedExperience);
+  };
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // set resume ID
-    experience.resumeId = "";
+    // Validation
+    if (!experience.position) return alert("Position is required");
+    if (!experience.responsibilities)
+      return alert("Responsibilities are required");
+    if (!experience.company.name || !experience.company.location)
+      return alert("Company name and location are required");
 
-    setExperiences([...experiences, experience]);
-    setExperience(newExperience);
+    if (onSave) {
+      onSave(experience);
+    } else {
+      if (editing) {
+        setExperiences((prev) =>
+          prev.map((s) => (s._id === experience._id ? experience : s))
+        );
+        setEditing?.(null);
+      } else {
+        setExperiences([...experiences, experience]);
+      }
+    }
+
+    setExperience(defaultExperience);
   };
 
   return (
     <form method="post" onSubmit={onSubmitHandler}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-x-6">
         <div className="flex flex-col gap-1">
-          <Label text="Job Title" htmlFor="jobTitle" />
-          <TextInput
-            name="jobTitle"
-            placeholder="React developer"
+          <Label text={t("job_title")} htmlFor="position" />
+          <Select
+            label={t("select_job_title")}
+            name="position"
+            value={experience.position}
             onChange={onChangeHandler}
-            value={experience.jobTitle}
-          />
+          >
+            {jobTitles.map((job) => (
+              <option key={job} value={job}>
+                {t(`${job}`)}
+              </option>
+            ))}
+          </Select>
         </div>
 
         <div className="flex flex-col gap-1">
-          <Label text="company name" htmlFor="companyName" />
+          <Label text={t("company_name")} htmlFor="company.name" />
           <TextInput
-            name="companyName"
+            name="company.name"
             placeholder="FluentTek"
-            onChange={(e) =>
-              setExperience({
-                ...experience,
-                company: { ...experience.company, name: e.target.value },
-              })
-            }
+            onChange={onChangeHandler}
             value={experience.company.name}
           />
         </div>
 
         <div className="flex flex-col gap-1">
-          <Label text="company location" htmlFor="companyLocation" />
+          <Label text={t("company_location")} htmlFor="company.location" />
           <TextInput
-            name="companyLocation"
+            name="company.location"
             placeholder="Mbinga, Tanzania"
-            onChange={(e) =>
-              setExperience({
-                ...experience,
-                company: { ...experience.company, location: e.target.value },
-              })
-            }
+            onChange={onChangeHandler}
             value={experience.company.location}
           />
         </div>
 
         <div className="flex flex-col gap-1">
-          <Label text="Starting Date" htmlFor="startDate" />
+          <Label text={t("starting_date")} htmlFor="startDate" />
           <TextInput
             name="startDate"
-            placeholder="E.g Jan 2013"
+            placeholder={t("experience_start_placeholder")}
             onChange={onChangeHandler}
             value={experience.startDate}
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <Label text="Ending Date" htmlFor="endDate" />
-          <TextInput
-            name="endDate"
-            placeholder="E.g May 2019"
+        {!experience.currentlyWorking && (
+          <div className="flex flex-col gap-1">
+            <Label text={t("ending_date")} htmlFor="endDate" />
+            <TextInput
+              name="endDate"
+              placeholder={t("experience_end_placeholder")}
+              onChange={onChangeHandler}
+              value={experience.endDate ?? ""}
+            />
+          </div>
+        )}
+
+        <div className="flex items-center gap-2 mt-4">
+          <input
+            type="checkbox"
+            id="currentlyWorking"
+            name="currentlyWorking"
+            checked={experience.currentlyWorking}
             onChange={onChangeHandler}
-            value={experience.endDate}
           />
+          <Label text={t("currently_work_here")} htmlFor="currentlyWorking" />
         </div>
       </div>
 
       <div className="flex flex-col gap-1 mt-5">
-        <Label text="responsibilities" htmlFor="responsibilities" />
+        <Label text={t("responsibilities")} htmlFor="responsibilities" />
         <TextArea
           name="responsibilities"
-          required={true}
+          placeholder={t("responsibilities_placeholder")}
+          required
           onChange={onChangeHandler}
           value={experience.responsibilities}
         />
       </div>
 
       <ActionButton
-        text="Add"
+        text={editing ? t("update") : t("add")}
         theme="bg-violet-600"
         icon={<Plus size={16} />}
       />
