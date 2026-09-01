@@ -21,7 +21,7 @@ const ProjectDetails = () => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value, files } = e.target as HTMLInputElement;
 
@@ -92,7 +92,7 @@ const ProjectDetails = () => {
             (changedData.tools as string)
               .split(",")
               .map((t) => t.trim())
-              .filter((t) => t)
+              .filter((t) => t),
           ),
         ];
         payload.append("tools", tools.join(","));
@@ -104,7 +104,7 @@ const ProjectDetails = () => {
             (changedData.socialLinks as string)
               .split(",")
               .map((s) => s.trim())
-              .filter((s) => s)
+              .filter((s) => s),
           ),
         ];
         payload.append("socialLinks", links.join(","));

@@ -30,7 +30,7 @@ const Resume = () => {
   function onChangeHandler(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }

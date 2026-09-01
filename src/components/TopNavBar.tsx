@@ -1,5 +1,5 @@
-import NavItem from "./ui/NavItem";
 import { useTranslation } from "react-i18next";
+import NavItem from "./ui/NavItem";
 
 const TopNavBar = () => {
   const { t } = useTranslation();

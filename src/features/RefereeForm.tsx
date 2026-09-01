@@ -31,7 +31,7 @@ const RefereeForm = ({
   const [reference, setReference] = useState<Referee>(newReferee);
 
   const onChangeHandler = (
-    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => setReference({ ...reference, [ev.target.name]: ev.target.value });
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const RefereeForm = ({
     } else {
       if (editing) {
         setReferences((prev) =>
-          prev.map((p) => (p._id === reference._id ? reference : p))
+          prev.map((p) => (p._id === reference._id ? reference : p)),
         );
         setEditing?.(null);
       } else {

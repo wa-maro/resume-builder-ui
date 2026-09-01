@@ -43,7 +43,7 @@ const WorkExperienceForm = ({
   const onChangeHandler = (
     ev: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, type, value, checked } = ev.target as HTMLInputElement;
 
@@ -83,7 +83,7 @@ const WorkExperienceForm = ({
     } else {
       if (editing) {
         setExperiences((prev) =>
-          prev.map((s) => (s._id === experience._id ? experience : s))
+          prev.map((s) => (s._id === experience._id ? experience : s)),
         );
         setEditing?.(null);
       } else {

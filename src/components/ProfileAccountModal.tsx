@@ -25,7 +25,7 @@ export default function ProfileAccountModal({
     password?: string;
   }>();
   const [username, setUsername] = useState<string | undefined>(
-    authUser?.username
+    authUser?.username,
   );
   const [email, setEmail] = useState<string | undefined>(authUser?.email);
   const [password, setPassword] = useState<string>();
@@ -42,7 +42,7 @@ export default function ProfileAccountModal({
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
 
       const result = await res.json();
@@ -85,7 +85,7 @@ export default function ProfileAccountModal({
             "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       const result = await res.json();

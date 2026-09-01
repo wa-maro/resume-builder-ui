@@ -71,7 +71,7 @@ const SchoolTable = ({
                         onClick={() => {
                           if (
                             confirm(
-                              `Are you sure you want to delete ${school.award} at ${school.school.name}?`
+                              `Are you sure you want to delete ${school.award} at ${school.school.name}?`,
                             )
                           ) {
                             onDelete(school._id!);

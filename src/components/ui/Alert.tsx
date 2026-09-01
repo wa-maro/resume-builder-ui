@@ -7,7 +7,7 @@ interface AlertProps {
 
 const Alert = ({ alert, setAlert }: AlertProps) => {
   const [visibleIndexes, setVisibleIndexes] = useState<number[]>(
-    alert.messages.map((_, i) => i)
+    alert.messages.map((_, i) => i),
   );
 
   useEffect(() => {
@@ -21,9 +21,12 @@ const Alert = ({ alert, setAlert }: AlertProps) => {
       timers.push(timer);
     });
 
-    const cleanup = setTimeout(() => {
-      setAlert(undefined);
-    }, (alert.messages.length + 1) * 4000); // one second after the last disappears
+    const cleanup = setTimeout(
+      () => {
+        setAlert(undefined);
+      },
+      (alert.messages.length + 1) * 4000,
+    ); // one second after the last disappears
 
     return () => {
       timers.forEach(clearTimeout);

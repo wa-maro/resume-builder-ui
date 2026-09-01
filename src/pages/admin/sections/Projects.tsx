@@ -45,7 +45,7 @@ const Projects = () => {
     const fieldsToSearch = [ref.title, ref.description, ref.tools.toString()];
 
     const matchesSearch = fieldsToSearch.some((field) =>
-      field?.toLowerCase().includes(searchTerm)
+      field?.toLowerCase().includes(searchTerm),
     );
     return matchesSearch;
   });

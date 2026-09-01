@@ -16,7 +16,7 @@ const FAQForm: React.FC<FAQFormProps> = ({
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, type, value } = e.target;
 

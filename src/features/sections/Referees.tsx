@@ -99,7 +99,7 @@ const Referees = () => {
             phone: reference.phone,
             physicalAddress: reference.physicalAddress,
           }),
-        }
+        },
       );
 
       const result = await res.json();
@@ -107,7 +107,7 @@ const Referees = () => {
       if (!ok) return;
 
       setReferences((prev) =>
-        prev.map((exp) => (exp._id === reference._id ? result.referee : exp))
+        prev.map((exp) => (exp._id === reference._id ? result.referee : exp)),
       );
       setEditing(null);
     } catch (error) {
@@ -131,7 +131,7 @@ const Referees = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/referees/${id}`,
-        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();

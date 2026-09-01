@@ -46,7 +46,7 @@ const ProjectForm = ({
   }, [editing]);
 
   const onChangeHandler = (
-    ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = ev.target;
     setProject({ ...project, [name]: value });
@@ -70,7 +70,7 @@ const ProjectForm = ({
           toolsInput
             .split(",")
             .map((t) => t.trim())
-            .filter((t) => t)
+            .filter((t) => t),
         ),
       ],
       socialLinks: [
@@ -78,7 +78,7 @@ const ProjectForm = ({
           socialLinksInput
             .split(",")
             .map((s) => s.trim())
-            .filter((s) => s)
+            .filter((s) => s),
         ),
       ],
     };
@@ -88,7 +88,7 @@ const ProjectForm = ({
     } else {
       if (editing) {
         setProjects((prev) =>
-          prev.map((p) => (p._id === finalProject._id ? finalProject : p))
+          prev.map((p) => (p._id === finalProject._id ? finalProject : p)),
         );
         setEditing?.(null);
       } else {

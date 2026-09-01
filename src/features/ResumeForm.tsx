@@ -33,7 +33,7 @@ interface ResumeFormProps {
   onChangeHandler: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => void;
   onSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
   isUpdate?: boolean;

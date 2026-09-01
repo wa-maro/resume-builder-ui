@@ -97,16 +97,16 @@ export default function ProjectSection({ projects, variant = "list" }: Props) {
                         {link.includes("github")
                           ? "GitHub"
                           : link.includes("linkedin")
-                          ? "LinkedIn"
-                          : link.includes("facebook")
-                          ? "Facebook"
-                          : link.includes("instagram")
-                          ? "Instagram"
-                          : link.includes("youtube")
-                          ? "YouTube"
-                          : link.includes("http")
-                          ? "Live Demo"
-                          : "Link"}
+                            ? "LinkedIn"
+                            : link.includes("facebook")
+                              ? "Facebook"
+                              : link.includes("instagram")
+                                ? "Instagram"
+                                : link.includes("youtube")
+                                  ? "YouTube"
+                                  : link.includes("http")
+                                    ? "Live Demo"
+                                    : "Link"}
                       </a>
                     ))}
                   </div>

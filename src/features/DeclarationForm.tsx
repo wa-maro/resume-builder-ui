@@ -25,7 +25,7 @@ const DeclarationForm = ({
   const { t } = useTranslation();
 
   async function handleSubmit(
-    e: React.FormEvent<HTMLFormElement>
+    e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> {
     e.preventDefault();
 

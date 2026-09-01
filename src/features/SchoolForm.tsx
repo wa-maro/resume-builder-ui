@@ -48,7 +48,7 @@ const SchoolForm = ({
   };
 
   const onChangeHandler = (
-    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = ev.target;
     setSchool((prev) => ({ ...prev, [name]: value }));
@@ -62,7 +62,7 @@ const SchoolForm = ({
     } else {
       if (editing) {
         setSchools((prev) =>
-          prev.map((s) => (s._id === school._id ? school : s))
+          prev.map((s) => (s._id === school._id ? school : s)),
         );
         setEditing?.(null);
       } else {

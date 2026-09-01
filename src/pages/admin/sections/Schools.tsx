@@ -46,7 +46,7 @@ const Schools = () => {
     const fieldsToSearch = [ref.award, ref.school.name, ref.school.location];
 
     const matchesSearch = fieldsToSearch.some((field) =>
-      field?.toLowerCase().includes(searchTerm)
+      field?.toLowerCase().includes(searchTerm),
     );
     const matchesFilter = filter === "" || ref.level === filter;
     return matchesSearch && matchesFilter;
@@ -115,8 +115,8 @@ const Schools = () => {
                         ac.level === "Primary"
                           ? "bg-blue-100 text-blue-700"
                           : ac.level === "O-Level"
-                          ? "bg-emerald-100 text-emerald-700"
-                          : "bg-pink-100 text-pink-700"
+                            ? "bg-emerald-100 text-emerald-700"
+                            : "bg-pink-100 text-pink-700"
                       }`}
                     >
                       {ac.level}

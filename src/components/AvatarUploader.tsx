@@ -56,7 +56,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     <div className="flex flex-col items-center gap-2">
       {/* Avatar Circle */}
       <div
-        className="w-24 h-24 md:w-32 md:h-32 object-cover bg-gray-200 rounded-full flex-shrink-0 flex items-center justify-center text-gray-400 text-sm font-semibold overflow-hidden cursor-pointer relative"
+        className="w-24 h-24 md:w-32 md:h-32 object-cover bg-gray-200 rounded-full shrink-0 flex items-center justify-center text-gray-400 text-sm font-semibold overflow-hidden cursor-pointer relative"
         onClick={() => fileInputRef.current?.click()} // trigger file input
       >
         {typeof avatar === "string" ? (

@@ -46,7 +46,7 @@ const Academics = () => {
     ];
 
     const matchesSearch = fieldsToSearch.some((field) =>
-      field?.toLowerCase().includes(searchTerm)
+      field?.toLowerCase().includes(searchTerm),
     );
     const matchesFilter = filter === "" || ref.level === filter;
     return matchesSearch && matchesFilter;
@@ -122,14 +122,14 @@ const Academics = () => {
                         ac.level === "Diploma"
                           ? "bg-blue-100 text-blue-700"
                           : ac.level === "Postgraduate Diploma"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : ac.level === "Bachelor's"
-                          ? "bg-emerald-100 text-emerald-700"
-                          : ac.level === "Master's"
-                          ? "bg-amber-100 text-amber-700"
-                          : ac.level === "Doctorate (PhD)"
-                          ? "bg-cyan-100 text-cyan-700"
-                          : "bg-pink-100 text-pink-700"
+                            ? "bg-yellow-100 text-yellow-700"
+                            : ac.level === "Bachelor's"
+                              ? "bg-emerald-100 text-emerald-700"
+                              : ac.level === "Master's"
+                                ? "bg-amber-100 text-amber-700"
+                                : ac.level === "Doctorate (PhD)"
+                                  ? "bg-cyan-100 text-cyan-700"
+                                  : "bg-pink-100 text-pink-700"
                       }`}
                     >
                       {ac.level}

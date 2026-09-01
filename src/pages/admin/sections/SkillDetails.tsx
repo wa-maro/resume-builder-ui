@@ -20,7 +20,7 @@ const SkillDetails = () => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value, files } = e.target as HTMLInputElement;
 

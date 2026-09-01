@@ -22,11 +22,11 @@ const AcademicTable = ({
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
-            <th className="py-3 w-[100px]">{t("year")}</th>
-            <th className="ps-3 py-3 w-[200px]">{t("award")}</th>
-            <th className="ps-3 py-3 w-[250px]">{t("institution")}</th>
-            <th className="ps-3 py-3 w-[250px]">{t("certification")}</th>
-            <th className="ps-3 py-3 w-[80px] sr-only">{t("action")}</th>
+            <th className="py-3 w-25">{t("year")}</th>
+            <th className="ps-3 py-3 w-50">{t("award")}</th>
+            <th className="ps-3 py-3 w-62.5">{t("institution")}</th>
+            <th className="ps-3 py-3 w-62.5">{t("certification")}</th>
+            <th className="ps-3 py-3 w-20 sr-only">{t("action")}</th>
           </tr>
         </thead>
 

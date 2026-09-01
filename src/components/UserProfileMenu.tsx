@@ -23,7 +23,7 @@ const DropdownItem = memo(
       {icon}
       {label}
     </button>
-  )
+  ),
 );
 
 function UserProfileMenu() {
@@ -35,12 +35,12 @@ function UserProfileMenu() {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const onLogout = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
+    async (e: React.SubmitEvent<HTMLFormElement>) => {
       e.preventDefault();
       logout();
       navigate("/", { replace: true });
     },
-    [logout, navigate]
+    [logout, navigate],
   );
 
   useEffect(() => {

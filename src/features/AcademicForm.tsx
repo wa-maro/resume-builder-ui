@@ -50,7 +50,7 @@ const AcademicForm = ({
     };
 
   const onChangeHandler = (
-    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = ev.target;
     setAcademic((prev) => ({ ...prev, [name]: value }));
@@ -89,7 +89,7 @@ const AcademicForm = ({
       // Local add/edit
       if (editing) {
         setAcademics((prev) =>
-          prev.map((s) => (s._id === academic._id ? academicToSave : s))
+          prev.map((s) => (s._id === academic._id ? academicToSave : s)),
         );
         setEditing?.(null);
       } else {

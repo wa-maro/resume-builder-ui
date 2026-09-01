@@ -15,7 +15,7 @@ const PrintableResume = () => {
   const { t } = useTranslation();
   const { resume } = useResume();
   const [template, setTemplate] = useState<"minimal" | "classic" | "modern">(
-    "classic"
+    "classic",
   );
   const [preview, setPreview] = useState<ResumePreview | null>(null);
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,7 @@ const PrintableResume = () => {
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
       const result: ResumePreviewResponse = await res.json();
       if (!result.success) {

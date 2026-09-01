@@ -106,7 +106,7 @@ const Skills = () => {
             Authorization: `Bearer ${token}`, // do NOT set Content-Type for FormData
           },
           body: formData,
-        }
+        },
       );
 
       const result = await res.json();
@@ -114,7 +114,7 @@ const Skills = () => {
       if (!ok) return;
 
       setSkills((prev) =>
-        prev.map((exp) => (exp._id === skill._id ? result.skill : exp))
+        prev.map((exp) => (exp._id === skill._id ? result.skill : exp)),
       );
       setEditing(null);
     } catch (error) {
@@ -138,7 +138,7 @@ const Skills = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/skills/${id}`,
-        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();

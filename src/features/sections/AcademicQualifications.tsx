@@ -45,7 +45,7 @@ const AcademicQualifications = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/academic-qualifications`,
-        { method: "GET", headers: { Authorization: `Bearer ${token}` } }
+        { method: "GET", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();
@@ -77,7 +77,7 @@ const AcademicQualifications = () => {
       if (academic.grade) {
         formData.append(
           "gradeClassification",
-          academic.grade.classification || ""
+          academic.grade.classification || "",
         );
         formData.append("gradeGPA", String(academic.grade.gpa || ""));
       }
@@ -95,7 +95,7 @@ const AcademicQualifications = () => {
             Authorization: `Bearer ${token}`, // no Content-Type
           },
           body: formData,
-        }
+        },
       );
 
       const result = await res.json();
@@ -103,7 +103,7 @@ const AcademicQualifications = () => {
       if (!ok) return;
 
       const newAcademic = mapAcademic(
-        result.academicQualification || result.academicQualifications?.[0]
+        result.academicQualification || result.academicQualifications?.[0],
       );
       setAcademics((prev) => [...prev, newAcademic]);
       setEditing(null);
@@ -144,7 +144,7 @@ const AcademicQualifications = () => {
       ) {
         formData.append(
           "gradeClassification",
-          academic.grade?.classification || ""
+          academic.grade?.classification || "",
         );
         formData.append("gpa", String(academic.grade?.gpa || ""));
       }
@@ -174,7 +174,7 @@ const AcademicQualifications = () => {
               Authorization: `Bearer ${token}`, // no Content-Type
             },
             body: formData,
-          }
+          },
         );
 
         const result = await res.json();
@@ -183,7 +183,7 @@ const AcademicQualifications = () => {
 
         const updatedAcademic = mapAcademic(result.academicQualification);
         setAcademics((prev) =>
-          prev.map((s) => (s._id === academic._id ? updatedAcademic : s))
+          prev.map((s) => (s._id === academic._id ? updatedAcademic : s)),
         );
       } else {
         console.log("No changes detected, skipping update.");
@@ -211,7 +211,7 @@ const AcademicQualifications = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/academic-qualifications/${id}`,
-        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();

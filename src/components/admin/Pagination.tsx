@@ -71,7 +71,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <span key={idx} className="px-2">
             {page}
           </span>
-        )
+        ),
       )}
 
       {/* Next button */}

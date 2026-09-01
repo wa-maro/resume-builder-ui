@@ -44,7 +44,7 @@ const SchoolQualifications = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/school-qualifications`,
-        { method: "GET", headers: { Authorization: `Bearer ${token}` } }
+        { method: "GET", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();
@@ -85,7 +85,7 @@ const SchoolQualifications = () => {
           JSON.stringify({
             division: school.grade.division,
             points: Number(school.grade.points),
-          })
+          }),
         );
       }
 
@@ -99,7 +99,7 @@ const SchoolQualifications = () => {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
-        }
+        },
       );
 
       const result = await res.json();
@@ -107,7 +107,7 @@ const SchoolQualifications = () => {
       if (!ok) return;
 
       const newSchool = mapSchool(
-        result.schoolQualification || result.schoolQualifications?.[0]
+        result.schoolQualification || result.schoolQualifications?.[0],
       );
 
       setSchools((prev) => [...prev, newSchool]);
@@ -151,7 +151,7 @@ const SchoolQualifications = () => {
           JSON.stringify({
             division: school.grade?.division,
             points: school.grade?.points,
-          })
+          }),
         );
       }
 
@@ -172,7 +172,7 @@ const SchoolQualifications = () => {
           method: "PATCH",
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
-        }
+        },
       );
 
       const result = await res.json();
@@ -181,7 +181,7 @@ const SchoolQualifications = () => {
 
       const updatedSchool = mapSchool(result.schoolQualification);
       setSchools((prev) =>
-        prev.map((s) => (s._id === school._id ? updatedSchool : s))
+        prev.map((s) => (s._id === school._id ? updatedSchool : s)),
       );
       setEditing(null);
     } catch (error) {
@@ -205,7 +205,7 @@ const SchoolQualifications = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/school-qualifications/${id}`,
-        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();

@@ -50,7 +50,7 @@ const PersonalDetails = () => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(data),
-        }
+        },
       );
 
       const result: FetchResponse<PersonalInfo> = await res.json();
@@ -77,7 +77,7 @@ const PersonalDetails = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       const result: FetchResponse<PersonalInfo> = await res.json();
@@ -109,7 +109,7 @@ const PersonalDetails = () => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(data),
-        }
+        },
       );
 
       const result: FetchResponse<PersonalInfo> = await res.json();

@@ -40,7 +40,7 @@ const SkillForm = ({
   const onChangeHandler = (
     ev: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => setSkill({ ...skill, [ev.target.name]: ev.target.value });
 
   useEffect(() => {

@@ -100,7 +100,7 @@ const Projects = () => {
           method: "PATCH",
           headers: { Authorization: `Bearer ${token}` }, // no Content-Type
           body: formData,
-        }
+        },
       );
 
       const result = await res.json();
@@ -108,7 +108,7 @@ const Projects = () => {
       if (!ok) return;
 
       setProjects((prev) =>
-        prev.map((exp) => (exp._id === project._id ? result.project : exp))
+        prev.map((exp) => (exp._id === project._id ? result.project : exp)),
       );
       setEditing(null);
     } catch (error) {
@@ -132,7 +132,7 @@ const Projects = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/projects/${id}`,
-        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();

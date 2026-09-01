@@ -40,7 +40,7 @@ const Messages = () => {
     const fieldsToSearch = [ref.name, ref.email, ref.message];
 
     const matchesSearch = fieldsToSearch.some((field) =>
-      field?.toLowerCase().includes(searchTerm)
+      field?.toLowerCase().includes(searchTerm),
     );
 
     const matchesFilter =

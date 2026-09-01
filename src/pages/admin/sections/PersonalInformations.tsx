@@ -47,7 +47,7 @@ const PersonalInformations = () => {
     const fieldsToSearch = [ref.fullName, ref.phone, ref.email];
 
     const matchesSearch = fieldsToSearch.some((field) =>
-      field?.toLowerCase().includes(searchTerm)
+      field?.toLowerCase().includes(searchTerm),
     );
 
     const matchesFilter = filter === "" || ref.gender === filter;

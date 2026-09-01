@@ -37,7 +37,7 @@ const PersonalDetailForm = ({
   const { t } = useTranslation();
 
   const onChangeHandler = async (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setPerson({ ...person, [e.target.name]: e.target.value });
   };

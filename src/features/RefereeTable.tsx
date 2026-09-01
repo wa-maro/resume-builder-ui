@@ -20,7 +20,7 @@ const RefereeTable = ({
             <th className="py-4 text-nowrap">{t("full_name")}</th>
             <th className="ps-4 py-4 text-nowrap">{t("position")}</th>
             <th className="ps-4 py-4 text-nowrap">{`${t("organization")} / ${t(
-              "institution"
+              "institution",
             )}`}</th>
             <th className="ps-4 py-4 text-nowrap sr-only">{t("actions")}</th>
           </tr>

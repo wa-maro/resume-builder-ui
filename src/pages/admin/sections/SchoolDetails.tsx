@@ -20,7 +20,7 @@ const SchoolDetails = () => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value, files } = e.target as HTMLInputElement;
 
@@ -40,7 +40,7 @@ const SchoolDetails = () => {
   const handleChangev2 = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
 

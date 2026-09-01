@@ -31,7 +31,7 @@ const WorkExperiences = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/work-experiences`,
-        { method: "GET", headers: { Authorization: `Bearer ${token}` } }
+        { method: "GET", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();
@@ -68,7 +68,7 @@ const WorkExperiences = () => {
             endDate: experience.endDate,
             currentlyWorking: experience.currentlyWorking,
           }),
-        }
+        },
       );
 
       const result = await res.json();
@@ -107,8 +107,8 @@ const WorkExperiences = () => {
       updatableFields
         .map((field) => [field, experience[field]])
         .filter(
-          ([_, value]) => value !== undefined && value !== null && value !== ""
-        )
+          ([_, value]) => value !== undefined && value !== null && value !== "",
+        ),
     );
 
     try {
@@ -121,7 +121,7 @@ const WorkExperiences = () => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(payload),
-        }
+        },
       );
       const result = await res.json();
       const ok = logAlert(result, setAlert);
@@ -129,8 +129,8 @@ const WorkExperiences = () => {
 
       setExperiences((prev) =>
         prev.map((exp) =>
-          exp._id === experience._id ? result.workExperience : exp
-        )
+          exp._id === experience._id ? result.workExperience : exp,
+        ),
       );
       setEditing(null);
     } catch (error) {
@@ -160,7 +160,7 @@ const WorkExperiences = () => {
     try {
       const res = await fetch(
         `${API_BASE_URL}/resume/${resume._id}/work-experiences/${id}`,
-        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
       );
 
       const result = await res.json();

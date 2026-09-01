@@ -20,7 +20,7 @@ const AcademicDetails = () => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value, files } = e.target as HTMLInputElement;
 
@@ -40,7 +40,7 @@ const AcademicDetails = () => {
   const handleChangev2 = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
 
@@ -127,7 +127,7 @@ const AcademicDetails = () => {
       if (changedData["institution.location"])
         payload.append(
           "institution[location]",
-          changedData["institution.location"]
+          changedData["institution.location"],
         );
       if (changedData.startYear)
         payload.append("startYear", String(changedData.startYear));
@@ -136,7 +136,7 @@ const AcademicDetails = () => {
       if (changedData["grade.classification"])
         payload.append(
           "grade[classification]",
-          changedData["grade.classification"]
+          changedData["grade.classification"],
         );
       if (changedData["grade.gpa"])
         payload.append("grade[gpa]", String(changedData["grade.gpa"]));

@@ -35,7 +35,8 @@ export default function Minimal({ preview }: Props) {
       <SummarySection summary={preview.summary} variant="minimal" />
       <PersonalInfoSection personalInfo={personalInfo} variant="minimal" />
       <EducationSection
-        schools={educationBackground?.schoolQualifications || []} variant="minimal"
+        schools={educationBackground?.schoolQualifications || []}
+        variant="minimal"
       />
       <ProjectSection projects={projects || []} variant="minimal" />
       <RefereeSection

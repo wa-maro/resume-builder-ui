@@ -43,7 +43,7 @@ const ContactForm = () => {
   };
 
   const onChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormdata({ ...formData, [e.target.name]: e.target.value });
   };
